@@ -1,4 +1,10 @@
 import os
+import sys
+from pathlib import Path
+
+# Fix pour permettre l'importation du module config depuis la racine
+sys.path.append(str(Path(__file__).resolve().parent.parent))
+
 import django
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'config.settings')
@@ -8,7 +14,6 @@ from django.contrib.auth import get_user_model
 
 User = get_user_model()
 
-# Modifiez avec vos identifiants souhaités
 USERNAME = 'admin'
 EMAIL = 'admin@hotel.com'
 PASSWORD = 'Killifeugui538'

@@ -5,9 +5,9 @@ import environ
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# 1. INITIALISATION DE ENVIROUNEMENT
+# Initialize environment variables
 env = environ.Env(
-    DEBUG=(bool, True),
+    DEBUG=(bool, False),
     SECRET_KEY=(str, 'django-insecure-hotel-pms-super-secret-key-change-in-production-2026!'),
 )
 
@@ -23,7 +23,6 @@ DEBUG = env('DEBUG')
 # CONFIGURATION POUR ACCÈS DISTANT (RENDER & CLOUDFLARE)
 # ==============================================================================
 
-# Lecture dynamique via env
 ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=[
     'localhost',
     '127.0.0.1',
@@ -33,7 +32,6 @@ ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=[
     '.trycloudflare.com',
 ])
 
-# Autoriser les formulaires POST (connexion, admin, etc.)
 CSRF_TRUSTED_ORIGINS = env.list('CSRF_TRUSTED_ORIGINS', default=[
     'https://*.onrender.com',
     'https://gestion-hoteliere-2jms.onrender.com',
@@ -41,11 +39,9 @@ CSRF_TRUSTED_ORIGINS = env.list('CSRF_TRUSTED_ORIGINS', default=[
     'https://*.trycloudflare.com',
 ])
 
-# Gestion du Proxy HTTPS / Headers SSL
 USE_X_FORWARDED_HOST = True
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
-# Configuration des cookies de session pour les requêtes distantes
 SESSION_COOKIE_SECURE = env.bool('SESSION_COOKIE_SECURE', default=True)
 CSRF_COOKIE_SECURE = env.bool('CSRF_COOKIE_SECURE', default=True)
 SESSION_COOKIE_SAMESITE = 'Lax'
@@ -53,7 +49,6 @@ CSRF_COOKIE_SAMESITE = 'Lax'
 
 # ==============================================================================
 
-# Application definition
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -90,13 +85,14 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',  # Gestion des fichiers statiques en prod
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'audit.middleware.AuditMiddleware',  # Traçabilité intégrale
+    'audit.middleware.AuditMiddleware',
 ]
 
 ROOT_URLCONF = 'config.urls'
@@ -122,17 +118,15 @@ WSGI_APPLICATION = 'config.wsgi.application'
 ASGI_APPLICATION = 'config.asgi.application'
 
 # ==============================================================================
-# DATABASE CONFIGURATION (CORRIGÉE POUR RENDER ET DÉVELOPPEMENT LOCAL)
+# DATABASE CONFIGURATION
 # ==============================================================================
 
 if env('DATABASE_URL', default=None):
-    # En production (Render / Heroku) via la variable DATABASE_URL
     DATABASES = {
         'default': env.db('DATABASE_URL')
     }
     DATABASES['default']['CONN_MAX_AGE'] = 600
 else:
-    # En local (developpement)
     DATABASES = {
         'default': {
             'ENGINE': env('DB_ENGINE', default='django.db.backends.postgresql'),
@@ -145,10 +139,8 @@ else:
         }
     }
 
-# Custom User Model
 AUTH_USER_MODEL = 'accounts.User'
 
-# Password validation
 AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
     {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator'},
@@ -156,13 +148,11 @@ AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator'},
 ]
 
-# Internationalization
 LANGUAGE_CODE = 'fr-fr'
 TIME_ZONE = env('HOTEL_TIMEZONE', default='UTC')
 USE_I18N = True
 USE_TZ = True
 
-# Currency Configuration
 HOTEL_CURRENCY = env('HOTEL_CURRENCY', default='FCFA')
 HOTEL_NAME = env('HOTEL_NAME', default='Hôtel Prestige & Spa')
 
@@ -171,18 +161,25 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [BASE_DIR / 'static']
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
+# WhiteNoise storage configuration
+STORAGES = {
+    "default": {
+        "BACKEND": "django.core.files.storage.FileSystemStorage",
+    },
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+    },
+}
+
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
-# Default primary key field type
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# Authentication URLs
 LOGIN_URL = 'accounts:login'
 LOGIN_REDIRECT_URL = 'dashboard:index'
 LOGOUT_REDIRECT_URL = 'accounts:login'
 
-# REST Framework Configuration
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.SessionAuthentication',
