@@ -5,7 +5,7 @@ import environ
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# 1. INITIALISATION DE ENVIROUNEMENT (Obligatoire avant toute utilisation de env)
+# 1. INITIALISATION DE ENVIROUNEMENT
 env = environ.Env(
     DEBUG=(bool, True),
     SECRET_KEY=(str, 'django-insecure-hotel-pms-super-secret-key-change-in-production-2026!'),
@@ -121,31 +121,27 @@ TEMPLATES = [
 WSGI_APPLICATION = 'config.wsgi.application'
 ASGI_APPLICATION = 'config.asgi.application'
 
-# Database Configuration
-DB_ENGINE = env('DB_ENGINE', default='django.db.backends.postgresql')
-DB_NAME = env('DB_NAME', default='hotel_pms_db')
-DB_USER = env('DB_USER', default='postgres')
-DB_PASSWORD = env('DB_PASSWORD', default='postgres')
-DB_HOST = env('DB_HOST', default='127.0.0.1')
-DB_PORT = env('DB_PORT', default='5432')
+# ==============================================================================
+# DATABASE CONFIGURATION (CORRIGÉE POUR RENDER ET DÉVELOPPEMENT LOCAL)
+# ==============================================================================
 
-try:
+if env('DATABASE_URL', default=None):
+    # En production (Render / Heroku) via la variable DATABASE_URL
     DATABASES = {
-        'default': {
-            'ENGINE': DB_ENGINE,
-            'NAME': DB_NAME,
-            'USER': DB_USER,
-            'PASSWORD': DB_PASSWORD,
-            'HOST': DB_HOST,
-            'PORT': DB_PORT,
-            'CONN_MAX_AGE': 600,
-        }
+        'default': env.db('DATABASE_URL')
     }
-except Exception:
+    DATABASES['default']['CONN_MAX_AGE'] = 600
+else:
+    # En local (developpement)
     DATABASES = {
         'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': BASE_DIR / 'db.sqlite3',
+            'ENGINE': env('DB_ENGINE', default='django.db.backends.postgresql'),
+            'NAME': env('DB_NAME', default='hotel_pms_db'),
+            'USER': env('DB_USER', default='postgres'),
+            'PASSWORD': env('DB_PASSWORD', default='postgres'),
+            'HOST': env('DB_HOST', default='127.0.0.1'),
+            'PORT': env('DB_PORT', default='5432'),
+            'CONN_MAX_AGE': 600,
         }
     }
 
