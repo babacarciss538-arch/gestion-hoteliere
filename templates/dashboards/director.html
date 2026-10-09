@@ -1,0 +1,240 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Tableau de bord | {{ HOTEL_NAME }}{% endblock %}
+{% block page_title %}Tableau de bord Général{% endblock %}
+
+{% block content %}
+<!-- Range Header & Quick Filters -->
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h3 class="fw-bold mb-1">Aperçu Général des Opérations</h3>
+        <p class="text-muted small mb-0">Données en temps réel extraites de la base hôtelière.</p>
+    </div>
+</div>
+
+<!-- Key Performance Indicators (KPI Cards) -->
+<div class="row g-3 mb-4">
+    <!-- Total Revenue Card -->
+    <div class="col-12 col-sm-6 col-xl-3">
+        <div class="glass-card metric-card">
+            <div>
+                <div class="text-muted extra-small font-monospace text-uppercase fw-semibold">Revenu Total (HT)</div>
+                <div class="metric-value metric-currency">{{ today_payments|floatformat:0 }} <span style="font-size: 1rem; color: #10B981;">{{ HOTEL_CURRENCY }}</span></div>
+                <div class="small text-emerald mt-1"><i class="bi bi-graph-up-arrow me-1"></i>Aujourd'hui</div>
+            </div>
+            <div class="metric-icon icon-green">
+                <i class="bi bi-currency-dollar"></i>
+            </div>
+        </div>
+    </div>
+
+    <!-- Orders / Occupancy Card -->
+    <div class="col-12 col-sm-6 col-xl-3">
+        <div class="glass-card metric-card">
+            <div>
+                <div class="text-muted extra-small font-monospace text-uppercase fw-semibold">Taux d'Occupation</div>
+                <div class="metric-value">{{ occupancy_rate }}%</div>
+                <div class="small text-secondary mt-1">{{ occupied_rooms }} / {{ total_rooms }} chambres louées</div>
+            </div>
+            <div class="metric-icon icon-purple">
+                <i class="bi bi-door-open-fill"></i>
+            </div>
+        </div>
+    </div>
+
+    <!-- Arrivées & Départs -->
+    <div class="col-12 col-sm-6 col-xl-3">
+        <div class="glass-card metric-card">
+            <div>
+                <div class="text-muted extra-small font-monospace text-uppercase fw-semibold">Arrivées / Départs</div>
+                <div class="metric-value">{{ today_checkins }} <span class="text-muted fs-6">/</span> {{ today_checkouts }}</div>
+                <div class="small text-secondary mt-1">Check-ins & Check-outs du jour</div>
+            </div>
+            <div class="metric-icon icon-blue">
+                <i class="bi bi-arrow-down-up"></i>
+            </div>
+        </div>
+    </div>
+
+    <!-- Stock & Maintenance Alerts -->
+    <div class="col-12 col-sm-6 col-xl-3">
+        <div class="glass-card metric-card">
+            <div>
+                <div class="text-muted extra-small font-monospace text-uppercase fw-semibold">Alertes Urgentes</div>
+                <div class="metric-value text-amber">{{ critical_stock_count|add:maintenance_open }}</div>
+                <div class="small text-amber mt-1">{{ critical_stock_count }} stocks + {{ maintenance_open }} tickets</div>
+            </div>
+            <div class="metric-icon icon-amber">
+                <i class="bi bi-exclamation-triangle-fill"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row g-3 mb-4">
+    <div class="col-12 col-sm-6 col-xl-3"><div class="glass-card metric-card"><div><div class="text-muted extra-small">RÉSERVATIONS CONFIRMÉES</div><div class="metric-value text-purple">{{ pending_reservations }}</div></div><div class="metric-icon icon-purple"><i class="bi bi-calendar-check"></i></div></div></div>
+    <div class="col-12 col-sm-6 col-xl-3"><div class="glass-card metric-card"><div><div class="text-muted extra-small">DÉPENSES</div><div class="metric-value text-danger">{{ expense_total|floatformat:0 }} {{ HOTEL_CURRENCY }}</div></div><div class="metric-icon icon-amber"><i class="bi bi-arrow-down-circle"></i></div></div></div>
+    <div class="col-12 col-sm-6 col-xl-3"><div class="glass-card metric-card"><div><div class="text-muted extra-small">RÉSULTAT</div><div class="metric-value text-emerald">{{ result_total|floatformat:0 }} {{ HOTEL_CURRENCY }}</div></div><div class="metric-icon icon-green"><i class="bi bi-graph-up"></i></div></div></div>
+    <div class="col-12 col-sm-6 col-xl-3"><div class="glass-card metric-card"><div><div class="text-muted extra-small">ÉCARTS DE CAISSE</div><div class="metric-value text-amber">{{ cash_discrepancy_count }}</div></div><div class="metric-icon icon-amber"><i class="bi bi-safe2"></i></div></div></div>
+</div>
+
+<div class="glass-card p-4 mb-4">
+    <h5 class="fw-bold mb-3"><i class="bi bi-building-gear text-purple me-2"></i>Supervision des services</h5>
+    <div class="row g-3">
+        <div class="col-md-3"><span class="text-secondary">Stock critique</span><strong class="d-block fs-4 text-danger">{{ critical_stock_count }}</strong></div>
+        <div class="col-md-3"><span class="text-secondary">Ruptures</span><strong class="d-block fs-4 text-danger">{{ out_of_stock_count }}</strong></div>
+        <div class="col-md-3"><span class="text-secondary">Maintenance ouverte</span><strong class="d-block fs-4 text-amber">{{ maintenance_open }}</strong></div>
+        <div class="col-md-3"><span class="text-secondary">Demandes magasin</span><strong class="d-block fs-4 text-blue">{{ service_request_open }}</strong></div>
+    </div>
+</div>
+
+<!-- Sales by Category / Room Status Overview & Chart -->
+<div class="row g-4 mb-4">
+    <!-- Revenue Evolution Chart -->
+    <div class="col-12 col-lg-8">
+        <div class="glass-card p-4">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <div>
+                    <h5 class="fw-bold mb-1"><i class="bi bi-graph-up text-purple me-2"></i>Évolution des Revenus (FCFA)</h5>
+                    <div class="text-muted small">Suivi quotidien des encaissements sur tous les services</div>
+                </div>
+                <div class="badge bg-purple-glow text-purple px-3 py-2 rounded-pill">Temps Réel</div>
+            </div>
+            <div style="height: 280px; position: relative;">
+                <canvas id="revenueChart"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <!-- Room Status Breakdown -->
+    <div class="col-12 col-lg-4">
+        <div class="glass-card p-4 h-100">
+            <h5 class="fw-bold mb-3"><i class="bi bi-pie-chart-fill text-purple me-2"></i>État du Parc Chambres</h5>
+            
+            <div class="d-flex justify-content-between align-items-center p-3 mb-2 rounded-3" style="background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.2);">
+                <div class="d-flex align-items-center gap-2">
+                    <span class="badge-status badge-available">Disponible</span>
+                </div>
+                <strong class="fs-5 text-emerald">{{ available_rooms }}</strong>
+            </div>
+
+            <div class="d-flex justify-content-between align-items-center p-3 mb-2 rounded-3" style="background: rgba(59, 130, 246, 0.1); border: 1px solid rgba(59, 130, 246, 0.2);">
+                <div class="d-flex align-items-center gap-2">
+                    <span class="badge-status badge-occupied">Occupée</span>
+                </div>
+                <strong class="fs-5 text-blue">{{ occupied_rooms }}</strong>
+            </div>
+
+            <div class="d-flex justify-content-between align-items-center p-3 mb-2 rounded-3" style="background: rgba(245, 158, 11, 0.1); border: 1px solid rgba(245, 158, 11, 0.2);">
+                <div class="d-flex align-items-center gap-2">
+                    <span class="badge-status badge-reserved">Réservée</span>
+                </div>
+                <strong class="fs-5 text-amber">{{ reserved_rooms }}</strong>
+            </div>
+
+            <div class="d-flex justify-content-between align-items-center p-3 mb-2 rounded-3" style="background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.2);">
+                <div class="d-flex align-items-center gap-2">
+                    <span class="badge-status badge-to_clean">À Nettoyer</span>
+                </div>
+                <strong class="fs-5 text-danger">{{ to_clean_rooms }}</strong>
+            </div>
+
+            <div class="d-flex justify-content-between align-items-center p-3 rounded-3" style="background: rgba(168, 85, 247, 0.1); border: 1px solid rgba(168, 85, 247, 0.2);">
+                <div class="d-flex align-items-center gap-2">
+                    <span class="badge-status badge-maintenance">Maintenance</span>
+                </div>
+                <strong class="fs-5 text-purple">{{ maintenance_rooms }}</strong>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Quick Module Shortcuts Table -->
+<div class="glass-card p-4">
+    <h5 class="fw-bold mb-3"><i class="bi bi-grid-fill text-purple me-2"></i>Actions Rapides & Opérations</h5>
+    <div class="row g-3">
+        <div class="col-md-3">
+            <a href="{% url 'reception:index' %}" class="btn btn-dark w-100 p-3 text-start glass-card-sm border-0 d-flex align-items-center justify-content-between">
+                <div>
+                    <div class="fw-bold text-white">Nouveau Check-In</div>
+                    <div class="extra-small text-muted">Enregistrer une arrivée</div>
+                </div>
+                <i class="bi bi-box-arrow-in-right fs-4 text-purple"></i>
+            </a>
+        </div>
+        <div class="col-md-3">
+            <a href="{% url 'reservations:list' %}" class="btn btn-dark w-100 p-3 text-start glass-card-sm border-0 d-flex align-items-center justify-content-between">
+                <div>
+                    <div class="fw-bold text-white">Créer Réservation</div>
+                    <div class="extra-small text-muted">Réservation client</div>
+                </div>
+                <i class="bi bi-calendar-plus fs-4 text-emerald"></i>
+            </a>
+        </div>
+        <div class="col-md-3">
+            <a href="{% url 'restaurant:index' %}" class="btn btn-dark w-100 p-3 text-start glass-card-sm border-0 d-flex align-items-center justify-content-between">
+                <div>
+                    <div class="fw-bold text-white">Commande Resto</div>
+                    <div class="extra-small text-muted">Caisse Restaurant / POS</div>
+                </div>
+                <i class="bi bi-cup-hot fs-4 text-amber"></i>
+            </a>
+        </div>
+        <div class="col-md-3">
+            <a href="{% url 'cashier:index' %}" class="btn btn-dark w-100 p-3 text-start glass-card-sm border-0 d-flex align-items-center justify-content-between">
+                <div>
+                    <div class="fw-bold text-white">Session Caisse</div>
+                    <div class="extra-small text-muted">Gestion des fonds & encaissements</div>
+                </div>
+                <i class="bi bi-cash-stack fs-4 text-blue"></i>
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const ctx = document.getElementById('revenueChart').getContext('2d');
+    new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: ['Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam', 'Dim'],
+            datasets: [{
+                label: 'Revenus (FCFA)',
+                data: [120000, 150000, 180000, 210000, 310000, 450000, 380000],
+                borderColor: '#8B5CF6',
+                backgroundColor: 'rgba(139, 92, 246, 0.1)',
+                borderWidth: 3,
+                fill: true,
+                tension: 0.4,
+                pointBackgroundColor: '#8B5CF6',
+                pointRadius: 5
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { display: false }
+            },
+            scales: {
+                x: {
+                    grid: { color: 'rgba(255, 255, 255, 0.05)' },
+                    ticks: { color: '#9CA3AF' }
+                },
+                y: {
+                    grid: { color: 'rgba(255, 255, 255, 0.05)' },
+                    ticks: { 
+                        color: '#9CA3AF',
+                        callback: function(value) { return value.toLocaleString() + ' FCFA'; }
+                    }
+                }
+            }
+        }
+    });
+});
+</script>
+{% endblock %}

@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% block title %}Housekeeping | {{ HOTEL_NAME }}{% endblock %}
+{% block page_title %}Tableau de bord Housekeeping{% endblock %}
+
+{% block content %}
+<div class="row g-3 mb-4">
+    <div class="col-md-3">
+        <div class="glass-card metric-card">
+            <div>
+                <div class="text-muted extra-small">CHAMBRES À NETTOYER</div>
+                <div class="metric-value text-danger">{{ to_clean_rooms }}</div>
+            </div>
+            <div class="metric-icon icon-amber"><i class="bi bi-stars"></i></div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="glass-card metric-card">
+            <div>
+                <div class="text-muted extra-small">TÂCHES EN ATTENTE</div>
+                <div class="metric-value text-purple">{{ housekeeping_pending }}</div>
+            </div>
+            <div class="metric-icon icon-purple"><i class="bi bi-clock-history"></i></div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="glass-card metric-card">
+            <div>
+                <div class="text-muted extra-small">CHAMBRES PRÊTES</div>
+                <div class="metric-value text-emerald">{{ available_rooms }}</div>
+            </div>
+            <div class="metric-icon icon-green"><i class="bi bi-check-circle-fill"></i></div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="glass-card metric-card">
+            <div>
+                <div class="text-muted extra-small">TÂCHES TERMINÉES</div>
+                <div class="metric-value text-blue">{{ housekeeping_completed }}</div>
+            </div>
+            <div class="metric-icon icon-blue"><i class="bi bi-check2-all"></i></div>
+        </div>
+    </div>
+</div>
+
+<div class="glass-card p-4">
+    <h5 class="fw-bold mb-3"><i class="bi bi-stars text-purple me-2"></i>Gestion des Nettoyages</h5>
+    <a href="{% url 'housekeeping:list' %}" class="btn btn-primary px-4 py-2"><i class="bi bi-list-task me-2"></i>Voir le Planning des Tâches</a>
+</div>
+{% endblock %}

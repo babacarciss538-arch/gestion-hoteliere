@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}Administration | {{ HOTEL_NAME }}{% endblock %}
+{% block page_title %}Tableau de bord Administrateur{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h3 class="fw-bold mb-1">Administration du système</h3>
+        <p class="text-muted small mb-0">Supervision des utilisateurs, permissions, activité et alertes.</p>
+    </div>
+    <span class="badge-status badge-available"><i class="bi bi-shield-check"></i>Système actif</span>
+</div>
+
+<div class="row g-3 mb-4">
+    <div class="col-12 col-sm-6 col-xl-3"><div class="glass-card metric-card"><div><div class="text-muted extra-small">UTILISATEURS</div><div class="metric-value text-purple">{{ total_users }}</div></div><div class="metric-icon icon-purple"><i class="bi bi-people-fill"></i></div></div></div>
+    <div class="col-12 col-sm-6 col-xl-3"><div class="glass-card metric-card"><div><div class="text-muted extra-small">UTILISATEURS ACTIFS</div><div class="metric-value text-emerald">{{ active_users }}</div></div><div class="metric-icon icon-green"><i class="bi bi-person-check-fill"></i></div></div></div>
+    <div class="col-12 col-sm-6 col-xl-3"><div class="glass-card metric-card"><div><div class="text-muted extra-small">RÔLES UTILISÉS</div><div class="metric-value text-blue">{{ role_count }}</div></div><div class="metric-icon icon-blue"><i class="bi bi-person-badge-fill"></i></div></div></div>
+    <div class="col-12 col-sm-6 col-xl-3"><div class="glass-card metric-card"><div><div class="text-muted extra-small">ALERTES SYSTÈME</div><div class="metric-value text-amber">{{ system_alerts }}</div></div><div class="metric-icon icon-amber"><i class="bi bi-exclamation-triangle-fill"></i></div></div></div>
+</div>
+
+<div class="row g-4">
+    <div class="col-12 col-lg-7"><div class="glass-card p-4"><h5 class="fw-bold mb-3"><i class="bi bi-clock-history text-purple me-2"></i>Activité récente</h5><div class="table-responsive"><table class="table-glass"><thead><tr><th>Date</th><th>Utilisateur</th><th>Action</th></tr></thead><tbody>{% for activity in recent_activities %}<tr><td>{{ activity.timestamp|date:"d/m/Y H:i" }}</td><td>{{ activity.user.email }}</td><td>{{ activity.action }}</td></tr>{% empty %}<tr><td colspan="3" class="text-center text-muted py-4">Aucune activité.</td></tr>{% endfor %}</tbody></table></div></div></div>
+    <div class="col-12 col-lg-5"><div class="glass-card p-4 h-100"><h5 class="fw-bold mb-3"><i class="bi bi-sliders text-purple me-2"></i>Administration</h5><p class="text-muted">Gérez les utilisateurs, rôles et permissions depuis l'interface d'administration.</p><a href="{% url 'admin:index' %}" class="btn btn-primary"><i class="bi bi-gear me-2"></i>Ouvrir l'administration</a><a href="{% url 'audit:index' %}" class="btn btn-outline-light ms-2"><i class="bi bi-shield-check me-2"></i>Journal d'audit</a></div></div>
+</div>
+{% endblock %}

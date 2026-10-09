@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block title %}Cuisine KDS | {{ HOTEL_NAME }}{% endblock %}
+{% block page_title %}Écran Cuisine (Kitchen Display System){% endblock %}
+
+{% block content %}
+<div class="row g-3 mb-4">
+    <div class="col-md-4"><div class="glass-card metric-card"><div><div class="text-muted extra-small">COMMANDES REÇUES</div><div class="metric-value text-purple">{{ restaurant_orders_today }}</div></div><div class="metric-icon icon-purple"><i class="bi bi-inbox"></i></div></div></div>
+    <div class="col-md-4"><div class="glass-card metric-card"><div><div class="text-muted extra-small">COMMANDES EN PRÉPARATION</div><div class="metric-value text-amber">{{ restaurant_orders_open }}</div></div><div class="metric-icon icon-amber"><i class="bi bi-fire"></i></div></div></div>
+    <div class="col-md-4"><div class="glass-card metric-card"><div><div class="text-muted extra-small">COMMANDES TERMINÉES</div><div class="metric-value text-emerald">{{ restaurant_orders_paid }}</div></div><div class="metric-icon icon-green"><i class="bi bi-check2-all"></i></div></div></div>
+</div>
+
+<div class="glass-card p-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h4 class="fw-bold mb-0"><i class="bi bi-fire text-amber me-2"></i>Commandes Cuisine</h4>
+        <a href="{% url 'kitchen:kds' %}" class="btn btn-sm btn-primary px-3 py-2"><i class="bi bi-fullscreen me-2"></i>Plein Écran KDS</a>
+    </div>
+    <div class="alert alert-info glass-card border-0 py-3">
+        L'écran de cuisine affiche les commandes en direct envoyées par la salle de restaurant ou le room-service.
+    </div>
+    <div class="row g-3 mt-2">
+        <div class="col-md-4"><span class="text-secondary">Commandes reçues</span><strong class="d-block fs-4 text-purple">{{ restaurant_orders_today }}</strong></div>
+        <div class="col-md-4"><span class="text-secondary">En préparation</span><strong class="d-block fs-4 text-amber">{{ restaurant_orders_open }}</strong></div>
+        <div class="col-md-4"><span class="text-secondary">Alertes ingrédients</span><strong class="d-block fs-4 text-danger">{{ critical_stock_count }}</strong></div>
+    </div>
+</div>
+{% endblock %}

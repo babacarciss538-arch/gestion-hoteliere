@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block title %}Fiches Clients | {{ HOTEL_NAME }}{% endblock %}
+{% block page_title %}Gestion des Clients{% endblock %}
+
+{% block content %}
+<div class="glass-card p-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h4 class="fw-bold mb-0"><i class="bi bi-people-fill text-purple me-2"></i>Répertoire Clients</h4>
+        <button type="button" class="btn btn-sm btn-primary" onclick="document.getElementById('guest-form').classList.toggle('d-none')"><i class="bi bi-person-plus me-1"></i>Nouveau Client</button>
+    </div>
+    <form id="guest-form" method="post" class="row g-3 mb-4 d-none">{% csrf_token %}{% for field in form %}<div class="col-md-4"><label class="form-label">{{ field.label }}</label>{{ field }}{{ field.errors }}</div>{% endfor %}<div class="col-12"><button class="btn btn-success" type="submit">Enregistrer le client</button></div></form>
+    <div class="table-responsive">
+        <table class="table-glass">
+            <thead>
+                <tr>
+                    <th>Nom & Prénom</th>
+                    <th>Email</th>
+                    <th>Téléphone</th>
+                    <th>Nationalité</th>
+                    <th>N° Pièce Identité</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>{% for guest in guests %}<tr><td>{{ guest.first_name }} {{ guest.last_name }}</td><td>{{ guest.email }}</td><td>{{ guest.phone }}</td><td>{{ guest.nationality }}</td><td>{{ guest.identity_number }}</td><td>-</td></tr>{% empty %}<tr><td colspan="6" class="text-center text-muted py-4">Aucune fiche client enregistrée.</td></tr>{% endfor %}</tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

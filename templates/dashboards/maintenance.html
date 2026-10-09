@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% block title %}Maintenance | {{ HOTEL_NAME }}{% endblock %}
+{% block page_title %}Tableau de bord Maintenance Technique{% endblock %}
+
+{% block content %}
+<div class="row g-3 mb-4">
+    <div class="col-md-3">
+        <div class="glass-card metric-card">
+            <div>
+                <div class="text-muted extra-small">TICKETS INCIDENTS EN COURS</div>
+                <div class="metric-value text-amber">{{ maintenance_open }}</div>
+            </div>
+            <div class="metric-icon icon-amber"><i class="bi bi-tools"></i></div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="glass-card metric-card">
+            <div>
+                <div class="text-muted extra-small">CHAMBRES IMMOBILISÉES</div>
+                <div class="metric-value text-danger">{{ maintenance_rooms }}</div>
+            </div>
+            <div class="metric-icon icon-purple"><i class="bi bi-slash-circle-fill"></i></div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="glass-card metric-card">
+            <div>
+                <div class="text-muted extra-small">INTERVENTIONS ASSIGNÉES</div>
+                <div class="metric-value text-blue">{{ maintenance_assigned }}</div>
+            </div>
+            <div class="metric-icon icon-blue"><i class="bi bi-person-check"></i></div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="glass-card metric-card">
+            <div>
+                <div class="text-muted extra-small">INTERVENTIONS TERMINÉES</div>
+                <div class="metric-value text-emerald">{{ maintenance_completed }}</div>
+            </div>
+            <div class="metric-icon icon-green"><i class="bi bi-check-circle"></i></div>
+        </div>
+    </div>
+</div>
+
+<div class="glass-card p-4">
+    <h5 class="fw-bold mb-3"><i class="bi bi-tools text-purple me-2"></i>Interventions & Diagnostics</h5>
+    <a href="{% url 'maintenance:list' %}" class="btn btn-primary px-4 py-2"><i class="bi bi-wrench me-2"></i>Gestion des Tickets de Maintenance</a>
+</div>
+{% endblock %}

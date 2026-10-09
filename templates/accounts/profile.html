@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+{% block title %}Profil Utilisateur | {{ HOTEL_NAME }}{% endblock %}
+{% block page_title %}Mon Profil & Sécurité{% endblock %}
+
+{% block content %}
+<div class="row g-4">
+    <div class="col-md-5 col-lg-4">
+        <div class="glass-card text-center p-4">
+            <div class="d-inline-block position-relative mb-3">
+                {% if user.avatar %}
+                    <img src="{{ user.avatar.url }}" class="rounded-circle border border-2 border-purple" style="width: 100px; height: 100px; object-fit: cover;">
+                {% else %}
+                    <div class="rounded-circle d-flex align-items-center justify-content-center text-purple" style="width: 100px; height: 100px; background: rgba(139, 92, 246, 0.15); font-size: 2.5rem; margin: 0 auto;">
+                        <i class="bi bi-person-fill"></i>
+                    </div>
+                {% endif %}
+            </div>
+            <h4 class="fw-bold mb-1">{{ user.display_name }}</h4>
+            <div class="mb-3">
+                <span class="role-badge role-badge-director">{{ user.get_role_display }}</span>
+            </div>
+            <div class="text-start small text-secondary border-top border-glass pt-3 mt-3">
+                <div class="d-flex justify-content-between mb-2">
+                    <span>Email:</span>
+                    <strong class="text-white">{{ user.email }}</strong>
+                </div>
+                <div class="d-flex justify-content-between mb-2">
+                    <span>Téléphone:</span>
+                    <strong class="text-white">{{ user.phone|default:"Non renseigné" }}</strong>
+                </div>
+                <div class="d-flex justify-content-between mb-2">
+                    <span>Membre depuis:</span>
+                    <strong class="text-white">{{ user.date_joined|date:"d/m/Y" }}</strong>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-7 col-lg-8">
+        <div class="glass-card p-4 mb-4">
+            <h5 class="fw-bold mb-3"><i class="bi bi-pencil-square text-purple me-2"></i>Modifier mes informations</h5>
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="row g-3 mb-3">
+                    <div class="col-md-6">
+                        <label class="form-label small text-secondary fw-semibold">PRÉNOM</label>
+                        {{ form.first_name }}
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label small text-secondary fw-semibold">NOM</label>
+                        {{ form.last_name }}
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label small text-secondary fw-semibold">TÉLÉPHONE</label>
+                    {{ form.phone }}
+                </div>
+                <div class="mb-4">
+                    <label class="form-label small text-secondary fw-semibold">PHOTO DE PROFIL</label>
+                    {{ form.avatar }}
+                </div>
+                <button type="submit" class="btn btn-sm btn-primary px-4 fw-semibold" style="background: #8B5CF6; border: none;">
+                    Enregistrer les modifications
+                </button>
+            </form>
+        </div>
+
+        <!-- Activité Récente -->
+        <div class="glass-card p-4">
+            <h5 class="fw-bold mb-3"><i class="bi bi-clock-history text-purple me-2"></i>Historique des Connexions & Activité</h5>
+            <table class="table-glass">
+                <thead>
+                    <tr>
+                        <th>Action</th>
+                        <th>Adresse IP</th>
+                        <th>Date & Heure</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for activity in activities %}
+                    <tr>
+                        <td>{{ activity.action }}</td>
+                        <td><code>{{ activity.ip_address|default:"Localhost" }}</code></td>
+                        <td>{{ activity.timestamp|date:"d/m/Y H:i:s" }}</td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="3" class="text-center text-muted">Aucune activité enregistrée.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

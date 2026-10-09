@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block title %}Inventaire & Stock | {{ HOTEL_NAME }}{% endblock %}
+{% block page_title %}Magasin Central & Produits{% endblock %}
+
+{% block content %}
+<div class="glass-card p-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h4 class="fw-bold mb-0"><i class="bi bi-box-seam-fill text-purple me-2"></i>Produits & Niveaux de Stock</h4>
+        <button type="button" class="btn btn-sm btn-primary" onclick="document.getElementById('product-form').classList.toggle('d-none')"><i class="bi bi-plus-lg me-1"></i>Nouveau Produit</button>
+    </div>
+    <form id="product-form" method="post" class="row g-3 mb-4 d-none">{% csrf_token %}{% for field in form %}<div class="col-md-4"><label class="form-label">{{ field.label }}</label>{{ field }}{{ field.errors }}</div>{% endfor %}<div class="col-12"><button class="btn btn-success" type="submit">Enregistrer le produit</button></div></form>
+    <div class="table-responsive">
+        <table class="table-glass">
+            <thead>
+                <tr>
+                    <th>Code</th>
+                    <th>Nom Produit</th>
+                    <th>Catégorie</th>
+                    <th>Stock Physique</th>
+                    <th>Stock Engagé</th>
+                    <th>Stock Disponible</th>
+                    <th>Statut Alerte</th>
+                </tr>
+            </thead>
+            <tbody>{% for product in products %}<tr><td>{{ product.id }}</td><td>{{ product.name }}</td><td>{{ product.category }}</td><td>{{ product.quantity }}</td><td>{{ product.committed_quantity }}</td><td>{{ product.quantity|default:0 }}</td><td>{{ product.get_alert_level_display }}</td></tr>{% empty %}<tr><td colspan="7" class="text-center text-muted py-4">Aucun produit en magasin central.</td></tr>{% endfor %}</tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

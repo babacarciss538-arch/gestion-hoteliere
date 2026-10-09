@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block title %}Gestion des Chambres | {{ HOTEL_NAME }}{% endblock %}
+{% block page_title %}Chambres & Hébergement{% endblock %}
+
+{% block content %}
+<div class="glass-card p-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h4 class="fw-bold mb-0"><i class="bi bi-door-closed-fill text-purple me-2"></i>Répertoire des Chambres</h4>
+        <button type="button" class="btn btn-sm btn-primary" onclick="document.getElementById('room-form').classList.toggle('d-none')"><i class="bi bi-plus-lg me-1"></i>Ajouter une chambre</button>
+    </div>
+    <form id="room-form" method="post" class="row g-3 mb-4 d-none">
+        {% csrf_token %}
+        {% for field in form %}<div class="col-md-4"><label class="form-label">{{ field.label }}</label>{{ field }}{{ field.errors }}</div>{% endfor %}
+        <div class="col-12"><button class="btn btn-success" type="submit">Enregistrer la chambre</button></div>
+    </form>
+    <div class="table-responsive">
+        <table class="table-glass">
+            <thead>
+                <tr>
+                    <th>N° Chambre</th>
+                    <th>Étage / Bâtiment</th>
+                    <th>Type</th>
+                    <th>Tarif / Nuit</th>
+                    <th>Statut Réel</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>{% for room in rooms %}<tr><td>{{ room.number }}</td><td>{{ room.floor }}</td><td>{{ room.room_type }}</td><td>{{ room.nightly_rate }}</td><td>{{ room.get_status_display }}</td><td>-</td></tr>{% empty %}<tr><td colspan="6" class="text-center text-muted py-4">Aucune chambre enregistrée.</td></tr>{% endfor %}</tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

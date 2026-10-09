@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block title %}Écran Cuisine KDS | {{ HOTEL_NAME }}{% endblock %}
+{% block page_title %}Production Cuisine (KDS){% endblock %}
+
+{% block content %}
+<div class="glass-card p-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h4 class="fw-bold mb-0"><i class="bi bi-fire text-amber me-2"></i>Écran de Production Cuisine</h4>
+    </div>
+    <div class="row g-3">
+        <div class="col-md-4">
+            <div class="glass-card-sm border-amber">
+                <h6 class="fw-bold text-amber">EN ATTENTE DE PRÉPARATION</h6>
+                <p class="text-muted extra-small">Nouvelles commandes confirmées</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="glass-card-sm border-blue">
+                <h6 class="fw-bold text-blue">EN COURS DE CUISSON</h6>
+                <p class="text-muted extra-small">Commandes en préparation</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="glass-card-sm border-green">
+                <h6 class="fw-bold text-emerald">PRÊTES À SERVIR</h6>
+                <p class="text-muted extra-small">Plats terminés</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

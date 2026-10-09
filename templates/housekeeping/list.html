@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block title %}Housekeeping | {{ HOTEL_NAME }}{% endblock %}
+{% block page_title %}Nettoyage & Gouvernance{% endblock %}
+
+{% block content %}
+<div class="glass-card p-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h4 class="fw-bold mb-0"><i class="bi bi-stars text-purple me-2"></i>Tâches de Nettoyage</h4>
+    </div>
+    <div class="table-responsive">
+        <table class="table-glass">
+            <thead>
+                <tr>
+                    <th>Chambre</th>
+                    <th>Priorité</th>
+                    <th>Affecté à</th>
+                    <th>Statut Tâche</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td colspan="5" class="text-center text-muted py-4">Aucune tâche de nettoyage en cours.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

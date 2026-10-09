@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+{% block title %}Tableau de Bord Réception | {{ HOTEL_NAME }}{% endblock %}
+{% block page_title %}Tableau de bord Réception{% endblock %}
+
+{% block content %}
+<div class="row g-3 mb-4">
+    <div class="col-md-3">
+        <div class="glass-card metric-card">
+            <div>
+                <div class="text-muted extra-small">ARRIVÉES DU JOUR</div>
+                <div class="metric-value text-emerald">{{ today_checkins }}</div>
+            </div>
+            <div class="metric-icon icon-green"><i class="bi bi-box-arrow-in-right"></i></div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="glass-card metric-card">
+            <div>
+                <div class="text-muted extra-small">DÉPARTS DU JOUR</div>
+                <div class="metric-value text-blue">{{ today_checkouts }}</div>
+            </div>
+            <div class="metric-icon icon-blue"><i class="bi bi-box-arrow-left"></i></div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="glass-card metric-card">
+            <div>
+                <div class="text-muted extra-small">CHAMBRES DISPONIBLES</div>
+                <div class="metric-value text-purple">{{ available_rooms }}</div>
+            </div>
+            <div class="metric-icon icon-purple"><i class="bi bi-door-open"></i></div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="glass-card metric-card">
+            <div>
+                <div class="text-muted extra-small">À NETTOYER</div>
+                <div class="metric-value text-danger">{{ to_clean_rooms }}</div>
+            </div>
+            <div class="metric-icon icon-amber"><i class="bi bi-stars"></i></div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="glass-card metric-card">
+            <div>
+                <div class="text-muted extra-small">CHAMBRES OCCUPÉES</div>
+                <div class="metric-value text-blue">{{ occupied_rooms }}</div>
+            </div>
+            <div class="metric-icon icon-blue"><i class="bi bi-door-closed"></i></div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="glass-card metric-card">
+            <div>
+                <div class="text-muted extra-small">RÉSERVATIONS DU JOUR</div>
+                <div class="metric-value text-purple">{{ pending_reservations }}</div>
+            </div>
+            <div class="metric-icon icon-purple"><i class="bi bi-calendar-check"></i></div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="glass-card metric-card">
+            <div>
+                <div class="text-muted extra-small">PAIEMENTS DU JOUR</div>
+                <div class="metric-value text-emerald">{{ today_payments|floatformat:0 }}</div>
+            </div>
+            <div class="metric-icon icon-green"><i class="bi bi-cash-stack"></i></div>
+        </div>
+    </div>
+    <div class="col-md-3"><div class="glass-card metric-card"><div><div class="text-muted extra-small">RÉSERVATIONS</div><div class="metric-value text-purple">{{ pending_reservations }}</div></div><div class="metric-icon icon-purple"><i class="bi bi-calendar-check"></i></div></div></div>
+    <div class="col-md-3"><div class="glass-card metric-card"><div><div class="text-muted extra-small">ALERTES IMPORTANTES</div><div class="metric-value text-amber">{{ critical_stock_count|add:maintenance_open }}</div></div><div class="metric-icon icon-amber"><i class="bi bi-exclamation-triangle"></i></div></div></div>
+</div>
+
+<div class="glass-card p-4">
+    <h5 class="fw-bold mb-3"><i class="bi bi-list-check me-2 text-purple"></i>Actions Principales Réception</h5>
+    <div class="d-flex gap-3">
+        <a href="{% url 'reception:index' %}" class="btn btn-primary px-4 py-2"><i class="bi bi-person-check me-2"></i>Module Check-In & Régie</a>
+        <a href="{% url 'reservations:list' %}" class="btn btn-outline-light px-4 py-2"><i class="bi bi-calendar-plus me-2"></i>Nouvelle Réservation</a>
+        <a href="{% url 'guests:list' %}" class="btn btn-outline-secondary px-4 py-2"><i class="bi bi-search me-2"></i>Rechercher Fiche Client</a>
+    </div>
+</div>
+{% endblock %}

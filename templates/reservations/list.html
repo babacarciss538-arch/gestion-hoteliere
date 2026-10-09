@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block title %}Réservations | {{ HOTEL_NAME }}{% endblock %}
+{% block page_title %}Gestion des Réservations{% endblock %}
+
+{% block content %}
+<div class="glass-card p-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h4 class="fw-bold mb-0"><i class="bi bi-calendar-check-fill text-purple me-2"></i>Planning des Réservations</h4>
+        <button type="button" class="btn btn-sm btn-primary" onclick="document.getElementById('reservation-form').classList.toggle('d-none')"><i class="bi bi-calendar-plus me-1"></i>Créer une Réservation</button>
+    </div>
+    <form id="reservation-form" method="post" class="row g-3 mb-4 d-none">{% csrf_token %}{% for field in form %}<div class="col-md-4"><label class="form-label">{{ field.label }}</label>{{ field }}{{ field.errors }}</div>{% endfor %}<div class="col-12"><button class="btn btn-success" type="submit">Enregistrer la réservation</button></div></form>
+    <div class="table-responsive">
+        <table class="table-glass">
+            <thead>
+                <tr>
+                    <th>Code</th>
+                    <th>Client</th>
+                    <th>Chambre</th>
+                    <th>Dates Séjour</th>
+                    <th>Montant Total</th>
+                    <th>Statut</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>{% for reservation in reservations %}<tr><td>{{ reservation.reference }}</td><td>{{ reservation.guest }}</td><td>{{ reservation.room }}</td><td>{{ reservation.check_in_date }} - {{ reservation.check_out_date }}</td><td>-</td><td>{{ reservation.get_status_display }}</td><td>-</td></tr>{% empty %}<tr><td colspan="7" class="text-center text-muted py-4">Aucune réservation enregistrée.</td></tr>{% endfor %}</tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

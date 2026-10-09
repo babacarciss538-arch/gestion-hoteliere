@@ -1,0 +1,44 @@
+<header class="app-topbar">
+    <div class="topbar-left">
+        <h1 class="page-title">{% block page_title %}Tableau de bord{% endblock %}</h1>
+    </div>
+
+    <div class="topbar-right">
+        <!-- Date Filters -->
+        <div class="filter-pills">
+            <a href="{% url 'dashboard:index' %}?period=today" class="filter-pill {% if request.GET.period|default:'today' == 'today' %}active{% endif %}">Aujourd'hui</a>
+            <a href="{% url 'dashboard:index' %}?period=7" class="filter-pill {% if request.GET.period == '7' %}active{% endif %}">7 derniers jours</a>
+            <a href="{% url 'dashboard:index' %}?period=30" class="filter-pill {% if request.GET.period == '30' %}active{% endif %}">30 derniers jours</a>
+        </div>
+
+        <!-- Real-time Notifications Bell -->
+        <a href="{% url 'notifications:index' %}" class="position-relative text-secondary" style="font-size: 1.25rem;">
+            <i class="bi bi-bell-fill"></i>
+            <span class="position-absolute top-0 start-100 translate-middle p-1 bg-danger border border-light rounded-circle">
+                <span class="visually-hidden">Notifications</span>
+            </span>
+        </a>
+
+        <!-- User Profile Pill -->
+        {% if user.is_authenticated %}
+        <div class="user-pill">
+            <i class="bi bi-person-circle text-purple" style="font-size: 1.2rem; color: #8B5CF6;"></i>
+            <span style="font-size: 0.85rem; font-weight: 500;">{{ user.email }}</span>
+            
+            <span class="role-badge 
+                {% if user.role == 'ADMIN' %}role-badge-admin
+                {% elif user.role == 'DIRECTOR' %}role-badge-director
+                {% elif user.role == 'RECEPTIONIST' %}role-badge-reception
+                {% else %}role-badge-default{% endif %}">
+                {{ user.get_role_display|slice:":15" }}
+            </span>
+            
+            <a href="{% url 'accounts:logout' %}" class="logout-link ms-2" title="Déconnexion" aria-label="Se déconnecter">
+                <i class="bi bi-box-arrow-right"></i>
+            </a>
+        </div>
+        {% else %}
+        <a href="{% url 'accounts:login' %}" class="btn btn-sm btn-outline-light">Connexion</a>
+        {% endif %}
+    </div>
+</header>

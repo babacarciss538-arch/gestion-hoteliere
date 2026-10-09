@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+
+{% block title %}Rapports & Analyses | {{ HOTEL_NAME }}{% endblock %}
+{% block page_title %}Rapports & Analyses{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h3 class="fw-bold mb-1">Rapports et analyses</h3>
+        <p class="text-muted small mb-0">Consultez les indicateurs opérationnels et financiers de l'hôtel.</p>
+    </div>
+    <span class="badge-status badge-available">
+        <i class="bi bi-bar-chart-line-fill"></i>Centre de pilotage
+    </span>
+</div>
+
+<div class="row g-4 mb-4">
+    <div class="col-12 col-lg-6">
+        <div class="glass-card h-100">
+            <div class="d-flex align-items-center gap-3 mb-3">
+                <div class="metric-icon icon-purple"><i class="bi bi-speedometer2"></i></div>
+                <div>
+                    <h5 class="fw-bold mb-1">Performance opérationnelle</h5>
+                    <p class="text-muted small mb-0">Occupation, arrivées, départs et état des chambres.</p>
+                </div>
+            </div>
+            <div class="d-flex justify-content-between align-items-center py-3 border-top border-secondary-subtle">
+                <span class="text-secondary">Rapport d'exploitation</span>
+                <a href="{% url 'dashboard:index' %}" class="btn btn-sm btn-outline-light">Consulter</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-12 col-lg-6">
+        <div class="glass-card h-100">
+            <div class="d-flex align-items-center gap-3 mb-3">
+                <div class="metric-icon icon-green"><i class="bi bi-cash-stack"></i></div>
+                <div>
+                    <h5 class="fw-bold mb-1">Rapports financiers</h5>
+                    <p class="text-muted small mb-0">Paiements, factures et suivi des encaissements.</p>
+                </div>
+            </div>
+            <div class="d-flex justify-content-between align-items-center py-3 border-top border-secondary-subtle">
+                <span class="text-secondary">Rapport financier</span>
+                <a href="{% url 'finance:index' %}" class="btn btn-sm btn-outline-light">Consulter</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="glass-card">
+    <div class="d-flex align-items-center gap-2 mb-3">
+        <i class="bi bi-file-earmark-bar-graph text-purple fs-4"></i>
+        <h5 class="fw-bold mb-0">Rapports disponibles</h5>
+    </div>
+    <div class="table-responsive">
+        <table class="table-glass">
+            <thead>
+                <tr>
+                    <th>Rapport</th>
+                    <th>Période</th>
+                    <th>État</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Résumé de l'activité hôtelière</td>
+                    <td>Aujourd'hui</td>
+                    <td><span class="badge-status badge-available">Disponible</span></td>
+                    <td><a href="{% url 'dashboard:index' %}" class="btn btn-sm btn-outline-light">Ouvrir</a></td>
+                </tr>
+                <tr>
+                    <td>Facturation et encaissements</td>
+                    <td>Aujourd'hui</td>
+                    <td><span class="badge-status badge-available">Disponible</span></td>
+                    <td><a href="{% url 'finance:index' %}" class="btn btn-sm btn-outline-light">Ouvrir</a></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

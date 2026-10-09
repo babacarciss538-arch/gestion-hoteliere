@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block title %}Journal d'Audit | {{ HOTEL_NAME }}{% endblock %}
+{% block page_title %}Journal d'Audit{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h3 class="fw-bold mb-1">Journal d'audit</h3>
+        <p class="text-muted small mb-0">Suivi des activités et des connexions réalisées dans l'application.</p>
+    </div>
+    <span class="badge-status badge-available">
+        <i class="bi bi-shield-check"></i>Traçabilité active
+    </span>
+</div>
+
+<div class="glass-card p-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h5 class="fw-bold mb-0"><i class="bi bi-clock-history text-purple me-2"></i>Activités récentes</h5>
+        <span class="text-secondary small">100 dernières activités</span>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table-glass">
+            <thead>
+                <tr>
+                    <th>Date et heure</th>
+                    <th>Utilisateur</th>
+                    <th>Action</th>
+                    <th>Adresse IP</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for activity in activities %}
+                <tr>
+                    <td>{{ activity.timestamp|date:"d/m/Y H:i" }}</td>
+                    <td>{{ activity.user.get_full_name|default:activity.user.email }}</td>
+                    <td>{{ activity.action }}</td>
+                    <td>{{ activity.ip_address|default:"Non disponible" }}</td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="4" class="text-center text-muted py-5">
+                        <i class="bi bi-journal-x d-block fs-2 mb-2"></i>
+                        Aucune activité enregistrée pour le moment.
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
