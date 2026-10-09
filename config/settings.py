@@ -188,3 +188,8 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.IsAuthenticated',
     ],
 }
+
+# ==============================================================================
+# EMAIL CONFIGURATION (FIX 500 ERROR ON USER CREATION)
+# ==============================================================================
+EMAIL_BACKEND = env('EMAIL_BACKEND', default='django.core.mail.backends.console.EmailBackend')
