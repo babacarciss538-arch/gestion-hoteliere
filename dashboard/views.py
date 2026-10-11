@@ -25,6 +25,9 @@ def _common_metrics(user, today, days=1):
     date_range = {'created_at__date__range': (start_date, today)}
     today_payments = Payment.objects.filter(**date_range).aggregate(total=Sum('amount'))['total'] or 0
     expense_total = Expense.objects.aggregate(total=Sum('amount'))['total'] or 0
+    cash_discrepancies = CashDiscrepancy.objects.all()
+    if not user.is_director_role and not user.is_superuser:
+        cash_discrepancies = cash_discrepancies.filter(session__cashier=user)
     return {
         'today': today,
         'total_rooms': total_rooms,
@@ -36,6 +39,8 @@ def _common_metrics(user, today, days=1):
         'occupancy_rate': round(occupied_rooms / total_rooms * 100, 1) if total_rooms else 0,
         'today_checkins': CheckIn.objects.filter(actual_check_in__date__range=(start_date, today)).count(),
         'today_checkouts': CheckIn.objects.filter(expected_check_out__range=(start_date, today)).count(),
+        'arrivals_today': Reservation.objects.filter(status=ReservationStatus.CONFIRMED, check_in_date=today).count(),
+        'departures_today': Reservation.objects.filter(status=ReservationStatus.CONFIRMED, check_out_date=today).count(),
         'pending_reservations': Reservation.objects.filter(status=ReservationStatus.CONFIRMED, check_in_date__range=(start_date, today)).count(),
         'today_payments': today_payments,
         'payment_count': Payment.objects.filter(**date_range).count(),
@@ -67,8 +72,9 @@ def _common_metrics(user, today, days=1):
         'maintenance_assigned': MaintenanceTicket.objects.filter(status=TicketStatus.ASSIGNED).count(),
         'maintenance_completed': MaintenanceTicket.objects.filter(status=TicketStatus.CLOSED).count(),
         'active_cash_session': CashSession.objects.filter(cashier=user, is_closed=False).first(),
-        'cash_discrepancy_count': CashDiscrepancy.objects.count(),
-        'cash_discrepancy_total': CashDiscrepancy.objects.aggregate(
+        'cash_sessions': CashSession.objects.filter(cashier=user).order_by('-opened_at')[:5],
+        'cash_discrepancy_count': cash_discrepancies.count(),
+        'cash_discrepancy_total': cash_discrepancies.aggregate(
             expected=Sum('expected_amount'), actual=Sum('actual_amount'),
         ),
     }
@@ -105,7 +111,6 @@ def dashboard_index(request):
     dashboard_by_role = {
         'DIRECTOR': 'dashboards/director.html',
         'RECEPTIONIST': 'dashboards/reception.html',
-        'BOOKING_AGENT': 'dashboards/reception.html',
         'HOUSEKEEPING_MGR': 'dashboards/housekeeping.html',
         'HOUSEKEEPER': 'dashboards/housekeeping.html',
         'MAINTENANCE_MGR': 'dashboards/maintenance.html',
@@ -115,8 +120,6 @@ def dashboard_index(request):
         'COOK': 'dashboards/kitchen.html',
         'RESTAURANT_MGR': 'dashboards/restaurant.html',
         'WAITER': 'dashboards/restaurant.html',
-        'CASHIER': 'dashboards/cashier.html',
-        'ACCOUNTANT': 'dashboards/finance.html',
         'NIGHT_AUDITOR': 'dashboards/finance.html',
     }
     return render(request, dashboard_by_role.get(role, 'dashboards/reception.html'), context)

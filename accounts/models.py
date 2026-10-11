@@ -5,14 +5,11 @@ from django.utils.translation import gettext_lazy as _
 class UserRole(models.TextChoices):
     ADMIN = 'ADMIN', _('1. Administrateur Système')
     DIRECTOR = 'DIRECTOR', _('2. Directeur / Gérant')
-    RECEPTIONIST = 'RECEPTIONIST', _('3. Réceptionniste')
-    BOOKING_AGENT = 'BOOKING_AGENT', _('4. Agent de Réservation')
+    RECEPTIONIST = 'RECEPTIONIST', _('Réceptionniste')
     HOUSEKEEPING_MGR = 'HOUSEKEEPING_MGR', _('5. Responsable Housekeeping')
     HOUSEKEEPER = 'HOUSEKEEPER', _('6. Femme / Valet de Chambre')
     MAINTENANCE_MGR = 'MAINTENANCE_MGR', _('7. Responsable Maintenance')
     TECHNICIAN = 'TECHNICIAN', _('8. Technicien Maintenance')
-    ACCOUNTANT = 'ACCOUNTANT', _('9. Comptable')
-    CASHIER = 'CASHIER', _('10. Caissier')
     RESTAURANT_MGR = 'RESTAURANT_MGR', _('11. Responsable Restaurant')
     WAITER = 'WAITER', _('12. Serveur')
     KITCHEN_MGR = 'KITCHEN_MGR', _('13. Chef Cuisine')
@@ -32,6 +29,7 @@ class User(AbstractUser):
         choices=UserRole.choices,
         default=UserRole.RECEPTIONIST
     )
+    legacy_role = models.CharField(max_length=30, blank=True, default='', editable=False)
     department = models.CharField(_('Département / Service'), max_length=100, blank=True, null=True)
     avatar = models.ImageField(upload_to='avatars/', blank=True, null=True)
     
@@ -62,7 +60,7 @@ class User(AbstractUser):
 
     @property
     def is_reception_staff(self):
-        return self.role in [UserRole.ADMIN, UserRole.DIRECTOR, UserRole.RECEPTIONIST, UserRole.BOOKING_AGENT, UserRole.NIGHT_AUDITOR]
+        return self.role in [UserRole.ADMIN, UserRole.DIRECTOR, UserRole.RECEPTIONIST, UserRole.NIGHT_AUDITOR]
 
     @property
     def is_housekeeping_staff(self):
@@ -86,11 +84,11 @@ class User(AbstractUser):
 
     @property
     def is_cashier_role(self):
-        return self.role in [UserRole.ADMIN, UserRole.DIRECTOR, UserRole.CASHIER, UserRole.ACCOUNTANT, UserRole.NIGHT_AUDITOR]
+        return self.role in [UserRole.ADMIN, UserRole.DIRECTOR, UserRole.RECEPTIONIST, UserRole.NIGHT_AUDITOR]
 
     @property
     def is_finance_staff(self):
-        return self.role in [UserRole.ADMIN, UserRole.DIRECTOR, UserRole.ACCOUNTANT, UserRole.NIGHT_AUDITOR]
+        return self.role in [UserRole.ADMIN, UserRole.DIRECTOR, UserRole.RECEPTIONIST, UserRole.NIGHT_AUDITOR]
 
     @property
     def is_hr_staff(self):

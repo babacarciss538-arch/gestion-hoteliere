@@ -6,12 +6,20 @@
 <div class="glass-card p-4">
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h4 class="fw-bold mb-0"><i class="bi bi-cash-stack text-purple me-2"></i>Régie de Caisse</h4>
-        <button type="button" class="btn btn-sm btn-success" onclick="document.getElementById('cash-form').classList.toggle('d-none')"><i class="bi bi-lock-fill me-1"></i>Ouvrir une Session</button>
+        {% if not has_open_session %}<button type="button" class="btn btn-sm btn-success" onclick="document.getElementById('cash-form').classList.toggle('d-none')"><i class="bi bi-lock-fill me-1"></i>Ouvrir une Session</button>{% endif %}
     </div>
-    <form id="cash-form" method="post" class="row g-3 mb-4 d-none">{% csrf_token %}<div class="col-md-6"><label class="form-label">Fond initial</label>{{ form.opening_amount }}</div><div class="col-12"><button class="btn btn-success" type="submit">Ouvrir la caisse</button></div></form>
+    <form id="cash-form" method="post" class="row g-3 mb-4 d-none">{% csrf_token %}<input type="hidden" name="action" value="open"><div class="col-md-6"><label class="form-label">Fond initial</label>{{ form.opening_amount }}{{ form.opening_amount.errors }}</div>{{ form.non_field_errors }}<div class="col-12"><button class="btn btn-success" type="submit">Ouvrir la caisse</button></div></form>
     <div class="alert alert-info glass-card border-0 py-3">
-        Calcul automatique du Montant Théorique = Fond Initial + Encaissements - Remboursements - Sorties, et contrôle rigoureux de l'écart au moment de la clôture.
+        La clôture enregistre le montant compté et l'heure. L'écart théorique n'est pas calculé, car les paiements ne sont pas associés à une session de caisse.
     </div>
-    {% for session in sessions %}<div class="small text-secondary">Session du {{ session.opened_at|date:"d/m/Y H:i" }} : {{ session.opening_amount }} {{ HOTEL_CURRENCY }} - {% if session.is_closed %}fermée{% else %}ouverte{% endif %}</div>{% empty %}<div class="text-muted">Aucune session créée.</div>{% endfor %}
+    {% for session in sessions %}<div class="small text-secondary border-top border-secondary-subtle py-3">
+        <div>Session du {{ session.opened_at|date:"d/m/Y H:i" }} : fond {{ session.opening_amount }} {{ HOTEL_CURRENCY }} - {% if session.is_closed %}fermée à {{ session.closed_at|date:"d/m/Y H:i" }}; montant compté {{ session.closing_amount }} {{ HOTEL_CURRENCY }}{% else %}ouverte{% endif %}</div>
+        {% if not session.is_closed %}<form method="post" class="row g-2 align-items-end mt-2">{% csrf_token %}<input type="hidden" name="action" value="close"><input type="hidden" name="session_id" value="{{ session.pk }}"><div class="col-md-5"><label class="form-label" for="closing-amount-{{ session.pk }}">Montant compté à la clôture</label><input id="closing-amount-{{ session.pk }}" class="form-control glass-input" type="number" name="closing_amount" min="0" step="0.01" required></div><div class="col-auto"><button class="btn btn-outline-light" type="submit">Clôturer ma session</button></div></form>{% endif %}
+    </div>{% empty %}<div class="text-muted">Aucune session créée.</div>{% endfor %}
+
+    <h5 class="fw-bold mt-4 mb-3">Écarts de mes sessions</h5>
+    <div class="table-responsive"><table class="table-glass"><thead><tr><th>Session</th><th>Attendu</th><th>Compté</th><th>Écart</th><th>Motif</th></tr></thead><tbody>
+        {% for discrepancy in discrepancies %}<tr><td>{{ discrepancy.session.opened_at|date:"d/m/Y H:i" }}</td><td>{{ discrepancy.expected_amount|floatformat:2 }} {{ HOTEL_CURRENCY }}</td><td>{{ discrepancy.actual_amount|floatformat:2 }} {{ HOTEL_CURRENCY }}</td><td>{{ discrepancy.difference|floatformat:2 }} {{ HOTEL_CURRENCY }}</td><td>{{ discrepancy.reason|default:"-" }}</td></tr>{% empty %}<tr><td colspan="5" class="text-center text-muted py-3">Aucun écart enregistré sur vos sessions.</td></tr>{% endfor %}
+    </tbody></table></div>
 </div>
 {% endblock %}

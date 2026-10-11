@@ -8,6 +8,11 @@
         <h4 class="fw-bold mb-0"><i class="bi bi-calendar-check-fill text-purple me-2"></i>Planning des Réservations</h4>
         <button type="button" class="btn btn-sm btn-primary" onclick="document.getElementById('reservation-form').classList.toggle('d-none')"><i class="bi bi-calendar-plus me-1"></i>Créer une Réservation</button>
     </div>
+    <form method="get" class="row g-2 mb-4">
+        <div class="col-md-6"><label class="visually-hidden" for="reservation-search">Rechercher une réservation</label><input id="reservation-search" class="form-control glass-input" type="search" name="q" value="{{ query }}" placeholder="Référence, client, email ou chambre"></div>
+        <div class="col-auto"><button class="btn btn-outline-light" type="submit">Rechercher</button></div>
+        {% if query %}<div class="col-auto"><a class="btn btn-outline-secondary" href="{% url 'reservations:list' %}">Effacer</a></div>{% endif %}
+    </form>
     <form id="reservation-form" method="post" class="row g-3 mb-4 d-none">{% csrf_token %}{% for field in form %}<div class="col-md-4"><label class="form-label">{{ field.label }}</label>{{ field }}{{ field.errors }}</div>{% endfor %}<div class="col-12"><button class="btn btn-success" type="submit">Enregistrer la réservation</button></div></form>
     <div class="table-responsive">
         <table class="table-glass">
@@ -22,7 +27,7 @@
                     <th>Actions</th>
                 </tr>
             </thead>
-            <tbody>{% for reservation in reservations %}<tr><td>{{ reservation.reference }}</td><td>{{ reservation.guest }}</td><td>{{ reservation.room }}</td><td>{{ reservation.check_in_date }} - {{ reservation.check_out_date }}</td><td>-</td><td>{{ reservation.get_status_display }}</td><td>-</td></tr>{% empty %}<tr><td colspan="7" class="text-center text-muted py-4">Aucune réservation enregistrée.</td></tr>{% endfor %}</tbody>
+            <tbody>{% for reservation in reservations %}<tr><td>{{ reservation.reference }}</td><td>{{ reservation.guest }}</td><td>{{ reservation.room }}</td><td>{{ reservation.check_in_date }} - {{ reservation.check_out_date }}</td><td>-</td><td>{{ reservation.get_status_display }}</td><td><a class="btn btn-sm btn-outline-light" href="{% url 'reservations:edit' reservation.pk %}">Modifier</a></td></tr>{% empty %}<tr><td colspan="7" class="text-center text-muted py-4">Aucune réservation enregistrée.</td></tr>{% endfor %}</tbody>
         </table>
     </div>
 </div>

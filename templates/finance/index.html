@@ -3,29 +3,50 @@
 {% block page_title %}Facturation, Taxes & Solde Comptable{% endblock %}
 
 {% block content %}
-<div class="glass-card p-4">
-    <div class="d-flex justify-content-between align-items-center mb-4">
-        <h4 class="fw-bold mb-0"><i class="bi bi-receipt text-purple me-2"></i>Factures & Folios</h4>
-    </div>
+<div class="glass-card p-4 mb-4">
+    <h4 class="fw-bold mb-4"><i class="bi bi-receipt text-purple me-2"></i>Factures enregistrées</h4>
     <div class="table-responsive">
         <table class="table-glass">
-            <thead>
-                <tr>
-                    <th>N° Facture</th>
-                    <th>Client</th>
-                    <th>Chambre / Séjour</th>
-                    <th>Total HT</th>
-                    <th>Taxes</th>
-                    <th>Total TTC (FCFA)</th>
-                    <th>Statut</th>
-                </tr>
-            </thead>
+            <thead><tr><th>Référence</th><th>Date</th><th>Montant</th></tr></thead>
             <tbody>
-                <tr>
-                    <td colspan="7" class="text-center text-muted py-4">Aucune facture enregistrée.</td>
-                </tr>
+                {% for invoice in invoices %}<tr><td>#{{ invoice.pk }}</td><td>{{ invoice.created_at|date:"d/m/Y H:i" }}</td><td>{{ invoice.amount|floatformat:2 }} {{ HOTEL_CURRENCY }}</td></tr>{% empty %}<tr><td colspan="3" class="text-center text-muted py-4">Aucune facture enregistrée.</td></tr>{% endfor %}
             </tbody>
         </table>
     </div>
+</div>
+
+<div class="glass-card p-4 mb-4">
+    <h4 class="fw-bold mb-4"><i class="bi bi-cash-stack text-emerald me-2"></i>Paiements enregistrés</h4>
+    {% if active_cash_session %}
+    <form method="post" class="row g-3 mb-4">
+        {% csrf_token %}
+        {% for field in payment_form %}<div class="col-md-5"><label class="form-label" for="{{ field.id_for_label }}">{{ field.label }}</label>{{ field }}{{ field.errors }}</div>{% endfor %}
+        {{ payment_form.non_field_errors }}
+        <div class="col-12"><button class="btn btn-primary" type="submit">Enregistrer le paiement</button></div>
+    </form>
+    {% else %}
+    <p class="small text-muted">Ouvrez d’abord votre session de caisse pour enregistrer un paiement. Les anciens paiements non affectés restent consultables sans rapprochement automatique.</p>
+    <a class="btn btn-outline-light mb-4" href="{% url 'cashier:index' %}">Ouvrir ma session de caisse</a>
+    {% endif %}
+    <p class="small text-muted">Un paiement lié à une facture ne dépasse pas son solde calculé à partir des paiements affectés. Les opérations antérieures sans facture liée ne sont pas déduites automatiquement.</p>
+    <div class="table-responsive"><table class="table-glass"><thead><tr><th>Référence</th><th>Date</th><th>Montant</th><th>Facture liée</th></tr></thead><tbody>
+        {% for payment in payments %}<tr><td>#{{ payment.pk }}</td><td>{{ payment.created_at|date:"d/m/Y H:i" }}</td><td>{{ payment.amount|floatformat:2 }} {{ HOTEL_CURRENCY }}</td><td>{% if payment.invoice_id %}#{{ payment.invoice_id }}{% else %}-{% endif %}</td></tr>{% empty %}<tr><td colspan="4" class="text-center text-muted py-4">Aucun paiement enregistré.</td></tr>{% endfor %}
+    </tbody></table></div>
+</div>
+
+<div class="glass-card p-4 mb-4">
+    <h4 class="fw-bold mb-4"><i class="bi bi-arrow-down-circle text-amber me-2"></i>Dépenses enregistrées</h4>
+    <div class="table-responsive"><table class="table-glass"><thead><tr><th>Libellé</th><th>Catégorie</th><th>Date</th><th>Montant</th></tr></thead><tbody>
+        {% for expense in expenses %}<tr><td>{{ expense.label }}</td><td>{{ expense.category|default:"-" }}</td><td>{{ expense.created_at|date:"d/m/Y H:i" }}</td><td>{{ expense.amount|floatformat:2 }} {{ HOTEL_CURRENCY }}</td></tr>{% empty %}<tr><td colspan="4" class="text-center text-muted py-4">Aucune dépense enregistrée.</td></tr>{% endfor %}
+    </tbody></table></div>
+</div>
+
+<div class="glass-card p-4">
+    <h4 class="fw-bold mb-4">Taxes et remboursements enregistrés</h4>
+    <div class="table-responsive"><table class="table-glass"><thead><tr><th>Type</th><th>Détail</th><th>Date</th><th>Montant</th></tr></thead><tbody>
+        {% for tax in taxes %}<tr><td>Taxe</td><td>{{ tax.name }}</td><td>{{ tax.created_at|date:"d/m/Y H:i" }}</td><td>{{ tax.amount|floatformat:2 }} {{ HOTEL_CURRENCY }}</td></tr>{% endfor %}
+        {% for refund in refunds %}<tr><td>Remboursement</td><td>Paiement #{{ refund.payment_id }}{% if refund.reason %}: {{ refund.reason }}{% endif %}</td><td>{{ refund.created_at|date:"d/m/Y H:i" }}</td><td>{{ refund.amount|floatformat:2 }} {{ HOTEL_CURRENCY }}</td></tr>{% endfor %}
+        {% if not taxes and not refunds %}<tr><td colspan="4" class="text-center text-muted py-4">Aucune taxe ou aucun remboursement enregistré.</td></tr>{% endif %}
+    </tbody></table></div>
 </div>
 {% endblock %}

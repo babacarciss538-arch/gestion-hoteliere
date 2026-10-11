@@ -6,7 +6,6 @@ from .models import Room
 @role_required([
     'DIRECTOR',
     'RECEPTIONIST',
-    'BOOKING_AGENT',
     'HOUSEKEEPING_MGR',
     'HOUSEKEEPER',
     'MAINTENANCE_MGR',

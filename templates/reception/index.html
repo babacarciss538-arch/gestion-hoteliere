@@ -4,11 +4,46 @@
 
 {% block content %}
 <div class="glass-card p-4">
-    <div class="d-flex justify-content-between align-items-center mb-4">
-        <h4 class="fw-bold mb-0"><i class="bi bi-box-arrow-in-right text-purple me-2"></i>Module Check-In / Check-Out</h4>
+    <h4 class="fw-bold mb-4"><i class="bi bi-box-arrow-in-right text-purple me-2"></i>Arrivées prévues et à traiter</h4>
+    <div class="table-responsive mb-5">
+        <table class="table-glass">
+            <thead><tr><th>Réservation</th><th>Client</th><th>Chambre</th><th>Arrivée</th><th>Départ prévu</th><th>Action</th></tr></thead>
+            <tbody>
+                {% for reservation in arrivals %}
+                <tr>
+                    <td>{{ reservation.reference }}</td>
+                    <td>{{ reservation.guest }}</td>
+                    <td>{{ reservation.room.number }}</td>
+                    <td>{{ reservation.check_in_date|date:"d/m/Y" }}</td>
+                    <td>{{ reservation.check_out_date|date:"d/m/Y"|default:"-" }}</td>
+                    <td><form method="post">{% csrf_token %}<input type="hidden" name="action" value="check_in"><input type="hidden" name="reservation_id" value="{{ reservation.pk }}"><button class="btn btn-sm btn-primary" type="submit">Enregistrer l’arrivée</button></form></td>
+                </tr>
+                {% empty %}
+                <tr><td colspan="6" class="text-center text-muted py-4">Aucune arrivée confirmée à traiter.</td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
     </div>
-    <div class="alert alert-info glass-card border-0 py-3">
-        Régie de réception : Enregistrement atomique des arrivées, départs, cautions et remises de clés.
+
+    <h4 class="fw-bold mb-4"><i class="bi bi-door-open text-emerald me-2"></i>Clients actuellement en séjour</h4>
+    <div class="table-responsive">
+        <table class="table-glass">
+            <thead><tr><th>Réservation</th><th>Client</th><th>Chambre</th><th>Arrivée enregistrée</th><th>Départ prévu</th><th>Action</th></tr></thead>
+            <tbody>
+                {% for check_in in in_house %}
+                <tr>
+                    <td>{{ check_in.reservation.reference }}</td>
+                    <td>{{ check_in.reservation.guest }}</td>
+                    <td>{{ check_in.reservation.room.number }}</td>
+                    <td>{{ check_in.actual_check_in|date:"d/m/Y H:i" }}</td>
+                    <td>{{ check_in.expected_check_out|date:"d/m/Y"|default:"-" }}</td>
+                    <td><form method="post">{% csrf_token %}<input type="hidden" name="action" value="check_out"><input type="hidden" name="check_in_id" value="{{ check_in.pk }}"><button class="btn btn-sm btn-outline-light" type="submit">Enregistrer le départ</button></form></td>
+                </tr>
+                {% empty %}
+                <tr><td colspan="6" class="text-center text-muted py-4">Aucun séjour en cours enregistré.</td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
     </div>
 </div>
 {% endblock %}

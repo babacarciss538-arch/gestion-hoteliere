@@ -1,5 +1,5 @@
 {% load static %}
-<aside class="app-sidebar">
+<aside class="app-sidebar" id="app-sidebar" aria-label="Navigation principale">
     <div class="sidebar-header">
         <i class="bi bi-building-fill text-purple" style="font-size: 1.5rem; color: #8B5CF6;"></i>
         <div>
@@ -16,17 +16,17 @@
             </a>
         </li>
 
-        {% if user.is_superuser or user.role == 'ADMIN' or user.role == 'DIRECTOR' or user.role == 'RECEPTIONIST' or user.role == 'BOOKING_AGENT' or user.role == 'HOUSEKEEPING_MGR' or user.role == 'HOUSEKEEPER' or user.role == 'MAINTENANCE_MGR' or user.role == 'TECHNICIAN' %}
+        {% if user.is_superuser or user.role == 'ADMIN' or user.role == 'DIRECTOR' or user.role == 'RECEPTIONIST' or user.role == 'HOUSEKEEPING_MGR' or user.role == 'HOUSEKEEPER' or user.role == 'MAINTENANCE_MGR' or user.role == 'TECHNICIAN' %}
         <li class="menu-category">Exploitation Hôtelière</li>
         {% endif %}
-        {% if user.is_superuser or user.role == 'ADMIN' or user.role == 'DIRECTOR' or user.role == 'RECEPTIONIST' or user.role == 'BOOKING_AGENT' or user.role == 'HOUSEKEEPING_MGR' or user.role == 'HOUSEKEEPER' or user.role == 'MAINTENANCE_MGR' or user.role == 'TECHNICIAN' %}
+        {% if user.is_superuser or user.role == 'ADMIN' or user.role == 'DIRECTOR' or user.role == 'RECEPTIONIST' or user.role == 'HOUSEKEEPING_MGR' or user.role == 'HOUSEKEEPER' or user.role == 'MAINTENANCE_MGR' or user.role == 'TECHNICIAN' %}
         <li class="menu-item">
             <a href="{% url 'rooms:list' %}" class="menu-link {% if request.resolver_match.app_name == 'rooms' %}active{% endif %}">
                 <i class="bi bi-door-closed-fill"></i><span>Chambres & Tarifs</span>
             </a>
         </li>
         {% endif %}
-        {% if user.is_superuser or user.role == 'ADMIN' or user.role == 'DIRECTOR' or user.role == 'RECEPTIONIST' or user.role == 'BOOKING_AGENT' %}
+        {% if user.is_superuser or user.role == 'ADMIN' or user.role == 'DIRECTOR' or user.role == 'RECEPTIONIST' %}
         <li class="menu-item">
             <a href="{% url 'guests:list' %}" class="menu-link {% if request.resolver_match.app_name == 'guests' %}active{% endif %}">
                 <i class="bi bi-people-fill"></i><span>Fiches Clients</span>
@@ -96,7 +96,7 @@
         </li>
         {% endif %}
 
-        {% if user.is_superuser or user.role == 'ADMIN' or user.role == 'DIRECTOR' or user.role == 'CASHIER' or user.role == 'ACCOUNTANT' or user.role == 'NIGHT_AUDITOR' %}
+        {% if user.is_superuser or user.role == 'ADMIN' or user.role == 'DIRECTOR' or user.role == 'RECEPTIONIST' or user.role == 'NIGHT_AUDITOR' %}
         <li class="menu-category">Finance & Caisses</li>
         <li class="menu-item">
             <a href="{% url 'cashier:index' %}" class="menu-link {% if request.resolver_match.app_name == 'cashier' %}active{% endif %}">
@@ -110,7 +110,7 @@
         </li>
         {% endif %}
 
-        {% if user.is_superuser or user.role == 'ADMIN' or user.role == 'DIRECTOR' or user.role == 'HR_MGR' or user.role == 'COMMERCIAL_MGR' or user.role == 'ACCOUNTANT' or user.role == 'NIGHT_AUDITOR' %}
+        {% if user.is_superuser or user.role == 'ADMIN' or user.role == 'DIRECTOR' or user.role == 'HR_MGR' or user.role == 'COMMERCIAL_MGR' or user.role == 'RECEPTIONIST' or user.role == 'NIGHT_AUDITOR' %}
         <li class="menu-category">Gestion & Audit</li>
         {% endif %}
         {% if user.is_superuser or user.role == 'ADMIN' or user.role == 'DIRECTOR' or user.role == 'HR_MGR' %}
@@ -127,12 +127,14 @@
             </a>
         </li>
         {% endif %}
-        {% if user.is_superuser or user.role == 'ADMIN' or user.role == 'DIRECTOR' or user.role == 'ACCOUNTANT' or user.role == 'NIGHT_AUDITOR' %}
+        {% if user.is_superuser or user.role == 'ADMIN' or user.role == 'DIRECTOR' or user.role == 'RECEPTIONIST' or user.role == 'NIGHT_AUDITOR' %}
         <li class="menu-item">
             <a href="{% url 'reports:index' %}" class="menu-link {% if request.resolver_match.app_name == 'reports' %}active{% endif %}">
                 <i class="bi bi-bar-chart-line-fill"></i><span>Rapports & Analyses</span>
             </a>
         </li>
+        {% endif %}
+        {% if user.is_superuser or user.role == 'ADMIN' or user.role == 'DIRECTOR' or user.role == 'NIGHT_AUDITOR' %}
         <li class="menu-item">
             <a href="{% url 'audit:index' %}" class="menu-link {% if request.resolver_match.app_name == 'audit' %}active{% endif %}">
                 <i class="bi bi-shield-check"></i><span>Journal d'Audit</span>

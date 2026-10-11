@@ -7,8 +7,8 @@
     <div class="col-md-3">
         <div class="glass-card metric-card">
             <div>
-                <div class="text-muted extra-small">ARRIVÉES DU JOUR</div>
-                <div class="metric-value text-emerald">{{ today_checkins }}</div>
+                <div class="text-muted extra-small">ARRIVÉES PRÉVUES AUJOURD'HUI</div>
+                    <div class="metric-value text-emerald">{{ arrivals_today }}</div>
             </div>
             <div class="metric-icon icon-green"><i class="bi bi-box-arrow-in-right"></i></div>
         </div>
@@ -16,8 +16,8 @@
     <div class="col-md-3">
         <div class="glass-card metric-card">
             <div>
-                <div class="text-muted extra-small">DÉPARTS DU JOUR</div>
-                <div class="metric-value text-blue">{{ today_checkouts }}</div>
+                <div class="text-muted extra-small">DÉPARTS PRÉVUS AUJOURD'HUI</div>
+                    <div class="metric-value text-blue">{{ departures_today }}</div>
             </div>
             <div class="metric-icon icon-blue"><i class="bi bi-box-arrow-left"></i></div>
         </div>
@@ -29,6 +29,36 @@
                 <div class="metric-value text-purple">{{ available_rooms }}</div>
             </div>
             <div class="metric-icon icon-purple"><i class="bi bi-door-open"></i></div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="glass-card metric-card">
+            <div>
+                <div class="text-muted extra-small">FACTURES À SUIVRE</div>
+                <div class="metric-value text-amber">{{ invoice_count }}</div>
+                <div class="small text-muted mt-1">{{ invoice_total|floatformat:0 }} {{ HOTEL_CURRENCY }} facturés</div>
+            </div>
+            <div class="metric-icon icon-amber"><i class="bi bi-receipt"></i></div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="glass-card metric-card">
+            <div>
+                <div class="text-muted extra-small">DÉPENSES ENREGISTRÉES</div>
+                <div class="metric-value text-danger">{{ expense_total|floatformat:0 }}</div>
+                <div class="small text-muted mt-1">{{ HOTEL_CURRENCY }}</div>
+            </div>
+            <div class="metric-icon icon-amber"><i class="bi bi-arrow-down-circle"></i></div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="glass-card metric-card">
+            <div>
+                <div class="text-muted extra-small">SESSION DE CAISSE</div>
+                <div class="metric-value text-emerald">{% if active_cash_session %}OUVERTE{% else %}AUCUNE{% endif %}</div>
+                <div class="small text-muted mt-1">{{ cash_discrepancy_count }} écart(s) sur mes sessions</div>
+            </div>
+            <div class="metric-icon icon-green"><i class="bi bi-safe"></i></div>
         </div>
     </div>
     <div class="col-md-3">
@@ -52,7 +82,7 @@
     <div class="col-md-3">
         <div class="glass-card metric-card">
             <div>
-                <div class="text-muted extra-small">RÉSERVATIONS DU JOUR</div>
+                <div class="text-muted extra-small">ARRIVÉES À TRAITER</div>
                 <div class="metric-value text-purple">{{ pending_reservations }}</div>
             </div>
             <div class="metric-icon icon-purple"><i class="bi bi-calendar-check"></i></div>
@@ -67,16 +97,24 @@
             <div class="metric-icon icon-green"><i class="bi bi-cash-stack"></i></div>
         </div>
     </div>
-    <div class="col-md-3"><div class="glass-card metric-card"><div><div class="text-muted extra-small">RÉSERVATIONS</div><div class="metric-value text-purple">{{ pending_reservations }}</div></div><div class="metric-icon icon-purple"><i class="bi bi-calendar-check"></i></div></div></div>
+    <div class="col-md-3"><div class="glass-card metric-card"><div><div class="text-muted extra-small">RÉSERVATIONS À TRAITER</div><div class="metric-value text-purple">{{ pending_reservations }}</div></div><div class="metric-icon icon-purple"><i class="bi bi-calendar-check"></i></div></div></div>
     <div class="col-md-3"><div class="glass-card metric-card"><div><div class="text-muted extra-small">ALERTES IMPORTANTES</div><div class="metric-value text-amber">{{ critical_stock_count|add:maintenance_open }}</div></div><div class="metric-icon icon-amber"><i class="bi bi-exclamation-triangle"></i></div></div></div>
 </div>
 
 <div class="glass-card p-4">
     <h5 class="fw-bold mb-3"><i class="bi bi-list-check me-2 text-purple"></i>Actions Principales Réception</h5>
-    <div class="d-flex gap-3">
-        <a href="{% url 'reception:index' %}" class="btn btn-primary px-4 py-2"><i class="bi bi-person-check me-2"></i>Module Check-In & Régie</a>
-        <a href="{% url 'reservations:list' %}" class="btn btn-outline-light px-4 py-2"><i class="bi bi-calendar-plus me-2"></i>Nouvelle Réservation</a>
-        <a href="{% url 'guests:list' %}" class="btn btn-outline-secondary px-4 py-2"><i class="bi bi-search me-2"></i>Rechercher Fiche Client</a>
+    <div class="d-flex gap-3 flex-wrap">
+        <a href="{% url 'reservations:list' %}" class="btn btn-primary px-4 py-2"><i class="bi bi-calendar-plus me-2"></i>Réservations</a>
+        <a href="{% url 'guests:list' %}" class="btn btn-outline-light px-4 py-2"><i class="bi bi-people me-2"></i>Clients</a>
+        <a href="{% url 'reception:index' %}" class="btn btn-outline-light px-4 py-2"><i class="bi bi-person-check me-2"></i>Check-In / Check-Out</a>
+        <a href="{% url 'cashier:index' %}" class="btn btn-outline-light px-4 py-2"><i class="bi bi-cash-stack me-2"></i>Caisse</a>
+        <a href="{% url 'finance:index' %}" class="btn btn-outline-light px-4 py-2"><i class="bi bi-receipt me-2"></i>Factures et paiements</a>
+        <a href="{% url 'reports:index' %}" class="btn btn-outline-light px-4 py-2"><i class="bi bi-bar-chart me-2"></i>Rapports autorisés</a>
     </div>
+    <hr class="border-secondary-subtle my-4">
+    <h6 class="fw-bold mb-3">Mes dernières sessions de caisse</h6>
+    <div class="table-responsive"><table class="table-glass"><thead><tr><th>Ouverture</th><th>Fond initial</th><th>État</th><th>Montant de clôture</th></tr></thead><tbody>
+        {% for session in cash_sessions %}<tr><td>{{ session.opened_at|date:"d/m/Y H:i" }}</td><td>{{ session.opening_amount|floatformat:2 }} {{ HOTEL_CURRENCY }}</td><td>{% if session.is_closed %}Fermée{% else %}Ouverte{% endif %}</td><td>{{ session.closing_amount|default:"-" }}</td></tr>{% empty %}<tr><td colspan="4" class="text-muted">Aucune session de caisse enregistrée.</td></tr>{% endfor %}
+    </tbody></table></div>
 </div>
 {% endblock %}
