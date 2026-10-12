@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block title %}Facture #{{ invoice.pk }} | {{ HOTEL_NAME }}{% endblock %}
+{% block page_title %}Facture #{{ invoice.pk }}{% endblock %}
+
+{% block content %}
+<div class="glass-card p-4 mb-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h4 class="fw-bold mb-0">Facture #{{ invoice.pk }} <span class="badge bg-secondary ms-2">{{ invoice.status_label }}</span></h4>
+        <a class="btn btn-outline-light btn-sm" href="{% url 'finance:index' %}">Retour</a>
+    </div>
+    <dl class="row mb-0">
+        <dt class="col-sm-3">Date</dt><dd class="col-sm-9">{{ invoice.created_at|date:"d/m/Y H:i" }}</dd>
+        <dt class="col-sm-3">Client</dt><dd class="col-sm-9">{{ invoice.customer_name|default:"-" }}</dd>
+        <dt class="col-sm-3">Objet</dt><dd class="col-sm-9">{{ invoice.description|default:"-" }}</dd>
+        <dt class="col-sm-3">Montant hors taxe</dt><dd class="col-sm-9">{{ invoice.subtotal|floatformat:2 }} {{ HOTEL_CURRENCY }}</dd>
+        <dt class="col-sm-3">Taxes</dt><dd class="col-sm-9">{{ invoice.tax_amount|floatformat:2 }} {{ HOTEL_CURRENCY }}{% for tax in invoice.taxes.all %} <span class="small text-muted">({{ tax }})</span>{% endfor %}</dd>
+        <dt class="col-sm-3">Total dû</dt><dd class="col-sm-9 fw-bold">{{ invoice.amount|floatformat:2 }} {{ HOTEL_CURRENCY }}</dd>
+        <dt class="col-sm-3">Déjà payé (net des remboursements)</dt><dd class="col-sm-9">{{ invoice.paid_amount|floatformat:2 }} {{ HOTEL_CURRENCY }}</dd>
+        <dt class="col-sm-3">Solde restant</dt><dd class="col-sm-9 fw-bold">{{ invoice.balance|floatformat:2 }} {{ HOTEL_CURRENCY }}</dd>
+    </dl>
+</div>
+
+<div class="glass-card p-4">
+    <h5 class="fw-bold mb-3">Paiements affectés</h5>
+    <div class="table-responsive"><table class="table-glass"><thead><tr><th>Référence</th><th>Date</th><th>Montant</th><th>Remboursé</th></tr></thead><tbody>
+        {% for payment in invoice.payments.all %}<tr><td>#{{ payment.pk }}</td><td>{{ payment.created_at|date:"d/m/Y H:i" }}</td><td>{{ payment.amount|floatformat:2 }} {{ HOTEL_CURRENCY }}</td><td>{{ payment.refunded_amount|floatformat:2 }} {{ HOTEL_CURRENCY }}</td></tr>{% empty %}<tr><td colspan="4" class="text-center text-muted py-3">Aucun paiement affecté à cette facture.</td></tr>{% endfor %}
+    </tbody></table></div>
+</div>
+{% endblock %}

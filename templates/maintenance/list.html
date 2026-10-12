@@ -1,28 +1,261 @@
 {% extends 'base.html' %}
 {% block title %}Maintenance Technique | {{ HOTEL_NAME }}{% endblock %}
-{% block page_title %}Maintenance & Incidents{% endblock %}
+{% block page_title %}
+  {% if can_manage %}Tableau de Bord Maintenance — Responsable{% else %}Mes Interventions — Technicien{% endif %}
+{% endblock %}
 
 {% block content %}
+
+{# ── KPI Cards ──────────────────────────────────────────────────────────── #}
+<div class="row g-3 mb-4">
+  <div class="col-12 col-sm-6 col-xl-3">
+    <div class="glass-card metric-card">
+      <div>
+        <div class="text-muted extra-small">SIGNALÉS (OUVERTS)</div>
+        <div class="metric-value text-red">{{ open_count }}</div>
+      </div>
+      <div class="metric-icon icon-red"><i class="bi bi-exclamation-diamond"></i></div>
+    </div>
+  </div>
+  <div class="col-12 col-sm-6 col-xl-3">
+    <div class="glass-card metric-card">
+      <div>
+        <div class="text-muted extra-small">ASSIGNÉS</div>
+        <div class="metric-value text-amber">{{ assigned_count }}</div>
+      </div>
+      <div class="metric-icon icon-amber"><i class="bi bi-person-check"></i></div>
+    </div>
+  </div>
+  <div class="col-12 col-sm-6 col-xl-3">
+    <div class="glass-card metric-card">
+      <div>
+        <div class="text-muted extra-small">EN COURS</div>
+        <div class="metric-value text-blue">{{ in_progress_count }}</div>
+      </div>
+      <div class="metric-icon icon-blue"><i class="bi bi-tools"></i></div>
+    </div>
+  </div>
+  <div class="col-12 col-sm-6 col-xl-3">
+    <div class="glass-card metric-card">
+      <div>
+        <div class="text-muted extra-small">RÉSOLUS (À VALIDER)</div>
+        <div class="metric-value text-green">{{ resolved_count }}</div>
+      </div>
+      <div class="metric-icon icon-green"><i class="bi bi-check2-circle"></i></div>
+    </div>
+  </div>
+</div>
+
+{# ── Liste des Tickets ─────────────────────────────────────────────────── #}
 <div class="glass-card p-4">
-    <div class="d-flex justify-content-between align-items-center mb-4">
-        <h4 class="fw-bold mb-0"><i class="bi bi-tools text-purple me-2"></i>Tickets de Maintenance</h4>
-        <button type="button" class="btn btn-sm btn-primary" onclick="document.getElementById('ticket-form').classList.toggle('d-none')"><i class="bi bi-plus-lg me-1"></i>Déclarer un incident</button>
+  <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mb-4">
+    <div>
+      <h5 class="fw-bold mb-0">
+        <i class="bi bi-wrench-adjustable text-purple me-2"></i>
+        {% if can_manage %}Suivi des Incidents & Interventions{% else %}Interventions qui me sont affectées{% endif %}
+      </h5>
+      <small class="text-muted">Structure commune — Aucune rubrique Tarif affichée</small>
     </div>
-    <form id="ticket-form" method="post" class="row g-3 mb-4 d-none">{% csrf_token %}{% for field in form %}<div class="col-md-4"><label class="form-label">{{ field.label }}</label>{{ field }}{{ field.errors }}</div>{% endfor %}<div class="col-12"><button class="btn btn-success" type="submit">Déclarer l'incident</button></div></form>
-    <div class="table-responsive">
-        <table class="table-glass">
-            <thead>
-                <tr>
-                    <th>Ticket N°</th>
-                    <th>Chambre / Équipement</th>
-                    <th>Problème Signalé</th>
-                    <th>Priorité</th>
-                    <th>Technicien</th>
-                    <th>Statut</th>
-                </tr>
-            </thead>
-            <tbody>{% for ticket in tickets %}<tr><td>{{ ticket.id }}</td><td>{{ ticket.location }}</td><td>{{ ticket.description }}</td><td>{{ ticket.priority }}</td><td>-</td><td>{{ ticket.get_status_display }}</td></tr>{% empty %}<tr><td colspan="6" class="text-center text-muted py-4">Aucun ticket d'incident ouvert.</td></tr>{% endfor %}</tbody>
-        </table>
+    <div class="d-flex gap-2 align-items-center">
+      {# Filtre par statut #}
+      <form method="get" class="d-inline">
+        <select name="status" class="form-select form-select-sm glass-input" onchange="this.form.submit()">
+          <option value="">Tous les statuts</option>
+          {% for code, label in status_choices %}
+            <option value="{{ code }}" {% if status_filter == code %}selected{% endif %}>{{ label }}</option>
+          {% endfor %}
+        </select>
+      </form>
+
+      <a href="{% url 'maintenance:report' %}" class="btn btn-sm btn-primary">
+        <i class="bi bi-plus-lg me-1"></i>Signaler un incident
+      </a>
     </div>
+  </div>
+
+  {% if not tickets %}
+    <div class="text-center text-muted py-5">
+      <i class="bi bi-clipboard-check display-4"></i>
+      <p class="mt-3">
+        {% if can_manage %}
+          Aucun incident signalé dans cette sélection.
+        {% else %}
+          Aucune intervention ne vous est assignée pour le moment.
+        {% endif %}
+      </p>
+    </div>
+  {% else %}
+  <div class="table-responsive">
+    <table class="table-glass">
+      <thead>
+        <tr>
+          <th>Réf</th>
+          <th>Chambre / Emplacement</th>
+          <th>Problème Signalé</th>
+          <th>Priorité</th>
+          <th>Statut</th>
+          <th>Technicien / Prestataire</th>
+          <th>Signalé par</th>
+          <th>Date</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for ticket in tickets %}
+        <tr>
+          <td><span class="fw-bold">#{{ ticket.id }}</span></td>
+          <td>
+            {% if ticket.room %}
+              <span class="badge bg-purple px-2 py-1"><i class="bi bi-door-closed me-1"></i>Ch. {{ ticket.room.number }}</span>
+              {% if ticket.location %}<small class="text-muted d-block mt-1">{{ ticket.location }}</small>{% endif %}
+            {% elif ticket.location %}
+              <span>{{ ticket.location }}</span>
+            {% else %}
+              <span class="text-muted">Zone commune</span>
+            {% endif %}
+          </td>
+          <td>
+            <div class="fw-semibold">{{ ticket.title }}</div>
+            {% if ticket.description %}
+              <small class="text-muted d-block">{{ ticket.description|truncatechars:60 }}</small>
+            {% endif %}
+          </td>
+          <td>
+            <span class="badge bg-{{ ticket.get_priority_badge }}">
+              {{ ticket.get_priority_display }}
+            </span>
+          </td>
+          <td>
+            <span class="badge bg-{{ ticket.get_status_badge }}">
+              {{ ticket.get_status_display }}
+            </span>
+          </td>
+          <td>
+            {% if ticket.technician_type == 'INTERNAL' and ticket.assigned_technician %}
+              <span><i class="bi bi-person me-1 text-info"></i>{% if ticket.assigned_technician.get_full_name %}{{ ticket.assigned_technician.get_full_name }}{% else %}{{ ticket.assigned_technician.email }}{% endif %}</span>
+            {% elif ticket.technician_type == 'EXTERNAL' and ticket.external_company %}
+              <span><i class="bi bi-building me-1 text-warning"></i>{{ ticket.external_company }}</span>
+              {% if ticket.external_contact %}<small class="text-muted d-block">{{ ticket.external_contact }}</small>{% endif %}
+            {% else %}
+              {% if can_manage %}
+                <button type="button" class="btn btn-xs btn-outline-warning py-1 px-2" data-bs-toggle="modal" data-bs-target="#assignModal{{ ticket.id }}">
+                  <i class="bi bi-person-plus me-1"></i>Affecter
+                </button>
+              {% else %}
+                <span class="text-muted italic">Non affecté</span>
+              {% endif %}
+            {% endif %}
+          </td>
+          <td>
+            <small>
+              {% if ticket.reported_by %}
+                {% if ticket.reported_by.get_full_name %}{{ ticket.reported_by.get_full_name }}{% else %}{{ ticket.reported_by.email }}{% endif %}
+              {% else %}
+                Non spécifié
+              {% endif %}
+            </small>
+          </td>
+          <td>
+            <small class="text-muted">{{ ticket.created_at|date:"d/m/Y H:i" }}</small>
+          </td>
+          <td>
+            <div class="d-flex gap-1 align-items-center">
+              <a href="{% url 'maintenance:detail' ticket.pk %}" class="btn btn-sm btn-outline-primary" title="Voir le détail et l'historique">
+                <i class="bi bi-eye"></i> Ouvrir
+              </a>
+              {% if can_manage and ticket.status != 'CLOSED' %}
+                <button type="button" class="btn btn-sm btn-outline-info" data-bs-toggle="modal" data-bs-target="#assignModal{{ ticket.id }}" title="Affecter ou changer le technicien">
+                  <i class="bi bi-person-gear"></i>
+                </button>
+              {% endif %}
+            </div>
+
+            {% if can_manage %}
+            <!-- Modal Affectation Rapide pour Ticket #{{ ticket.id }} -->
+            <div class="modal fade" id="assignModal{{ ticket.id }}" tabindex="-1" aria-labelledby="assignModalLabel{{ ticket.id }}" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content glass-card border border-secondary text-light" style="background: #111827;">
+                  <div class="modal-header border-bottom border-secondary">
+                    <h6 class="modal-title fw-bold" id="assignModalLabel{{ ticket.id }}">
+                      <i class="bi bi-person-gear text-purple me-2"></i>Affecter l'incident #{{ ticket.id }}
+                    </h6>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Fermer"></button>
+                  </div>
+                  <form method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="action" value="quick_assign">
+                    <input type="hidden" name="ticket_id" value="{{ ticket.id }}">
+                    <div class="modal-body">
+                      <div class="mb-3">
+                        <label class="form-label text-muted small">Incident</label>
+                        <div class="fw-semibold text-light">{{ ticket.title }}</div>
+                        <small class="text-muted">{% if ticket.room %}Chambre {{ ticket.room.number }}{% else %}{{ ticket.location|default:"Zone commune" }}{% endif %}</small>
+                      </div>
+
+                      <div class="mb-3">
+                        <label class="form-label">Type d'intervenant</label>
+                        <select name="technician_type" class="form-select glass-input text-light" id="quick_tech_type_{{ ticket.id }}" onchange="toggleQuickAssignFields('{{ ticket.id }}')">
+                          <option value="INTERNAL">Technicien interne de l'hôtel</option>
+                          <option value="EXTERNAL">Prestataire / Société externe</option>
+                        </select>
+                      </div>
+
+                      <div class="mb-3" id="quick_internal_div_{{ ticket.id }}">
+                        <label class="form-label">Sélectionner le technicien disponible</label>
+                        <select name="technician_id" class="form-select glass-input text-light">
+                          {% for tech in available_technicians %}
+                            <option value="{{ tech.id }}" {% if ticket.assigned_technician_id == tech.id %}selected{% endif %}>
+                              {{ tech.get_full_name|default:tech.email }} ({{ tech.get_role_display }})
+                            </option>
+                          {% empty %}
+                            <option value="" disabled>Aucun technicien interne enregistré</option>
+                          {% endfor %}
+                        </select>
+                      </div>
+
+                      <div class="mb-3 d-none" id="quick_external_div_{{ ticket.id }}">
+                        <label class="form-label">Nom de la société prestataire</label>
+                        <input type="text" name="external_company" value="{{ ticket.external_company }}" class="form-control glass-input text-light mb-2" placeholder="Ex: ClimaTech SARL, Plomberie Express…">
+
+                        <label class="form-label">Contact / Téléphone d'astreinte</label>
+                        <input type="text" name="external_contact" value="{{ ticket.external_contact }}" class="form-control glass-input text-light" placeholder="Ex: M. Diop - 77 123 45 67">
+                      </div>
+                    </div>
+                    <div class="modal-footer border-top border-secondary">
+                      <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-dismiss="modal">Annuler</button>
+                      <button type="submit" class="btn btn-sm btn-primary">
+                        <i class="bi bi-check2-circle me-1"></i>Confirmer l'affectation
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+            {% endif %}
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  {% endif %}
+</div>
+
+<script>
+function toggleQuickAssignFields(id) {
+  const select = document.getElementById('quick_tech_type_' + id);
+  const internalDiv = document.getElementById('quick_internal_div_' + id);
+  const externalDiv = document.getElementById('quick_external_div_' + id);
+  if (!select) return;
+
+  if (select.value === 'EXTERNAL') {
+    if (internalDiv) internalDiv.classList.add('d-none');
+    if (externalDiv) externalDiv.classList.remove('d-none');
+  } else {
+    if (internalDiv) internalDiv.classList.remove('d-none');
+    if (externalDiv) externalDiv.classList.add('d-none');
+  }
+}
+</script>
 </div>
 {% endblock %}

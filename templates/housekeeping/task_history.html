@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+{% block title %}Historique Tâche #{{ task.pk }} | {{ HOTEL_NAME }}{% endblock %}
+{% block page_title %}Historique — {{ task.title }}{% endblock %}
+
+{% block content %}
+<div class="row">
+  <div class="col-12 col-lg-4 mb-4">
+    <div class="glass-card p-4">
+      <h5 class="fw-bold mb-3"><i class="bi bi-info-circle text-purple me-2"></i>Détails de la tâche</h5>
+      <dl class="row mb-0">
+        <dt class="col-5 text-muted">Chambre</dt>
+        <dd class="col-7">{% if task.room %}{{ task.room.number }} — {{ task.room.room_type }}{% else %}—{% endif %}</dd>
+
+        <dt class="col-5 text-muted">Titre</dt>
+        <dd class="col-7">{{ task.title }}</dd>
+
+        <dt class="col-5 text-muted">Priorité</dt>
+        <dd class="col-7">{{ task.get_priority_display }}</dd>
+
+        <dt class="col-5 text-muted">Statut actuel</dt>
+        <dd class="col-7">
+          {% if task.status == 'COMPLETED' %}<span class="badge bg-success">{{ task.get_status_display }}</span>
+          {% elif task.status == 'IN_PROGRESS' %}<span class="badge bg-primary">{{ task.get_status_display }}</span>
+          {% else %}<span class="badge bg-warning text-dark">{{ task.get_status_display }}</span>{% endif %}
+        </dd>
+
+        <dt class="col-5 text-muted">Assignée à</dt>
+        <dd class="col-7">{{ task.assigned_to.get_full_name|default:task.assigned_to.email|default:"—" }}</dd>
+
+        <dt class="col-5 text-muted">Créée par</dt>
+        <dd class="col-7">{{ task.created_by.get_full_name|default:task.created_by.email|default:"—" }}</dd>
+
+        <dt class="col-5 text-muted">Créée le</dt>
+        <dd class="col-7">{{ task.created_at|date:"d/m/Y H:i" }}</dd>
+
+        {% if task.completed_at %}
+        <dt class="col-5 text-muted">Terminée le</dt>
+        <dd class="col-7">{{ task.completed_at|date:"d/m/Y H:i" }}</dd>
+        {% endif %}
+
+        {% if task.notes %}
+        <dt class="col-5 text-muted">Notes</dt>
+        <dd class="col-7">{{ task.notes }}</dd>
+        {% endif %}
+      </dl>
+      <div class="mt-3">
+        <a href="{% url 'housekeeping:list' %}" class="btn btn-outline-secondary btn-sm">
+          <i class="bi bi-arrow-left me-1"></i>Retour au planning
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-12 col-lg-8">
+    <div class="glass-card p-4">
+      <h5 class="fw-bold mb-4"><i class="bi bi-clock-history text-purple me-2"></i>Historique des actions</h5>
+      {% if task.history.all %}
+        <div class="timeline">
+          {% for entry in task.history.all %}
+          <div class="d-flex gap-3 mb-3">
+            <div class="text-center" style="min-width:36px;">
+              {% if entry.action == 'ASSIGNED' %}
+                <span class="badge bg-info rounded-circle p-2"><i class="bi bi-person-plus"></i></span>
+              {% elif entry.action == 'REASSIGNED' %}
+                <span class="badge bg-warning text-dark rounded-circle p-2"><i class="bi bi-arrow-left-right"></i></span>
+              {% elif entry.action == 'STATUS_CHANGED' and entry.to_status == 'COMPLETED' %}
+                <span class="badge bg-success rounded-circle p-2"><i class="bi bi-check-lg"></i></span>
+              {% elif entry.action == 'STATUS_CHANGED' %}
+                <span class="badge bg-primary rounded-circle p-2"><i class="bi bi-arrow-up-right"></i></span>
+              {% else %}
+                <span class="badge bg-secondary rounded-circle p-2"><i class="bi bi-dot"></i></span>
+              {% endif %}
+            </div>
+            <div class="flex-grow-1">
+              <div class="fw-semibold">
+                {% if entry.action == 'ASSIGNED' %}Tâche affectée
+                {% elif entry.action == 'REASSIGNED' %}Tâche réaffectée
+                {% elif entry.action == 'STATUS_CHANGED' %}
+                  Statut : <span class="badge bg-secondary">{{ entry.from_status }}</span>
+                  <i class="bi bi-arrow-right mx-1"></i>
+                  <span class="badge bg-primary">{{ entry.to_status }}</span>
+                {% else %}{{ entry.action }}{% endif %}
+              </div>
+              {% if entry.details %}
+                <small class="text-muted">{{ entry.details }}</small>
+              {% endif %}
+              <div class="text-muted extra-small mt-1">
+                Par <strong>{{ entry.actor.get_full_name|default:entry.actor.email|default:"Système" }}</strong>
+                — {{ entry.created_at|date:"d/m/Y à H:i" }}
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      {% else %}
+        <div class="text-center text-muted py-4">
+          <i class="bi bi-journal-x display-5"></i>
+          <p class="mt-2">Aucun historique enregistré pour cette tâche.</p>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -4,12 +4,15 @@
 
 {% block content %}
 <div class="glass-card p-4 mb-4">
-    <h4 class="fw-bold mb-4"><i class="bi bi-receipt text-purple me-2"></i>Factures enregistrées</h4>
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h4 class="fw-bold mb-0"><i class="bi bi-receipt text-purple me-2"></i>Factures enregistrées</h4>
+        <a class="btn btn-sm btn-primary" href="{% url 'finance:invoice_create' %}"><i class="bi bi-plus-lg me-1"></i>Nouvelle facture</a>
+    </div>
     <div class="table-responsive">
         <table class="table-glass">
-            <thead><tr><th>Référence</th><th>Date</th><th>Montant</th></tr></thead>
+            <thead><tr><th>Référence</th><th>Date</th><th>Client</th><th>Montant</th><th>Payé</th><th>Solde</th><th>Statut</th></tr></thead>
             <tbody>
-                {% for invoice in invoices %}<tr><td>#{{ invoice.pk }}</td><td>{{ invoice.created_at|date:"d/m/Y H:i" }}</td><td>{{ invoice.amount|floatformat:2 }} {{ HOTEL_CURRENCY }}</td></tr>{% empty %}<tr><td colspan="3" class="text-center text-muted py-4">Aucune facture enregistrée.</td></tr>{% endfor %}
+                {% for invoice in invoices %}<tr><td><a href="{% url 'finance:invoice_detail' invoice.pk %}">#{{ invoice.pk }}</a></td><td>{{ invoice.created_at|date:"d/m/Y H:i" }}</td><td>{{ invoice.customer_name|default:"-" }}</td><td>{{ invoice.amount|floatformat:2 }} {{ HOTEL_CURRENCY }}</td><td>{{ invoice.paid_amount|floatformat:2 }} {{ HOTEL_CURRENCY }}</td><td>{{ invoice.balance|floatformat:2 }} {{ HOTEL_CURRENCY }}</td><td>{{ invoice.status_label }}</td></tr>{% empty %}<tr><td colspan="7" class="text-center text-muted py-4">Aucune facture enregistrée.</td></tr>{% endfor %}
             </tbody>
         </table>
     </div>
@@ -35,16 +38,25 @@
 </div>
 
 <div class="glass-card p-4 mb-4">
-    <h4 class="fw-bold mb-4"><i class="bi bi-arrow-down-circle text-amber me-2"></i>Dépenses enregistrées</h4>
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h4 class="fw-bold mb-0"><i class="bi bi-arrow-down-circle text-amber me-2"></i>Dépenses enregistrées</h4>
+        <a class="btn btn-sm btn-primary" href="{% url 'finance:expense_create' %}"><i class="bi bi-plus-lg me-1"></i>Nouvelle dépense</a>
+    </div>
     <div class="table-responsive"><table class="table-glass"><thead><tr><th>Libellé</th><th>Catégorie</th><th>Date</th><th>Montant</th></tr></thead><tbody>
         {% for expense in expenses %}<tr><td>{{ expense.label }}</td><td>{{ expense.category|default:"-" }}</td><td>{{ expense.created_at|date:"d/m/Y H:i" }}</td><td>{{ expense.amount|floatformat:2 }} {{ HOTEL_CURRENCY }}</td></tr>{% empty %}<tr><td colspan="4" class="text-center text-muted py-4">Aucune dépense enregistrée.</td></tr>{% endfor %}
     </tbody></table></div>
 </div>
 
 <div class="glass-card p-4">
-    <h4 class="fw-bold mb-4">Taxes et remboursements enregistrés</h4>
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h4 class="fw-bold mb-0">Taxes et remboursements enregistrés</h4>
+        {% if can_manage_sensitive %}<div>
+            <a class="btn btn-sm btn-primary" href="{% url 'finance:tax_create' %}"><i class="bi bi-plus-lg me-1"></i>Nouvelle taxe</a>
+            <a class="btn btn-sm btn-outline-light ms-2" href="{% url 'finance:refund_create' %}"><i class="bi bi-arrow-counterclockwise me-1"></i>Nouveau remboursement</a>
+        </div>{% endif %}
+    </div>
     <div class="table-responsive"><table class="table-glass"><thead><tr><th>Type</th><th>Détail</th><th>Date</th><th>Montant</th></tr></thead><tbody>
-        {% for tax in taxes %}<tr><td>Taxe</td><td>{{ tax.name }}</td><td>{{ tax.created_at|date:"d/m/Y H:i" }}</td><td>{{ tax.amount|floatformat:2 }} {{ HOTEL_CURRENCY }}</td></tr>{% endfor %}
+        {% for tax in taxes %}<tr><td>Taxe</td><td>{{ tax.name }}{% if tax.rate is not None %} ({{ tax.rate|floatformat:2 }} %, applicable aux factures){% else %} (montant enregistré){% endif %}</td><td>{{ tax.created_at|date:"d/m/Y H:i" }}</td><td>{% if tax.rate is not None %}-{% else %}{{ tax.amount|floatformat:2 }} {{ HOTEL_CURRENCY }}{% endif %}</td></tr>{% endfor %}
         {% for refund in refunds %}<tr><td>Remboursement</td><td>Paiement #{{ refund.payment_id }}{% if refund.reason %}: {{ refund.reason }}{% endif %}</td><td>{{ refund.created_at|date:"d/m/Y H:i" }}</td><td>{{ refund.amount|floatformat:2 }} {{ HOTEL_CURRENCY }}</td></tr>{% endfor %}
         {% if not taxes and not refunds %}<tr><td colspan="4" class="text-center text-muted py-4">Aucune taxe ou aucun remboursement enregistré.</td></tr>{% endif %}
     </tbody></table></div>

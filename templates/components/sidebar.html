@@ -22,7 +22,7 @@
         {% if user.is_superuser or user.role == 'ADMIN' or user.role == 'DIRECTOR' or user.role == 'RECEPTIONIST' or user.role == 'HOUSEKEEPING_MGR' or user.role == 'HOUSEKEEPER' or user.role == 'MAINTENANCE_MGR' or user.role == 'TECHNICIAN' %}
         <li class="menu-item">
             <a href="{% url 'rooms:list' %}" class="menu-link {% if request.resolver_match.app_name == 'rooms' %}active{% endif %}">
-                <i class="bi bi-door-closed-fill"></i><span>Chambres & Tarifs</span>
+                <i class="bi bi-door-closed-fill"></i><span>{% if user.role == 'HOUSEKEEPING_MGR' or user.role == 'HOUSEKEEPER' or user.role == 'MAINTENANCE_MGR' or user.role == 'TECHNICIAN' %}Chambres{% else %}Chambres & Tarifs{% endif %}</span>
             </a>
         </li>
         {% endif %}
@@ -83,14 +83,14 @@
         {% endif %}
         {% if user.is_superuser or user.role == 'ADMIN' or user.role == 'DIRECTOR' or user.role == 'STOREKEEPER' or user.role == 'KITCHEN_MGR' or user.role == 'COOK' %}
         <li class="menu-item">
-            <a href="{% url 'inventory:list' %}" class="menu-link {% if request.resolver_match.app_name == 'inventory' %}active{% endif %}">
+            <a href="{% url 'inventory:product_list' %}" class="menu-link {% if request.resolver_match.app_name == 'inventory' %}active{% endif %}">
                 <i class="bi bi-box-seam-fill"></i><span>Magasin & Stock</span>
             </a>
         </li>
         {% endif %}
         {% if user.is_superuser or user.role == 'ADMIN' or user.role == 'DIRECTOR' or user.role == 'STOREKEEPER' or user.role == 'COMMERCIAL_MGR' %}
         <li class="menu-item">
-            <a href="{% url 'procurement:list' %}" class="menu-link {% if request.resolver_match.app_name == 'procurement' %}active{% endif %}">
+            <a href="{% url 'procurement:supplier_list' %}" class="menu-link {% if request.resolver_match.app_name == 'procurement' %}active{% endif %}">
                 <i class="bi bi-cart-fill"></i><span>Achats & Fournisseurs</span>
             </a>
         </li>

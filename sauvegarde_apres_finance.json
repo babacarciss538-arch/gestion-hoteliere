@@ -1,0 +1,3721 @@
+[
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "admin",
+    "model": "logentry"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "auth",
+    "model": "permission"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "auth",
+    "model": "group"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "contenttypes",
+    "model": "contenttype"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "sessions",
+    "model": "session"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "accounts",
+    "model": "user"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "accounts",
+    "model": "useractivity"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "rooms",
+    "model": "room"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "reservations",
+    "model": "reservation"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "reception",
+    "model": "checkin"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "housekeeping",
+    "model": "housekeepingtask"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "maintenance",
+    "model": "maintenanceticket"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "restaurant",
+    "model": "restaurantorder"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "inventory",
+    "model": "product"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "cashier",
+    "model": "cashsession"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "finance",
+    "model": "invoice"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "finance",
+    "model": "payment"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "inventory",
+    "model": "servicerequest"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "inventory",
+    "model": "stockmovement"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "procurement",
+    "model": "purchaseorder"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "procurement",
+    "model": "supplier"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "procurement",
+    "model": "delivery"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "cashier",
+    "model": "cashdiscrepancy"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "finance",
+    "model": "expense"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "finance",
+    "model": "tax"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "finance",
+    "model": "refund"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "guests",
+    "model": "guest"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "1qoz7rp7m4n5tuuuf5sg4je8ihnt6kmt",
+  "fields": {
+    "session_data": ".eJxVjDEOwjAMRe-SGUWOXRLCyM4ZIsdxSQG1UtNOiLtDpQ6w_vfef5nE61LT2nROQzFn48AcfsfM8tBxI-XO422yMo3LPGS7KXanzV6nos_L7v4dVG71Wwc5EavrlAMzePSidFQklkAAFHsmir7LTrOWjIi9egYQQSDsJJr3BxEKODg:1x9Soo:eF4qs51mBGnK6j7AcQzD9De6Eamu-j_1nF6EhGiOLsM",
+    "expire_date": "2026-10-07T19:39:50.594Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "2jxd1b049v4t4xif0jemsazcyrd172jp",
+  "fields": {
+    "session_data": ".eJxVjDEOwjAMRe-SGUWOXRLCyM4ZIsdxSQG1UtNOiLtDpQ6w_vfef5nE61LT2nROQzFn48AcfsfM8tBxI-XO422yMo3LPGS7KXanzV6nos_L7v4dVG71Wwc5EavrlAMzePSidFQklkAAFHsmir7LTrOWjIi9egYQQSDsJJr3BxEKODg:1xEx3O:TzKtnrae6PCESZZf0100vRjffJOksDrHAbMSYP8LdV4",
+    "expire_date": "2026-10-22T22:57:34.380Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "2smrhoz90nlv7kh7xvyrzomonbf7u3c6",
+  "fields": {
+    "session_data": ".eJxVjDsOwjAQRO_iGllx_EmWkj5nsNbeNQ4gW4qTCnF3EikFNFPMezNv4XFbs98aL34mcRVKXH67gPHJ5QD0wHKvMtayLnOQhyJP2uRUiV-30_07yNjyvnYjQRqCGzvSyMYiBwWpS84C7mFddGRBU9I0GI1WKQbHBvrQBx2BxOcL7304IA:1x7BjN:lioBu1ml1tn789HqXmBiZKUCRdbNFqhlI9s1TNxtOa8",
+    "expire_date": "2026-10-01T13:00:49.815Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "3vswoqma3jmq8rnequgy0yo97qo2m101",
+  "fields": {
+    "session_data": ".eJxVjDsOwjAQRO_iGllx_EmWkj5nsNbeNQ4gW4qTCnF3EikFNFPMezNv4XFbs98aL34mcRVKXH67gPHJ5QD0wHKvMtayLnOQhyJP2uRUiV-30_07yNjyvnYjQRqCGzvSyMYiBwWpS84C7mFddGRBU9I0GI1WKQbHBvrQBx2BxOcL7304IA:1x8bgM:noRHXmlHC0EopBGkpyd0DtoSFXYJYGu04hrhx1xnE6U",
+    "expire_date": "2026-10-05T10:55:34.042Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "52vwswlgiuob6t7rkk6gzsj6pfxg3gv5",
+  "fields": {
+    "session_data": ".eJxVjDsOwjAQRO_iGllx_EmWkj5nsNbeNQ4gW4qTCnF3EikFNFPMezNv4XFbs98aL34mcRVKXH67gPHJ5QD0wHKvMtayLnOQhyJP2uRUiV-30_07yNjyvnYjQRqCGzvSyMYiBwWpS84C7mFddGRBU9I0GI1WKQbHBvrQBx2BxOcL7304IA:1x7BnE:nZqAoLsHfqS5ZJMsjPqMr63vVPlnAvjkPaxXq64fUnA",
+    "expire_date": "2026-10-01T13:04:48.612Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "5l4gnofdaw7g8thqtkkarcnzd19ijfa1",
+  "fields": {
+    "session_data": ".eJxVjDsOwjAQRO_iGllx_EmWkj5nsNbeNQ4gW4qTCnF3EikFNFPMezNv4XFbs98aL34mcRVKXH67gPHJ5QD0wHKvMtayLnOQhyJP2uRUiV-30_07yNjyvnYjQRqCGzvSyMYiBwWpS84C7mFddGRBU9I0GI1WKQbHBvrQBx2BxOcL7304IA:1x7Fiv:_uLDGGbRfRnI0qheUCwP1ACiYImQNMHWnxnXGlba_mE",
+    "expire_date": "2026-10-01T17:16:37.770Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "7s2r8yspt91v9bbqgcpmyvm9hnt5kd3u",
+  "fields": {
+    "session_data": ".eJxVjDsOwjAQRO_iGllx_EmWkj5nsNbeNQ4gW4qTCnF3EikFNFPMezNv4XFbs98aL34mcRVKXH67gPHJ5QD0wHKvMtayLnOQhyJP2uRUiV-30_07yNjyvnYjQRqCGzvSyMYiBwWpS84C7mFddGRBU9I0GI1WKQbHBvrQBx2BxOcL7304IA:1xFial:Er8JfWSskp-5J0Ocr4ofwd4o32Q-SFgDPe8DJSDJzao",
+    "expire_date": "2026-10-25T01:43:11.941Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "8mydjxye8a490q87xqgrfds2isrbgxs1",
+  "fields": {
+    "session_data": ".eJxVjMsOgjAUBf-la9NQWnrFpXu-gdxXBTVtQmFl_HclYaHbmTnnZUbc1mncqi7jLOZiWnP6ZYT80LwLuWO-Fcslr8tMdk_sYasdiujzerR_BxPWaV-3CUGgD0LBQQjsRbRPTeO7FM_kiWOPnWOG-IVOOIJQUkJ1npOCeX8AAFU5Ig:1x9S77:skFX2C-p3tv_uDtJ57EtqKQPuInM9HgSJLk3flqK9L0",
+    "expire_date": "2026-10-07T18:54:41.491Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "a15ylof87724ro3sx9k7s887w0naaljc",
+  "fields": {
+    "session_data": ".eJxVjDsOwjAQRO_iGllx_EmWkj5nsNbeNQ4gW4qTCnF3EikFNFPMezNv4XFbs98aL34mcRVKXH67gPHJ5QD0wHKvMtayLnOQhyJP2uRUiV-30_07yNjyvnYjQRqCGzvSyMYiBwWpS84C7mFddGRBU9I0GI1WKQbHBvrQBx2BxOcL7304IA:1x8bFj:nyGm8KdBBg0eUk0Lk1-TuO3ztq8FHKgY_WPa9kVYYYY",
+    "expire_date": "2026-10-05T10:28:03.231Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "dp0bv3xyeqwjwfe50ompdoltnme4keue",
+  "fields": {
+    "session_data": ".eJxVjDsOwjAQRO_iGllx_EmWkj5nsNbeNQ4gW4qTCnF3EikFNFPMezNv4XFbs98aL34mcRVKXH67gPHJ5QD0wHKvMtayLnOQhyJP2uRUiV-30_07yNjyvnYjQRqCGzvSyMYiBwWpS84C7mFddGRBU9I0GI1WKQbHBvrQBx2BxOcL7304IA:1xEynZ:bYZIuR9dgPd1ZleMot82CB1xf56VWhrItDzMf9EJv-o",
+    "expire_date": "2026-10-23T00:49:21.712Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "g3nzlx891n8umb5w85y55ppxe3h219w2",
+  "fields": {
+    "session_data": ".eJxVjDsOwjAQRO_iGllx_EmWkj5nsNbeNQ4gW4qTCnF3EikFNFPMezNv4XFbs98aL34mcRVKXH67gPHJ5QD0wHKvMtayLnOQhyJP2uRUiV-30_07yNjyvnYjQRqCGzvSyMYiBwWpS84C7mFddGRBU9I0GI1WKQbHBvrQBx2BxOcL7304IA:1x7FlN:Awe-bLmY2PcEHwgKjFLEns1w-zS1R-BrXs69Fg3ehUs",
+    "expire_date": "2026-10-01T17:19:09.566Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "g476pf746genvz8knhvdgxmi5f41x2ad",
+  "fields": {
+    "session_data": ".eJxVjDsOwjAQRO_iGllx_EmWkj5nsNbeNQ4gW4qTCnF3EikFNFPMezNv4XFbs98aL34mcRVKXH67gPHJ5QD0wHKvMtayLnOQhyJP2uRUiV-30_07yNjyvnYjQRqCGzvSyMYiBwWpS84C7mFddGRBU9I0GI1WKQbHBvrQBx2BxOcL7304IA:1x7Fgo:fb_GbE-Fuzw8fsVgaboJoBnGJj5-ba6dapArcCXLkrc",
+    "expire_date": "2026-10-01T17:14:26.950Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "gqyqud2fg9tnxvdlq4oiga4dx2bwtnhg",
+  "fields": {
+    "session_data": ".eJxVjDsOwjAQRO_iGllx_EmWkj5nsNbeNQ4gW4qTCnF3EikFNFPMezNv4XFbs98aL34mcRVKXH67gPHJ5QD0wHKvMtayLnOQhyJP2uRUiV-30_07yNjyvnYjQRqCGzvSyMYiBwWpS84C7mFddGRBU9I0GI1WKQbHBvrQBx2BxOcL7304IA:1x7FjF:WW94Rbh3G_OvJXx3xJd1zrp9KJUWqFdxwch988S0wzU",
+    "expire_date": "2026-10-01T17:16:57.728Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "h2tkqta6fjg5nu2nj8tr1m3h5ap2b7pw",
+  "fields": {
+    "session_data": ".eJxVjDsOwjAQRO_iGllx_EmWkj5nsNbeNQ4gW4qTCnF3EikFNFPMezNv4XFbs98aL34mcRVKXH67gPHJ5QD0wHKvMtayLnOQhyJP2uRUiV-30_07yNjyvnYjQRqCGzvSyMYiBwWpS84C7mFddGRBU9I0GI1WKQbHBvrQBx2BxOcL7304IA:1x8bJn:XOXhx9431XfRe1iNfwvAv_XBA_-4cVA4zQr_ywtQw2c",
+    "expire_date": "2026-10-05T10:32:15.118Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "k7fjblz7a26kozm5wm8o8f95awurp2g6",
+  "fields": {
+    "session_data": ".eJxVjDsOwjAQRO_iGllx_EmWkj5nsNbeNQ4gW4qTCnF3EikFNFPMezNv4XFbs98aL34mcRVKXH67gPHJ5QD0wHKvMtayLnOQhyJP2uRUiV-30_07yNjyvnYjQRqCGzvSyMYiBwWpS84C7mFddGRBU9I0GI1WKQbHBvrQBx2BxOcL7304IA:1x8bNf:qo1UWQ3NzMe7E-dX7mWl202M734mj3IRZOE2TmRf_I0",
+    "expire_date": "2026-10-05T10:36:15.869Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "ke12kfx4n2lhbk29zz769wb1jmq7gg9o",
+  "fields": {
+    "session_data": ".eJxVjDsOwjAQRO_iGllx_EmWkj5nsNbeNQ4gW4qTCnF3EikFNFPMezNv4XFbs98aL34mcRVKXH67gPHJ5QD0wHKvMtayLnOQhyJP2uRUiV-30_07yNjyvnYjQRqCGzvSyMYiBwWpS84C7mFddGRBU9I0GI1WKQbHBvrQBx2BxOcL7304IA:1x7FkE:UJyAziz_s7haVSY1yYJTJ0id2IdHZ8NjbW6acyN-g-Y",
+    "expire_date": "2026-10-01T17:17:58.577Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "kgjo9bsvujkgm82roew1hw0j7h19web3",
+  "fields": {
+    "session_data": ".eJxVjDsOwyAQRO9CHSFYg8Ep0_sMaJdPcBKBZOwqyt2DJRdJM8W8N_NmDvctu73F1S2BXdnALr8doX_GcoDwwHKv3NeyrQvxQ-EnbXyuIb5up_t3kLHlvgYJZAyJcQzB2wQJQCgpLCo9oPZkdTQxpagAyEob9ECp50ST1dRd9vkC2Uc3og:1xDPuT:c803_EpArxC6OnSAxPJcOhnKD3ErYtJ4WxCb16n9Uj8",
+    "expire_date": "2026-10-18T17:22:01.077Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "krb18dp23p7l8iocd2234gpkprzzofe5",
+  "fields": {
+    "session_data": ".eJxVjDsOwjAQRO_iGllx_EmWkj5nsNbeNQ4gW4qTCnF3EikFNFPMezNv4XFbs98aL34mcRVKXH67gPHJ5QD0wHKvMtayLnOQhyJP2uRUiV-30_07yNjyvnYjQRqCGzvSyMYiBwWpS84C7mFddGRBU9I0GI1WKQbHBvrQBx2BxOcL7304IA:1x8bfX:QKGpa-x-xyraVRXnl8HIhAUTP0T3FWzZXO8FiNODZ5Y",
+    "expire_date": "2026-10-05T10:54:43.140Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "otu27s6nh16qgjfmbwziq02y47whrrbv",
+  "fields": {
+    "session_data": ".eJxVjDsOwjAQRO_iGllx_EmWkj5nsNbeNQ4gW4qTCnF3EikFNFPMezNv4XFbs98aL34mcRVKXH67gPHJ5QD0wHKvMtayLnOQhyJP2uRUiV-30_07yNjyvnYjQRqCGzvSyMYiBwWpS84C7mFddGRBU9I0GI1WKQbHBvrQBx2BxOcL7304IA:1x7Ffk:w0IPYjBg3d22QOwjSad6KECnqGmNKe_iiG7vz9PEq_Y",
+    "expire_date": "2026-10-01T17:13:20.516Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "qiohcoyvqhbq0t75ekwmnd6dhrm6ds22",
+  "fields": {
+    "session_data": ".eJxVjMEOwiAQRP-FsyFIKCwevfsNZHdZpGpoUtqT8d9tkx70MJd5b-atEq5LTWuXOY1ZXZRTp9-OkJ_SdpAf2O6T5qkt80h6V_RBu75NWV7Xw_07qNjrtmbrIYOx3mLwSCRsYEt2EgoTEEUBNxAUsjayAxOwnIfA2VGMJEZ9vgNWOM0:1x8bcE:6WChTNH68zthF-ZaCVDEQhx-ka00uwFwFQ3olmVWgmo",
+    "expire_date": "2026-10-05T10:51:18.986Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "rze6sai4vssq7ncvxirx9rlj49ycukhu",
+  "fields": {
+    "session_data": ".eJxVjDsOwjAQRO_iGllx_EmWkj5nsNbeNQ4gW4qTCnF3EikFNFPMezNv4XFbs98aL34mcRVKXH67gPHJ5QD0wHKvMtayLnOQhyJP2uRUiV-30_07yNjyvnYjQRqCGzvSyMYiBwWpS84C7mFddGRBU9I0GI1WKQbHBvrQBx2BxOcL7304IA:1x71Dz:K4X3jXEZC_0m6lCYwM1IFt5JYSSJsbvY9AHdujqCV8U",
+    "expire_date": "2026-10-01T01:47:43.598Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "s3kk0mxn7ncii6pwfosm8gdhwpi74r1a",
+  "fields": {
+    "session_data": ".eJxVjDsOwjAQRO_iGllx_EmWkj5nsNbeNQ4gW4qTCnF3EikFNFPMezNv4XFbs98aL34mcRVKXH67gPHJ5QD0wHKvMtayLnOQhyJP2uRUiV-30_07yNjyvnYjQRqCGzvSyMYiBwWpS84C7mFddGRBU9I0GI1WKQbHBvrQBx2BxOcL7304IA:1xEv6r:8lNlItWNUVsV4oanbhFsDYbTSQTt9K6jtG_jcHJK03g",
+    "expire_date": "2026-10-22T20:53:01.410Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "t53bvb1nvkid0xyc2jk4uznxaq5wr227",
+  "fields": {
+    "session_data": ".eJxVjDsOwjAQRO_iGllx_EmWkj5nsNbeNQ4gW4qTCnF3EikFNFPMezNv4XFbs98aL34mcRVKXH67gPHJ5QD0wHKvMtayLnOQhyJP2uRUiV-30_07yNjyvnYjQRqCGzvSyMYiBwWpS84C7mFddGRBU9I0GI1WKQbHBvrQBx2BxOcL7304IA:1x7GRy:Dl823sC9BlrCuBaJne-0sRedWoxN7YY070_TYhlA0Wo",
+    "expire_date": "2026-10-01T18:03:10.583Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "tcuue0ujc0vvy9k9gjkt9h5e49q8m9xp",
+  "fields": {
+    "session_data": ".eJxVjDsOwjAQRO_iGllx_EmWkj5nsNbeNQ4gW4qTCnF3EikFNFPMezNv4XFbs98aL34mcRVKXH67gPHJ5QD0wHKvMtayLnOQhyJP2uRUiV-30_07yNjyvnYjQRqCGzvSyMYiBwWpS84C7mFddGRBU9I0GI1WKQbHBvrQBx2BxOcL7304IA:1x7GGX:I0vf1exm97m1pRfY30f8ziu2A7i4wff74TqAG6Jw-Js",
+    "expire_date": "2026-10-01T17:51:21.010Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "uru0rds7u9cpf48ye918t2tgq74vuzok",
+  "fields": {
+    "session_data": ".eJxVjDsOwjAQBe_iGlnxN5iSPmew1t5dHEC2FCcV4u4QKQW0b2beS0TY1hK3TkucUVyEUuL0OybID6o7wTvUW5O51XWZk9wVedAup4b0vB7u30GBXr41jQ4Vs2PyiqwOELTJGfzAGDJqa1ICAmvZDCq5zNrC2Y4m-IAcjGHx_gAs1DjL:1xEzAl:tGlVE1auYeDOUi-OHB9hKz8EE2bfyTCkda5pcKodKns",
+    "expire_date": "2026-10-23T01:13:19.866Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "vix8ug7el9w1icvov7t14b40bk8m3ruv",
+  "fields": {
+    "session_data": ".eJxVjDsOwjAQRO_iGllx_EmWkj5nsNbeNQ4gW4qTCnF3EikFNFPMezNv4XFbs98aL34mcRVKXH67gPHJ5QD0wHKvMtayLnOQhyJP2uRUiV-30_07yNjyvnYjQRqCGzvSyMYiBwWpS84C7mFddGRBU9I0GI1WKQbHBvrQBx2BxOcL7304IA:1x7BUo:RVzb5yfaSWdRnXn7tQ17khokbKp3UQOurNvLbzFsgOY",
+    "expire_date": "2026-10-01T12:45:46.488Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "xg4oyncg74hjjhlqstyah7189kwvj7d6",
+  "fields": {
+    "session_data": ".eJxVjDsOwjAQRO_iGllx_EmWkj5nsNbeNQ4gW4qTCnF3EikFNFPMezNv4XFbs98aL34mcRVKXH67gPHJ5QD0wHKvMtayLnOQhyJP2uRUiV-30_07yNjyvnYjQRqCGzvSyMYiBwWpS84C7mFddGRBU9I0GI1WKQbHBvrQBx2BxOcL7304IA:1x7BgE:xykbbBW7itK8roJISqqQxt50GOYjXLGD3WufpcQI8a4",
+    "expire_date": "2026-10-01T12:57:34.550Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "yrtbcejjodwj6qndbd2dplr95u6jckyy",
+  "fields": {
+    "session_data": ".eJxVjDsOwjAQRO_iGllx_EmWkj5nsNbeNQ4gW4qTCnF3EikFNFPMezNv4XFbs98aL34mcRVKXH67gPHJ5QD0wHKvMtayLnOQhyJP2uRUiV-30_07yNjyvnYjQRqCGzvSyMYiBwWpS84C7mFddGRBU9I0GI1WKQbHBvrQBx2BxOcL7304IA:1x7GSV:gHE8XdLWR58JMOREnKjqtkPls5os4M26zlHVQc7DPTc",
+    "expire_date": "2026-10-01T18:03:43.055Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "ztpg678w675w2v42ngpybn7slrmq0tur",
+  "fields": {
+    "session_data": ".eJxVjDsOwjAQRO_iGllx_EmWkj5nsNbeNQ4gW4qTCnF3EikFNFPMezNv4XFbs98aL34mcRVKXH67gPHJ5QD0wHKvMtayLnOQhyJP2uRUiV-30_07yNjyvnYjQRqCGzvSyMYiBwWpS84C7mFddGRBU9I0GI1WKQbHBvrQBx2BxOcL7304IA:1x7BUT:z-HgCrqA7rxWlrUSAsq9TkcnqoH__gt6YxItEFObNFA",
+    "expire_date": "2026-10-01T12:45:25.244Z"
+  }
+},
+{
+  "model": "rooms.room",
+  "pk": 1,
+  "fields": {
+    "number": "T-001",
+    "floor": "1",
+    "room_type": "Standard",
+    "nightly_rate": "25000.00",
+    "status": "AVAILABLE"
+  }
+},
+{
+  "model": "rooms.room",
+  "pk": 2,
+  "fields": {
+    "number": "12",
+    "floor": "cool",
+    "room_type": "salon",
+    "nightly_rate": "0.04",
+    "status": "AVAILABLE"
+  }
+},
+{
+  "model": "guests.guest",
+  "pk": 1,
+  "fields": {
+    "first_name": "Test",
+    "last_name": "Client",
+    "email": "test@example.com",
+    "phone": "",
+    "nationality": "",
+    "identity_number": "",
+    "created_at": "2026-09-21T10:28:03.335Z"
+  }
+},
+{
+  "model": "guests.guest",
+  "pk": 2,
+  "fields": {
+    "first_name": "Killifeu",
+    "last_name": "GUI",
+    "email": "killifeugui538@gmail.com",
+    "phone": "+221771058520",
+    "nationality": "sénégalaise",
+    "identity_number": "30012203",
+    "created_at": "2026-09-21T10:42:54.329Z"
+  }
+},
+{
+  "model": "maintenance.maintenanceticket",
+  "pk": 1,
+  "fields": {
+    "description": "Test incident",
+    "priority": "HIGH",
+    "location": "Chambre T-001",
+    "status": "OPEN"
+  }
+},
+{
+  "model": "maintenance.maintenanceticket",
+  "pk": 2,
+  "fields": {
+    "description": "",
+    "priority": "NORMAL",
+    "location": "",
+    "status": "OPEN"
+  }
+},
+{
+  "model": "restaurant.restaurantorder",
+  "pk": 1,
+  "fields": {
+    "description": "Test commande",
+    "table_number": "1",
+    "status": "OPEN",
+    "total_amount": "5000.00",
+    "created_at": "2026-09-21T10:32:15.431Z"
+  }
+},
+{
+  "model": "restaurant.restaurantorder",
+  "pk": 2,
+  "fields": {
+    "description": "YASSA",
+    "table_number": "12",
+    "status": "OPEN",
+    "total_amount": "5.00",
+    "created_at": "2026-09-21T10:48:56.666Z"
+  }
+},
+{
+  "model": "inventory.product",
+  "pk": 1,
+  "fields": {
+    "name": "Test produit",
+    "category": "Cuisine",
+    "alert_level": "NORMAL",
+    "quantity": "10.00",
+    "committed_quantity": "2.00",
+    "reorder_level": "3.00"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add log entry",
+    "content_type": [
+      "admin",
+      "logentry"
+    ],
+    "codename": "add_logentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change log entry",
+    "content_type": [
+      "admin",
+      "logentry"
+    ],
+    "codename": "change_logentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete log entry",
+    "content_type": [
+      "admin",
+      "logentry"
+    ],
+    "codename": "delete_logentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view log entry",
+    "content_type": [
+      "admin",
+      "logentry"
+    ],
+    "codename": "view_logentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add permission",
+    "content_type": [
+      "auth",
+      "permission"
+    ],
+    "codename": "add_permission"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change permission",
+    "content_type": [
+      "auth",
+      "permission"
+    ],
+    "codename": "change_permission"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete permission",
+    "content_type": [
+      "auth",
+      "permission"
+    ],
+    "codename": "delete_permission"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view permission",
+    "content_type": [
+      "auth",
+      "permission"
+    ],
+    "codename": "view_permission"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add group",
+    "content_type": [
+      "auth",
+      "group"
+    ],
+    "codename": "add_group"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change group",
+    "content_type": [
+      "auth",
+      "group"
+    ],
+    "codename": "change_group"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete group",
+    "content_type": [
+      "auth",
+      "group"
+    ],
+    "codename": "delete_group"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view group",
+    "content_type": [
+      "auth",
+      "group"
+    ],
+    "codename": "view_group"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add content type",
+    "content_type": [
+      "contenttypes",
+      "contenttype"
+    ],
+    "codename": "add_contenttype"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change content type",
+    "content_type": [
+      "contenttypes",
+      "contenttype"
+    ],
+    "codename": "change_contenttype"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete content type",
+    "content_type": [
+      "contenttypes",
+      "contenttype"
+    ],
+    "codename": "delete_contenttype"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view content type",
+    "content_type": [
+      "contenttypes",
+      "contenttype"
+    ],
+    "codename": "view_contenttype"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add session",
+    "content_type": [
+      "sessions",
+      "session"
+    ],
+    "codename": "add_session"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change session",
+    "content_type": [
+      "sessions",
+      "session"
+    ],
+    "codename": "change_session"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete session",
+    "content_type": [
+      "sessions",
+      "session"
+    ],
+    "codename": "delete_session"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view session",
+    "content_type": [
+      "sessions",
+      "session"
+    ],
+    "codename": "view_session"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add Utilisateur",
+    "content_type": [
+      "accounts",
+      "user"
+    ],
+    "codename": "add_user"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change Utilisateur",
+    "content_type": [
+      "accounts",
+      "user"
+    ],
+    "codename": "change_user"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete Utilisateur",
+    "content_type": [
+      "accounts",
+      "user"
+    ],
+    "codename": "delete_user"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view Utilisateur",
+    "content_type": [
+      "accounts",
+      "user"
+    ],
+    "codename": "view_user"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add Activité Utilisateur",
+    "content_type": [
+      "accounts",
+      "useractivity"
+    ],
+    "codename": "add_useractivity"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change Activité Utilisateur",
+    "content_type": [
+      "accounts",
+      "useractivity"
+    ],
+    "codename": "change_useractivity"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete Activité Utilisateur",
+    "content_type": [
+      "accounts",
+      "useractivity"
+    ],
+    "codename": "delete_useractivity"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view Activité Utilisateur",
+    "content_type": [
+      "accounts",
+      "useractivity"
+    ],
+    "codename": "view_useractivity"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add room",
+    "content_type": [
+      "rooms",
+      "room"
+    ],
+    "codename": "add_room"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change room",
+    "content_type": [
+      "rooms",
+      "room"
+    ],
+    "codename": "change_room"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete room",
+    "content_type": [
+      "rooms",
+      "room"
+    ],
+    "codename": "delete_room"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view room",
+    "content_type": [
+      "rooms",
+      "room"
+    ],
+    "codename": "view_room"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add reservation",
+    "content_type": [
+      "reservations",
+      "reservation"
+    ],
+    "codename": "add_reservation"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change reservation",
+    "content_type": [
+      "reservations",
+      "reservation"
+    ],
+    "codename": "change_reservation"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete reservation",
+    "content_type": [
+      "reservations",
+      "reservation"
+    ],
+    "codename": "delete_reservation"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view reservation",
+    "content_type": [
+      "reservations",
+      "reservation"
+    ],
+    "codename": "view_reservation"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add check in",
+    "content_type": [
+      "reception",
+      "checkin"
+    ],
+    "codename": "add_checkin"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change check in",
+    "content_type": [
+      "reception",
+      "checkin"
+    ],
+    "codename": "change_checkin"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete check in",
+    "content_type": [
+      "reception",
+      "checkin"
+    ],
+    "codename": "delete_checkin"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view check in",
+    "content_type": [
+      "reception",
+      "checkin"
+    ],
+    "codename": "view_checkin"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add housekeeping task",
+    "content_type": [
+      "housekeeping",
+      "housekeepingtask"
+    ],
+    "codename": "add_housekeepingtask"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change housekeeping task",
+    "content_type": [
+      "housekeeping",
+      "housekeepingtask"
+    ],
+    "codename": "change_housekeepingtask"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete housekeeping task",
+    "content_type": [
+      "housekeeping",
+      "housekeepingtask"
+    ],
+    "codename": "delete_housekeepingtask"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view housekeeping task",
+    "content_type": [
+      "housekeeping",
+      "housekeepingtask"
+    ],
+    "codename": "view_housekeepingtask"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add maintenance ticket",
+    "content_type": [
+      "maintenance",
+      "maintenanceticket"
+    ],
+    "codename": "add_maintenanceticket"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change maintenance ticket",
+    "content_type": [
+      "maintenance",
+      "maintenanceticket"
+    ],
+    "codename": "change_maintenanceticket"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete maintenance ticket",
+    "content_type": [
+      "maintenance",
+      "maintenanceticket"
+    ],
+    "codename": "delete_maintenanceticket"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view maintenance ticket",
+    "content_type": [
+      "maintenance",
+      "maintenanceticket"
+    ],
+    "codename": "view_maintenanceticket"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add restaurant order",
+    "content_type": [
+      "restaurant",
+      "restaurantorder"
+    ],
+    "codename": "add_restaurantorder"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change restaurant order",
+    "content_type": [
+      "restaurant",
+      "restaurantorder"
+    ],
+    "codename": "change_restaurantorder"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete restaurant order",
+    "content_type": [
+      "restaurant",
+      "restaurantorder"
+    ],
+    "codename": "delete_restaurantorder"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view restaurant order",
+    "content_type": [
+      "restaurant",
+      "restaurantorder"
+    ],
+    "codename": "view_restaurantorder"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add product",
+    "content_type": [
+      "inventory",
+      "product"
+    ],
+    "codename": "add_product"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change product",
+    "content_type": [
+      "inventory",
+      "product"
+    ],
+    "codename": "change_product"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete product",
+    "content_type": [
+      "inventory",
+      "product"
+    ],
+    "codename": "delete_product"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view product",
+    "content_type": [
+      "inventory",
+      "product"
+    ],
+    "codename": "view_product"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add cash session",
+    "content_type": [
+      "cashier",
+      "cashsession"
+    ],
+    "codename": "add_cashsession"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change cash session",
+    "content_type": [
+      "cashier",
+      "cashsession"
+    ],
+    "codename": "change_cashsession"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete cash session",
+    "content_type": [
+      "cashier",
+      "cashsession"
+    ],
+    "codename": "delete_cashsession"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view cash session",
+    "content_type": [
+      "cashier",
+      "cashsession"
+    ],
+    "codename": "view_cashsession"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add invoice",
+    "content_type": [
+      "finance",
+      "invoice"
+    ],
+    "codename": "add_invoice"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change invoice",
+    "content_type": [
+      "finance",
+      "invoice"
+    ],
+    "codename": "change_invoice"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete invoice",
+    "content_type": [
+      "finance",
+      "invoice"
+    ],
+    "codename": "delete_invoice"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view invoice",
+    "content_type": [
+      "finance",
+      "invoice"
+    ],
+    "codename": "view_invoice"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add payment",
+    "content_type": [
+      "finance",
+      "payment"
+    ],
+    "codename": "add_payment"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change payment",
+    "content_type": [
+      "finance",
+      "payment"
+    ],
+    "codename": "change_payment"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete payment",
+    "content_type": [
+      "finance",
+      "payment"
+    ],
+    "codename": "delete_payment"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view payment",
+    "content_type": [
+      "finance",
+      "payment"
+    ],
+    "codename": "view_payment"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add service request",
+    "content_type": [
+      "inventory",
+      "servicerequest"
+    ],
+    "codename": "add_servicerequest"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change service request",
+    "content_type": [
+      "inventory",
+      "servicerequest"
+    ],
+    "codename": "change_servicerequest"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete service request",
+    "content_type": [
+      "inventory",
+      "servicerequest"
+    ],
+    "codename": "delete_servicerequest"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view service request",
+    "content_type": [
+      "inventory",
+      "servicerequest"
+    ],
+    "codename": "view_servicerequest"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add stock movement",
+    "content_type": [
+      "inventory",
+      "stockmovement"
+    ],
+    "codename": "add_stockmovement"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change stock movement",
+    "content_type": [
+      "inventory",
+      "stockmovement"
+    ],
+    "codename": "change_stockmovement"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete stock movement",
+    "content_type": [
+      "inventory",
+      "stockmovement"
+    ],
+    "codename": "delete_stockmovement"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view stock movement",
+    "content_type": [
+      "inventory",
+      "stockmovement"
+    ],
+    "codename": "view_stockmovement"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add purchase order",
+    "content_type": [
+      "procurement",
+      "purchaseorder"
+    ],
+    "codename": "add_purchaseorder"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change purchase order",
+    "content_type": [
+      "procurement",
+      "purchaseorder"
+    ],
+    "codename": "change_purchaseorder"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete purchase order",
+    "content_type": [
+      "procurement",
+      "purchaseorder"
+    ],
+    "codename": "delete_purchaseorder"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view purchase order",
+    "content_type": [
+      "procurement",
+      "purchaseorder"
+    ],
+    "codename": "view_purchaseorder"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add supplier",
+    "content_type": [
+      "procurement",
+      "supplier"
+    ],
+    "codename": "add_supplier"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change supplier",
+    "content_type": [
+      "procurement",
+      "supplier"
+    ],
+    "codename": "change_supplier"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete supplier",
+    "content_type": [
+      "procurement",
+      "supplier"
+    ],
+    "codename": "delete_supplier"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view supplier",
+    "content_type": [
+      "procurement",
+      "supplier"
+    ],
+    "codename": "view_supplier"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add delivery",
+    "content_type": [
+      "procurement",
+      "delivery"
+    ],
+    "codename": "add_delivery"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change delivery",
+    "content_type": [
+      "procurement",
+      "delivery"
+    ],
+    "codename": "change_delivery"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete delivery",
+    "content_type": [
+      "procurement",
+      "delivery"
+    ],
+    "codename": "delete_delivery"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view delivery",
+    "content_type": [
+      "procurement",
+      "delivery"
+    ],
+    "codename": "view_delivery"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add cash discrepancy",
+    "content_type": [
+      "cashier",
+      "cashdiscrepancy"
+    ],
+    "codename": "add_cashdiscrepancy"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change cash discrepancy",
+    "content_type": [
+      "cashier",
+      "cashdiscrepancy"
+    ],
+    "codename": "change_cashdiscrepancy"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete cash discrepancy",
+    "content_type": [
+      "cashier",
+      "cashdiscrepancy"
+    ],
+    "codename": "delete_cashdiscrepancy"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view cash discrepancy",
+    "content_type": [
+      "cashier",
+      "cashdiscrepancy"
+    ],
+    "codename": "view_cashdiscrepancy"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add expense",
+    "content_type": [
+      "finance",
+      "expense"
+    ],
+    "codename": "add_expense"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change expense",
+    "content_type": [
+      "finance",
+      "expense"
+    ],
+    "codename": "change_expense"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete expense",
+    "content_type": [
+      "finance",
+      "expense"
+    ],
+    "codename": "delete_expense"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view expense",
+    "content_type": [
+      "finance",
+      "expense"
+    ],
+    "codename": "view_expense"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add tax",
+    "content_type": [
+      "finance",
+      "tax"
+    ],
+    "codename": "add_tax"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change tax",
+    "content_type": [
+      "finance",
+      "tax"
+    ],
+    "codename": "change_tax"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete tax",
+    "content_type": [
+      "finance",
+      "tax"
+    ],
+    "codename": "delete_tax"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view tax",
+    "content_type": [
+      "finance",
+      "tax"
+    ],
+    "codename": "view_tax"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add refund",
+    "content_type": [
+      "finance",
+      "refund"
+    ],
+    "codename": "add_refund"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change refund",
+    "content_type": [
+      "finance",
+      "refund"
+    ],
+    "codename": "change_refund"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete refund",
+    "content_type": [
+      "finance",
+      "refund"
+    ],
+    "codename": "delete_refund"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view refund",
+    "content_type": [
+      "finance",
+      "refund"
+    ],
+    "codename": "view_refund"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add guest",
+    "content_type": [
+      "guests",
+      "guest"
+    ],
+    "codename": "add_guest"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change guest",
+    "content_type": [
+      "guests",
+      "guest"
+    ],
+    "codename": "change_guest"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete guest",
+    "content_type": [
+      "guests",
+      "guest"
+    ],
+    "codename": "delete_guest"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view guest",
+    "content_type": [
+      "guests",
+      "guest"
+    ],
+    "codename": "view_guest"
+  }
+},
+{
+  "model": "accounts.user",
+  "fields": {
+    "password": "pbkdf2_sha256$720000$cS7iz3qFOW5UAiiqOcGD7J$lX/hSNKcJ0QuwQJJIW7ovcTv8kyXYNB0r6Z7DxhfWFM=",
+    "last_login": "2026-10-11T01:43:11.934Z",
+    "is_superuser": true,
+    "first_name": "Babacar",
+    "last_name": "CISSE",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2026-09-17T01:47:21Z",
+    "username": "babacar",
+    "email": "babacarciss538@gmail.com",
+    "phone": "+221771058520",
+    "role": "ADMIN",
+    "legacy_role": "",
+    "department": null,
+    "avatar": "avatars/25537069-groupe-de-masque-cambrioleur-avec-agression-fusil-banque-vol-generatif-ai-photo.jpg",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "accounts.user",
+  "fields": {
+    "password": "pbkdf2_sha256$720000$XgCVrOjWHCwyMP7nybNJni$uOxMCWB5h1yJBE8lq4IaHagjI/0rfeMwt4MqMaMcWU4=",
+    "last_login": "2026-10-05T18:07:33.102Z",
+    "is_superuser": false,
+    "first_name": "Babacar",
+    "last_name": "Cissé",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-09-17T12:36:01Z",
+    "username": null,
+    "email": "killifeugui538@gmail.com",
+    "phone": null,
+    "role": "KITCHEN_MGR",
+    "legacy_role": "",
+    "department": null,
+    "avatar": "",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "accounts.user",
+  "fields": {
+    "password": "pbkdf2_sha256$720000$VabNUjD0GtpstKcuJqR0EY$x2fkPAxOwYpjxEpmK44yhgISC0eXm/2NhtBegaQ1iqo=",
+    "last_login": "2026-10-05T17:22:51.627Z",
+    "is_superuser": false,
+    "first_name": "Pape Mbaye",
+    "last_name": "CISSE",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-09-17T17:29:52Z",
+    "username": null,
+    "email": "killifeugui745@gmail.com",
+    "phone": null,
+    "role": "DIRECTOR",
+    "legacy_role": "",
+    "department": null,
+    "avatar": "",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "accounts.user",
+  "fields": {
+    "password": "pbkdf2_sha256$720000$0dkgM6iQD092hU16iFdDOW$IqKAxq8S3qJXibfc5VUdZX3dUtALXdOKmz3e56o2Oew=",
+    "last_login": "2026-09-21T10:51:18.978Z",
+    "is_superuser": false,
+    "first_name": "Fatimata",
+    "last_name": "BA",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-09-17T18:14:06.529Z",
+    "username": null,
+    "email": "fba538@gmail.com",
+    "phone": null,
+    "role": "STOREKEEPER",
+    "legacy_role": "",
+    "department": null,
+    "avatar": "",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "accounts.user",
+  "fields": {
+    "password": "pbkdf2_sha256$720000$fvTCt5DisMoosrqwuQBNd1$koGvDE9pX2Eb2133wmrIxjfSvOChyDfcky2QSnLomdA=",
+    "last_login": "2026-09-21T10:48:14.553Z",
+    "is_superuser": false,
+    "first_name": "serveur",
+    "last_name": "service",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-09-17T18:18:28Z",
+    "username": null,
+    "email": "serveur1@gmail.com",
+    "phone": null,
+    "role": "WAITER",
+    "legacy_role": "",
+    "department": null,
+    "avatar": "",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "accounts.user",
+  "fields": {
+    "password": "pbkdf2_sha256$720000$fo5qfDiO1H4iN3Cn1ERxtn$HRJjMip2QAufOLA7A9l7gp5EW269nAGgphLF5N6G7L4=",
+    "last_login": "2026-09-21T10:08:02.552Z",
+    "is_superuser": false,
+    "first_name": "caissier",
+    "last_name": "caisse",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-09-17T18:21:01Z",
+    "username": null,
+    "email": "caissier1@gmail.com",
+    "phone": null,
+    "role": "RECEPTIONIST",
+    "legacy_role": "CASHIER",
+    "department": null,
+    "avatar": "",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "accounts.user",
+  "fields": {
+    "password": "pbkdf2_sha256$720000$rgUk1RS8daw5vq0UTP9SxO$5kmRBgayCrXoFZ4Fzo+HkvlD7KtHgqXmamtYIRqObKM=",
+    "last_login": "2026-09-17T18:25:04.371Z",
+    "is_superuser": false,
+    "first_name": "responsable",
+    "last_name": "restaurant",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-09-17T18:24:26Z",
+    "username": null,
+    "email": "resprestau@gmail.com",
+    "phone": null,
+    "role": "RESTAURANT_MGR",
+    "legacy_role": "",
+    "department": null,
+    "avatar": "",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "accounts.user",
+  "fields": {
+    "password": "pbkdf2_sha256$720000$IUzKj0lLB1jUXIo7E4zOvh$bdiIiKByU28ivzAtUhayJh26HfFSy9+vhHu95rolgZE=",
+    "last_login": "2026-09-21T10:08:23.394Z",
+    "is_superuser": false,
+    "first_name": "binetou",
+    "last_name": "ba",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-09-20T01:21:18Z",
+    "username": null,
+    "email": "fatimata22@gmail.com",
+    "phone": null,
+    "role": "TECHNICIAN",
+    "legacy_role": "",
+    "department": null,
+    "avatar": "",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "accounts.user",
+  "fields": {
+    "password": "pbkdf2_sha256$720000$gaNnsTM2MxzWd8k3umlliz$cFQ4b9B9Gal/90FrtZtnsI5C8YMVPTi/4GvvOPp+zgc=",
+    "last_login": "2026-09-21T10:39:08.047Z",
+    "is_superuser": false,
+    "first_name": "receptionniste",
+    "last_name": "recept",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-09-21T10:11:44.566Z",
+    "username": null,
+    "email": "recept2@gmail.com",
+    "phone": null,
+    "role": "RECEPTIONIST",
+    "legacy_role": "",
+    "department": null,
+    "avatar": "",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "accounts.user",
+  "fields": {
+    "password": "pbkdf2_sha256$720000$duZwM39JVY2CU153rjdufp$9jEBdbwTbdIpWMPLrHHRLX0qlaPGx8EfQIk+q5M3L9s=",
+    "last_login": "2026-10-09T00:51:13.884Z",
+    "is_superuser": false,
+    "first_name": "biniritou",
+    "last_name": "ba",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-09-23T19:38:25Z",
+    "username": null,
+    "email": "fatimata12@gmail.com",
+    "phone": null,
+    "role": "DIRECTOR",
+    "legacy_role": "",
+    "department": null,
+    "avatar": "",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "accounts.user",
+  "fields": {
+    "password": "pbkdf2_sha256$720000$ASh5T8IsipfThwo0eBgi2Y$qJlxXTctmOb9KMyG+JxD01NhT07v1vjK2zR6325HXuA=",
+    "last_login": "2026-10-09T01:13:19.848Z",
+    "is_superuser": false,
+    "first_name": "Admin",
+    "last_name": "Admin",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-10-08T16:27:00Z",
+    "username": null,
+    "email": "administrateur1@gmail.com",
+    "phone": null,
+    "role": "ADMIN",
+    "legacy_role": "",
+    "department": null,
+    "avatar": "",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "accounts.user",
+  "fields": {
+    "password": "pbkdf2_sha256$720000$UGVZ8uQrNl1cGyXQ3iFFYk$SXex+0g3ohCnBB2oSA0EL8DDpMUuRvN7TghUNXw8WUo=",
+    "last_login": "2026-10-11T01:41:38.503Z",
+    "is_superuser": false,
+    "first_name": "receptioniste",
+    "last_name": "receptioniste",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-10-11T01:40:39Z",
+    "username": null,
+    "email": "receptioniste1@gmail.com",
+    "phone": null,
+    "role": "RECEPTIONIST",
+    "legacy_role": "",
+    "department": null,
+    "avatar": "",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "accounts.useractivity",
+  "pk": 1,
+  "fields": {
+    "user": [
+      "babacarciss538@gmail.com"
+    ],
+    "action": "Déconnexion",
+    "ip_address": "127.0.0.1",
+    "timestamp": "2026-09-17T12:40:49.098Z"
+  }
+},
+{
+  "model": "accounts.useractivity",
+  "pk": 2,
+  "fields": {
+    "user": [
+      "killifeugui538@gmail.com"
+    ],
+    "action": "Connexion réussie",
+    "ip_address": "127.0.0.1",
+    "timestamp": "2026-09-17T12:41:43.573Z"
+  }
+},
+{
+  "model": "accounts.useractivity",
+  "pk": 3,
+  "fields": {
+    "user": [
+      "killifeugui538@gmail.com"
+    ],
+    "action": "Déconnexion",
+    "ip_address": "127.0.0.1",
+    "timestamp": "2026-09-17T12:42:14.315Z"
+  }
+},
+{
+  "model": "accounts.useractivity",
+  "pk": 4,
+  "fields": {
+    "user": [
+      "babacarciss538@gmail.com"
+    ],
+    "action": "Connexion réussie",
+    "ip_address": "127.0.0.1",
+    "timestamp": "2026-09-17T12:42:29.188Z"
+  }
+},
+{
+  "model": "accounts.useractivity",
+  "pk": 5,
+  "fields": {
+    "user": [
+      "babacarciss538@gmail.com"
+    ],
+    "action": "Déconnexion",
+    "ip_address": "127.0.0.1",
+    "timestamp": "2026-09-17T12:58:19.699Z"
+  }
+},
+{
+  "model": "accounts.useractivity",
+  "pk": 6,
+  "fields": {
+    "user": [
+      "babacarciss538@gmail.com"
+    ],
+    "action": "Connexion réussie",
+    "ip_address": "127.0.0.1",
+    "timestamp": "2026-09-17T12:58:32.264Z"
+  }
+},
+{
+  "model": "accounts.useractivity",
+  "pk": 7,
+  "fields": {
+    "user": [
+      "babacarciss538@gmail.com"
+    ],
+    "action": "Déconnexion",
+    "ip_address": "127.0.0.1",
+    "timestamp": "2026-09-17T13:06:24.408Z"
+  }
+},
+{
+  "model": "accounts.useractivity",
+  "pk": 8,
+  "fields": {
+    "user": [
+      "killifeugui538@gmail.com"
+    ],
+    "action": "Connexion réussie",
+    "ip_address": "127.0.0.1",
+    "timestamp": "2026-09-17T13:06:49.368Z"
+  }
+},
+{
+  "model": "accounts.useractivity",
+  "pk": 9,
+  "fields": {
+    "user": [
+      "killifeugui538@gmail.com"
+    ],
+    "action": "Déconnexion",
+    "ip_address": "127.0.0.1",
+    "timestamp": "2026-09-17T17:25:54.266Z"
+  }
+},
+{
+  "model": "accounts.useractivity",
+  "pk": 10,
+  "fields": {
+    "user": [
+      "babacarciss538@gmail.com"
+    ],
+    "action": "Connexion réussie",
+    "ip_address": "127.0.0.1",
+    "timestamp": "2026-09-17T17:26:07.700Z"
+  }
+},
+{
+  "model": "accounts.useractivity",
+  "pk": 11,
+  "fields": {
+    "user": [
+      "babacarciss538@gmail.com"
+    ],
+    "action": "Déconnexion",
+    "ip_address": "127.0.0.1",
+    "timestamp": "2026-09-17T17:31:00.288Z"
+  }
+},
+{
+  "model": "accounts.useractivity",
+  "pk": 12,
+  "fields": {
+    "user": [
+      "killifeugui745@gmail.com"
+    ],
+    "action": "Connexion réussie",
+    "ip_address": "127.0.0.1",
+    "timestamp": "2026-09-17T17:31:11.986Z"
+  }
+},
+{
+  "model": "accounts.useractivity",
+  "pk": 13,
+  "fields": {
+    "user": [
+      "killifeugui745@gmail.com"
+    ],
+    "action": "Déconnexion",
+    "ip_address": "127.0.0.1",
+    "timestamp": "2026-09-17T17:32:09.618Z"
+  }
+},
+{
+  "model": "accounts.useractivity",
+  "pk": 14,
+  "fields": {
+    "user": [
+      "babacarciss538@gmail.com"
+    ],
+    "action": "Connexion réussie",
+    "ip_address": "127.0.0.1",
+    "timestamp": "2026-09-17T17:32:21.573Z"
+  }
+},
+{
+  "model": "accounts.useractivity",
+  "pk": 15,
+  "fields": {
+    "user": [
+      "babacarciss538@gmail.com"
+    ],
+    "action": "Déconnexion",
+    "ip_address": "127.0.0.1",
+    "timestamp": "2026-09-17T17:33:33.539Z"
+  }
+},
+{
+  "model": "accounts.useractivity",
+  "pk": 16,
+  "fields": {
+    "user": [
+      "killifeugui538@gmail.com"
+    ],
+    "action": "Connexion réussie",
+    "ip_address": "127.0.0.1",
+    "timestamp": "2026-09-17T17:33:47.349Z"
+  }
+},
+{
+  "model": "accounts.useractivity",
+  "pk": 17,
+  "fields": {
+    "user": [
+      "killifeugui538@gmail.com"
+    ],
+    "action": "Déconnexion",
+    "ip_address": "127.0.0.1",
+    "timestamp": "2026-09-17T17:58:40.819Z"
+  }
+},
+{
+  "model": "accounts.useractivity",
+  "pk": 18,
+  "fields": {
+    "user": [
+      "babacarciss538@gmail.com"
+    ],
+    "action": "Connexion réussie",
+    "ip_address": "127.0.0.1",
+    "timestamp": "2026-09-17T17:58:50.118Z"
+  }
+},
+{
+  "model": "accounts.useractivity",
+  "pk": 19,
+  "fields": {
+    "user": [
+      "babacarciss538@gmail.com"
+    ],
+    "action": "Déconnexion",
+    "ip_address": "127.0.0.1",
+    "timestamp": "2026-09-17T17:59:02.332Z"
+  }
+},
+{
+  "model": "accounts.useractivity",
+  "pk": 20,
+  "fields": {
+    "user": [
+      "babacarciss538@gmail.com"
+    ],
+    "action": "Connexion réussie",
+    "ip_address": "127.0.0.1",
+    "timestamp": "2026-09-17T18:05:29.183Z"
+  }
+},
+{
+  "model": "accounts.useractivity",
+  "pk": 21,
+  "fields": {
+    "user": [
+      "babacarciss538@gmail.com"
+    ],
+    "action": "Déconnexion",
+    "ip_address": "127.0.0.1",
+    "timestamp": "2026-09-17T18:06:56.652Z"
+  }
+},
+{
+  "model": "accounts.useractivity",
+  "pk": 22,
+  "fields": {
+    "user": [
+      "babacarciss538@gmail.com"
+    ],
+    "action": "Connexion réussie",
+    "ip_address": "127.0.0.1",
+    "timestamp": "2026-09-17T18:07:11.999Z"
+  }
+},
+{
+  "model": "accounts.useractivity",
+  "pk": 23,
+  "fields": {
+    "user": [
+      "babacarciss538@gmail.com"
+    ],
+    "action": "Déconnexion",
+    "ip_address": "127.0.0.1",
+    "timestamp": "2026-09-17T18:07:24.112Z"
+  }
+},
+{
+  "model": "accounts.useractivity",
+  "pk": 24,
+  "fields": {
+    "user": [
+      "killifeugui538@gmail.com"
+    ],
+    "action": "Connexion réussie",
+    "ip_address": "127.0.0.1",
+    "timestamp": "2026-09-17T18:07:31.727Z"
+  }
+},
+{
+  "model": "accounts.useractivity",
+  "pk": 25,
+  "fields": {
+    "user": [
+      "killifeugui538@gmail.com"
+    ],
+    "action": "Déconnexion",
+    "ip_address": "127.0.0.1",
+    "timestamp": "2026-09-17T18:08:15.985Z"
+  }
+},
+{
+  "model": "accounts.useractivity",
+  "pk": 26,
+  "fields": {
+    "user": [
+      "killifeugui745@gmail.com"
+    ],
+    "action": "Connexion réussie",
+    "ip_address": "127.0.0.1",
+    "timestamp": "2026-09-17T18:08:33.642Z"
+  }
+},
+{
+  "model": "accounts.useractivity",
+  "pk": 27,
+  "fields": {
+    "user": [
+      "babacarciss538@gmail.com"
+    ],
+    "action": "Déconnexion",
+    "ip_address": "127.0.0.1",
+    "timestamp": "2026-09-17T18:14:34.575Z"
+  }
+},
+{
+  "model": "accounts.useractivity",
+  "pk": 28,
+  "fields": {
+    "user": [
+      "fba538@gmail.com"
+    ],
+    "action": "Connexion réussie",
+    "ip_address": "127.0.0.1",
+    "timestamp": "2026-09-17T18:14:46.950Z"
+  }
+},
+{
+  "model": "accounts.useractivity",
+  "pk": 29,
+  "fields": {
+    "user": [
+      "babacarciss538@gmail.com"
+    ],
+    "action": "Déconnexion",
+    "ip_address": "127.0.0.1",
+    "timestamp": "2026-09-17T18:18:57.189Z"
+  }
+},
+{
+  "model": "accounts.useractivity",
+  "pk": 30,
+  "fields": {
+    "user": [
+      "serveur1@gmail.com"
+    ],
+    "action": "Connexion réussie",
+    "ip_address": "127.0.0.1",
+    "timestamp": "2026-09-17T18:19:08.417Z"
+  }
+},
+{
+  "model": "accounts.useractivity",
+  "pk": 31,
+  "fields": {
+    "user": [
+      "babacarciss538@gmail.com"
+    ],
+    "action": "Déconnexion",
+    "ip_address": "127.0.0.1",
+    "timestamp": "2026-09-17T18:21:28.039Z"
+  }
+},
+{
+  "model": "accounts.useractivity",
+  "pk": 32,
+  "fields": {
+    "user": [
+      "caissier1@gmail.com"
+    ],
+    "action": "Connexion réussie",
+    "ip_address": "127.0.0.1",
+    "timestamp": "2026-09-17T18:21:37.818Z"
+  }
+},
+{
+  "model": "accounts.useractivity",
+  "pk": 33,
+  "fields": {
+    "user": [
+      "caissier1@gmail.com"
+    ],
+    "action": "Déconnexion",
+    "ip_address": "127.0.0.1",
+    "timestamp": "2026-09-17T18:22:59.541Z"
+  }
+},
+{
+  "model": "accounts.useractivity",
+  "pk": 34,
+  "fields": {
+    "user": [
+      "babacarciss538@gmail.com"
+    ],
+    "action": "Déconnexion",
+    "ip_address": "127.0.0.1",
+    "timestamp": "2026-09-17T18:24:45.875Z"
+  }
+},
+{
+  "model": "accounts.useractivity",
+  "pk": 35,
+  "fields": {
+    "user": [
+      "resprestau@gmail.com"
+    ],
+    "action": "Connexion réussie",
+    "ip_address": "127.0.0.1",
+    "timestamp": "2026-09-17T18:25:04.379Z"
+  }
+},
+{
+  "model": "accounts.useractivity",
+  "pk": 36,
+  "fields": {
+    "user": [
+      "resprestau@gmail.com"
+    ],
+    "action": "Déconnexion",
+    "ip_address": "127.0.0.1",
+    "timestamp": "2026-09-17T18:30:01.155Z"
+  }
+},
+{
+  "model": "accounts.useractivity",
+  "pk": 37,
+  "fields": {
+    "user": [
+      "babacarciss538@gmail.com"
+    ],
+    "action": "Déconnexion",
+    "ip_address": "127.0.0.1",
+    "timestamp": "2026-09-17T19:02:09.659Z"
+  }
+},
+{
+  "model": "accounts.useractivity",
+  "pk": 38,
+  "fields": {
+    "user": [
+      "babacarciss538@gmail.com"
+    ],
+    "action": "Connexion réussie",
+    "ip_address": "127.0.0.1",
+    "timestamp": "2026-09-17T19:03:15.732Z"
+  }
+},
+{
+  "model": "accounts.useractivity",
+  "pk": 39,
+  "fields": {
+    "user": [
+      "babacarciss538@gmail.com"
+    ],
+    "action": "Déconnexion",
+    "ip_address": "127.0.0.1",
+    "timestamp": "2026-09-17T19:05:55.365Z"
+  }
+},
+{
+  "model": "accounts.useractivity",
+  "pk": 40,
+  "fields": {
+    "user": [
+      "killifeugui745@gmail.com"
+    ],
+    "action": "Connexion réussie",
+    "ip_address": "127.0.0.1",
+    "timestamp": "2026-09-17T19:06:09.771Z"
+  }
+},
+{
+  "model": "accounts.useractivity",
+  "pk": 41,
+  "fields": {
+    "user": [
+      "babacarciss538@gmail.com"
+    ],
+    "action": "Déconnexion",
+    "ip_address": "127.0.0.1",
+    "timestamp": "2026-09-20T01:22:00.437Z"
+  }
+},
+{
+  "model": "accounts.useractivity",
+  "pk": 42,
+  "fields": {
+    "user": [
+      "fatimata22@gmail.com"
+    ],
+    "action": "Connexion réussie",
+    "ip_address": "127.0.0.1",
+    "timestamp": "2026-09-20T01:22:12.897Z"
+  }
+},
+{
+  "model": "accounts.useractivity",
+  "pk": 43,
+  "fields": {
+    "user": [
+      "fatimata22@gmail.com"
+    ],
+    "action": "Déconnexion",
+    "ip_address": "127.0.0.1",
+    "timestamp": "2026-09-21T10:05:55.797Z"
+  }
+},
+{
+  "model": "accounts.useractivity",
+  "pk": 44,
+  "fields": {
+    "user": [
+      "babacarciss538@gmail.com"
+    ],
+    "action": "Connexion réussie",
+    "ip_address": "127.0.0.1",
+    "timestamp": "2026-09-21T10:06:08.712Z"
+  }
+},
+{
+  "model": "accounts.useractivity",
+  "pk": 45,
+  "fields": {
+    "user": [
+      "babacarciss538@gmail.com"
+    ],
+    "action": "Déconnexion",
+    "ip_address": "127.0.0.1",
+    "timestamp": "2026-09-21T10:06:14.748Z"
+  }
+},
+{
+  "model": "accounts.useractivity",
+  "pk": 46,
+  "fields": {
+    "user": [
+      "killifeugui538@gmail.com"
+    ],
+    "action": "Connexion réussie",
+    "ip_address": "127.0.0.1",
+    "timestamp": "2026-09-21T10:06:24.456Z"
+  }
+},
+{
+  "model": "accounts.useractivity",
+  "pk": 47,
+  "fields": {
+    "user": [
+      "killifeugui538@gmail.com"
+    ],
+    "action": "Déconnexion",
+    "ip_address": "127.0.0.1",
+    "timestamp": "2026-09-21T10:06:28.135Z"
+  }
+},
+{
+  "model": "accounts.useractivity",
+  "pk": 48,
+  "fields": {
+    "user": [
+      "killifeugui745@gmail.com"
+    ],
+    "action": "Connexion réussie",
+    "ip_address": "127.0.0.1",
+    "timestamp": "2026-09-21T10:06:38.811Z"
+  }
+},
+{
+  "model": "accounts.useractivity",
+  "pk": 49,
+  "fields": {
+    "user": [
+      "killifeugui745@gmail.com"
+    ],
+    "action": "Déconnexion",
+    "ip_address": "127.0.0.1",
+    "timestamp": "2026-09-21T10:07:16.703Z"
+  }
+},
+{
+  "model": "accounts.useractivity",
+  "pk": 50,
+  "fields": {
+    "user": [
+      "fba538@gmail.com"
+    ],
+    "action": "Connexion réussie",
+    "ip_address": "127.0.0.1",
+    "timestamp": "2026-09-21T10:07:36.222Z"
+  }
+},
+{
+  "model": "accounts.useractivity",
+  "pk": 51,
+  "fields": {
+    "user": [
+      "fba538@gmail.com"
+    ],
+    "action": "Déconnexion",
+    "ip_address": "127.0.0.1",
+    "timestamp": "2026-09-21T10:07:50.383Z"
+  }
+},
+{
+  "model": "accounts.useractivity",
+  "pk": 52,
+  "fields": {
+    "user": [
+      "caissier1@gmail.com"
+    ],
+    "action": "Connexion réussie",
+    "ip_address": "127.0.0.1",
+    "timestamp": "2026-09-21T10:08:02.557Z"
+  }
+},
+{
+  "model": "accounts.useractivity",
+  "pk": 53,
+  "fields": {
+    "user": [
+      "caissier1@gmail.com"
+    ],
+    "action": "Déconnexion",
+    "ip_address": "127.0.0.1",
+    "timestamp": "2026-09-21T10:08:05.971Z"
+  }
+},
+{
+  "model": "accounts.useractivity",
+  "pk": 54,
+  "fields": {
+    "user": [
+      "fatimata22@gmail.com"
+    ],
+    "action": "Connexion réussie",
+    "ip_address": "127.0.0.1",
+    "timestamp": "2026-09-21T10:08:23.400Z"
+  }
+},
+{
+  "model": "accounts.useractivity",
+  "pk": 55,
+  "fields": {
+    "user": [
+      "fatimata22@gmail.com"
+    ],
+    "action": "Déconnexion",
+    "ip_address": "127.0.0.1",
+    "timestamp": "2026-09-21T10:08:27.019Z"
+  }
+},
+{
+  "model": "accounts.useractivity",
+  "pk": 56,
+  "fields": {
+    "user": [
+      "babacarciss538@gmail.com"
+    ],
+    "action": "Déconnexion",
+    "ip_address": "127.0.0.1",
+    "timestamp": "2026-09-21T10:12:28.136Z"
+  }
+},
+{
+  "model": "accounts.useractivity",
+  "pk": 57,
+  "fields": {
+    "user": [
+      "recept2@gmail.com"
+    ],
+    "action": "Connexion réussie",
+    "ip_address": "127.0.0.1",
+    "timestamp": "2026-09-21T10:12:41.137Z"
+  }
+},
+{
+  "model": "accounts.useractivity",
+  "pk": 58,
+  "fields": {
+    "user": [
+      "recept2@gmail.com"
+    ],
+    "action": "Déconnexion",
+    "ip_address": "127.0.0.1",
+    "timestamp": "2026-09-21T10:17:19.925Z"
+  }
+},
+{
+  "model": "accounts.useractivity",
+  "pk": 59,
+  "fields": {
+    "user": [
+      "killifeugui538@gmail.com"
+    ],
+    "action": "Connexion réussie",
+    "ip_address": "127.0.0.1",
+    "timestamp": "2026-09-21T10:17:38.541Z"
+  }
+},
+{
+  "model": "accounts.useractivity",
+  "pk": 60,
+  "fields": {
+    "user": [
+      "killifeugui538@gmail.com"
+    ],
+    "action": "Déconnexion",
+    "ip_address": "127.0.0.1",
+    "timestamp": "2026-09-21T10:19:13.478Z"
+  }
+},
+{
+  "model": "accounts.useractivity",
+  "pk": 61,
+  "fields": {
+    "user": [
+      "killifeugui745@gmail.com"
+    ],
+    "action": "Connexion réussie",
+    "ip_address": "127.0.0.1",
+    "timestamp": "2026-09-21T10:19:31.328Z"
+  }
+},
+{
+  "model": "accounts.useractivity",
+  "pk": 62,
+  "fields": {
+    "user": [
+      "killifeugui745@gmail.com"
+    ],
+    "action": "Déconnexion",
+    "ip_address": "127.0.0.1",
+    "timestamp": "2026-09-21T10:38:51.542Z"
+  }
+},
+{
+  "model": "accounts.useractivity",
+  "pk": 63,
+  "fields": {
+    "user": [
+      "recept2@gmail.com"
+    ],
+    "action": "Connexion réussie",
+    "ip_address": "127.0.0.1",
+    "timestamp": "2026-09-21T10:39:08.054Z"
+  }
+},
+{
+  "model": "accounts.useractivity",
+  "pk": 64,
+  "fields": {
+    "user": [
+      "recept2@gmail.com"
+    ],
+    "action": "Déconnexion",
+    "ip_address": "127.0.0.1",
+    "timestamp": "2026-09-21T10:40:48.535Z"
+  }
+},
+{
+  "model": "accounts.useractivity",
+  "pk": 65,
+  "fields": {
+    "user": [
+      "killifeugui745@gmail.com"
+    ],
+    "action": "Connexion réussie",
+    "ip_address": "127.0.0.1",
+    "timestamp": "2026-09-21T10:41:04.471Z"
+  }
+},
+{
+  "model": "accounts.useractivity",
+  "pk": 66,
+  "fields": {
+    "user": [
+      "killifeugui745@gmail.com"
+    ],
+    "action": "Déconnexion",
+    "ip_address": "127.0.0.1",
+    "timestamp": "2026-09-21T10:46:37.375Z"
+  }
+},
+{
+  "model": "accounts.useractivity",
+  "pk": 67,
+  "fields": {
+    "user": [
+      "killifeugui538@gmail.com"
+    ],
+    "action": "Connexion réussie",
+    "ip_address": "127.0.0.1",
+    "timestamp": "2026-09-21T10:47:11.827Z"
+  }
+},
+{
+  "model": "accounts.useractivity",
+  "pk": 68,
+  "fields": {
+    "user": [
+      "killifeugui538@gmail.com"
+    ],
+    "action": "Déconnexion",
+    "ip_address": "127.0.0.1",
+    "timestamp": "2026-09-21T10:48:04.772Z"
+  }
+},
+{
+  "model": "accounts.useractivity",
+  "pk": 69,
+  "fields": {
+    "user": [
+      "serveur1@gmail.com"
+    ],
+    "action": "Connexion réussie",
+    "ip_address": "127.0.0.1",
+    "timestamp": "2026-09-21T10:48:14.556Z"
+  }
+},
+{
+  "model": "accounts.useractivity",
+  "pk": 70,
+  "fields": {
+    "user": [
+      "serveur1@gmail.com"
+    ],
+    "action": "Déconnexion",
+    "ip_address": "127.0.0.1",
+    "timestamp": "2026-09-21T10:49:35.293Z"
+  }
+},
+{
+  "model": "accounts.useractivity",
+  "pk": 71,
+  "fields": {
+    "user": [
+      "killifeugui538@gmail.com"
+    ],
+    "action": "Connexion réussie",
+    "ip_address": "127.0.0.1",
+    "timestamp": "2026-09-21T10:49:50.401Z"
+  }
+},
+{
+  "model": "accounts.useractivity",
+  "pk": 72,
+  "fields": {
+    "user": [
+      "killifeugui538@gmail.com"
+    ],
+    "action": "Déconnexion",
+    "ip_address": "127.0.0.1",
+    "timestamp": "2026-09-21T10:50:20.401Z"
+  }
+},
+{
+  "model": "accounts.useractivity",
+  "pk": 73,
+  "fields": {
+    "user": [
+      "killifeugui745@gmail.com"
+    ],
+    "action": "Connexion réussie",
+    "ip_address": "127.0.0.1",
+    "timestamp": "2026-09-21T10:50:29.907Z"
+  }
+},
+{
+  "model": "accounts.useractivity",
+  "pk": 74,
+  "fields": {
+    "user": [
+      "killifeugui745@gmail.com"
+    ],
+    "action": "Déconnexion",
+    "ip_address": "127.0.0.1",
+    "timestamp": "2026-09-21T10:51:05.175Z"
+  }
+},
+{
+  "model": "accounts.useractivity",
+  "pk": 75,
+  "fields": {
+    "user": [
+      "fba538@gmail.com"
+    ],
+    "action": "Connexion réussie",
+    "ip_address": "127.0.0.1",
+    "timestamp": "2026-09-21T10:51:18.982Z"
+  }
+},
+{
+  "model": "accounts.useractivity",
+  "pk": 76,
+  "fields": {
+    "user": [
+      "killifeugui745@gmail.com"
+    ],
+    "action": "Connexion réussie",
+    "ip_address": "127.0.0.1",
+    "timestamp": "2026-09-23T18:32:04.054Z"
+  }
+},
+{
+  "model": "accounts.useractivity",
+  "pk": 77,
+  "fields": {
+    "user": [
+      "killifeugui745@gmail.com"
+    ],
+    "action": "Connexion réussie",
+    "ip_address": "41.82.175.21",
+    "timestamp": "2026-09-23T18:53:55.501Z"
+  }
+},
+{
+  "model": "accounts.useractivity",
+  "pk": 78,
+  "fields": {
+    "user": [
+      "killifeugui745@gmail.com"
+    ],
+    "action": "Déconnexion",
+    "ip_address": "41.82.175.21",
+    "timestamp": "2026-09-23T18:54:05.518Z"
+  }
+},
+{
+  "model": "accounts.useractivity",
+  "pk": 79,
+  "fields": {
+    "user": [
+      "killifeugui538@gmail.com"
+    ],
+    "action": "Connexion réussie",
+    "ip_address": "41.82.175.21",
+    "timestamp": "2026-09-23T18:54:41.480Z"
+  }
+},
+{
+  "model": "accounts.useractivity",
+  "pk": 80,
+  "fields": {
+    "user": [
+      "killifeugui745@gmail.com"
+    ],
+    "action": "Déconnexion",
+    "ip_address": "127.0.0.1",
+    "timestamp": "2026-09-23T19:33:51.513Z"
+  }
+},
+{
+  "model": "accounts.useractivity",
+  "pk": 81,
+  "fields": {
+    "user": [
+      "babacarciss538@gmail.com"
+    ],
+    "action": "Connexion réussie",
+    "ip_address": "127.0.0.1",
+    "timestamp": "2026-09-23T19:34:10.339Z"
+  }
+},
+{
+  "model": "accounts.useractivity",
+  "pk": 82,
+  "fields": {
+    "user": [
+      "babacarciss538@gmail.com"
+    ],
+    "action": "Déconnexion",
+    "ip_address": "127.0.0.1",
+    "timestamp": "2026-09-23T19:39:41.249Z"
+  }
+},
+{
+  "model": "accounts.useractivity",
+  "pk": 83,
+  "fields": {
+    "user": [
+      "fatimata12@gmail.com"
+    ],
+    "action": "Connexion réussie",
+    "ip_address": "127.0.0.1",
+    "timestamp": "2026-09-23T19:39:50.588Z"
+  }
+},
+{
+  "model": "accounts.useractivity",
+  "pk": 84,
+  "fields": {
+    "user": [
+      "killifeugui745@gmail.com"
+    ],
+    "action": "Connexion réussie",
+    "ip_address": "127.0.0.1",
+    "timestamp": "2026-10-04T17:22:01.017Z"
+  }
+},
+{
+  "model": "accounts.useractivity",
+  "pk": 85,
+  "fields": {
+    "user": [
+      "killifeugui745@gmail.com"
+    ],
+    "action": "Connexion réussie",
+    "ip_address": "127.0.0.1",
+    "timestamp": "2026-10-05T17:22:51.641Z"
+  }
+},
+{
+  "model": "accounts.useractivity",
+  "pk": 86,
+  "fields": {
+    "user": [
+      "killifeugui538@gmail.com"
+    ],
+    "action": "Connexion réussie",
+    "ip_address": "41.82.183.56",
+    "timestamp": "2026-10-05T18:07:33.129Z"
+  }
+},
+{
+  "model": "accounts.useractivity",
+  "pk": 87,
+  "fields": {
+    "user": [
+      "killifeugui538@gmail.com"
+    ],
+    "action": "Déconnexion",
+    "ip_address": "41.82.183.56",
+    "timestamp": "2026-10-05T18:11:50.331Z"
+  }
+},
+{
+  "model": "accounts.useractivity",
+  "pk": 88,
+  "fields": {
+    "user": [
+      "babacarciss538@gmail.com"
+    ],
+    "action": "Connexion réussie",
+    "ip_address": "102.164.183.99",
+    "timestamp": "2026-10-08T16:18:52.331Z"
+  }
+},
+{
+  "model": "accounts.useractivity",
+  "pk": 89,
+  "fields": {
+    "user": [
+      "babacarciss538@gmail.com"
+    ],
+    "action": "Déconnexion",
+    "ip_address": "102.164.183.99",
+    "timestamp": "2026-10-08T16:20:57.215Z"
+  }
+},
+{
+  "model": "accounts.useractivity",
+  "pk": 90,
+  "fields": {
+    "user": [
+      "babacarciss538@gmail.com"
+    ],
+    "action": "Connexion réussie",
+    "ip_address": "102.164.183.99",
+    "timestamp": "2026-10-08T16:21:23.014Z"
+  }
+},
+{
+  "model": "accounts.useractivity",
+  "pk": 91,
+  "fields": {
+    "user": [
+      "babacarciss538@gmail.com"
+    ],
+    "action": "Déconnexion",
+    "ip_address": "102.164.183.99",
+    "timestamp": "2026-10-08T16:21:34.169Z"
+  }
+},
+{
+  "model": "accounts.useractivity",
+  "pk": 92,
+  "fields": {
+    "user": [
+      "babacarciss538@gmail.com"
+    ],
+    "action": "Déconnexion",
+    "ip_address": "127.0.0.1",
+    "timestamp": "2026-10-08T16:28:01.845Z"
+  }
+},
+{
+  "model": "accounts.useractivity",
+  "pk": 93,
+  "fields": {
+    "user": [
+      "administrateur1@gmail.com"
+    ],
+    "action": "Connexion réussie",
+    "ip_address": "127.0.0.1",
+    "timestamp": "2026-10-08T16:28:13.782Z"
+  }
+},
+{
+  "model": "accounts.useractivity",
+  "pk": 94,
+  "fields": {
+    "user": [
+      "babacarciss538@gmail.com"
+    ],
+    "action": "Connexion réussie",
+    "ip_address": "102.164.188.75",
+    "timestamp": "2026-10-08T20:53:01.392Z"
+  }
+},
+{
+  "model": "accounts.useractivity",
+  "pk": 95,
+  "fields": {
+    "user": [
+      "administrateur1@gmail.com"
+    ],
+    "action": "Déconnexion",
+    "ip_address": "127.0.0.1",
+    "timestamp": "2026-10-08T22:52:01.390Z"
+  }
+},
+{
+  "model": "accounts.useractivity",
+  "pk": 96,
+  "fields": {
+    "user": [
+      "administrateur1@gmail.com"
+    ],
+    "action": "Connexion réussie",
+    "ip_address": "127.0.0.1",
+    "timestamp": "2026-10-08T22:56:18.460Z"
+  }
+},
+{
+  "model": "accounts.useractivity",
+  "pk": 97,
+  "fields": {
+    "user": [
+      "administrateur1@gmail.com"
+    ],
+    "action": "Déconnexion",
+    "ip_address": "127.0.0.1",
+    "timestamp": "2026-10-08T22:56:25.051Z"
+  }
+},
+{
+  "model": "accounts.useractivity",
+  "pk": 98,
+  "fields": {
+    "user": [
+      "fatimata12@gmail.com"
+    ],
+    "action": "Connexion réussie",
+    "ip_address": "154.125.61.249",
+    "timestamp": "2026-10-08T22:57:34.374Z"
+  }
+},
+{
+  "model": "accounts.useractivity",
+  "pk": 99,
+  "fields": {
+    "user": [
+      "babacarciss538@gmail.com"
+    ],
+    "action": "Connexion réussie",
+    "ip_address": "102.164.183.75",
+    "timestamp": "2026-10-09T00:49:21.695Z"
+  }
+},
+{
+  "model": "accounts.useractivity",
+  "pk": 100,
+  "fields": {
+    "user": [
+      "fatimata12@gmail.com"
+    ],
+    "action": "Connexion réussie",
+    "ip_address": "41.82.183.49",
+    "timestamp": "2026-10-09T00:51:13.892Z"
+  }
+},
+{
+  "model": "accounts.useractivity",
+  "pk": 101,
+  "fields": {
+    "user": [
+      "fatimata12@gmail.com"
+    ],
+    "action": "Déconnexion",
+    "ip_address": "41.82.183.49",
+    "timestamp": "2026-10-09T01:11:55.888Z"
+  }
+},
+{
+  "model": "accounts.useractivity",
+  "pk": 102,
+  "fields": {
+    "user": [
+      "administrateur1@gmail.com"
+    ],
+    "action": "Connexion réussie",
+    "ip_address": "41.82.183.49",
+    "timestamp": "2026-10-09T01:13:19.854Z"
+  }
+},
+{
+  "model": "accounts.useractivity",
+  "pk": 103,
+  "fields": {
+    "user": [
+      "babacarciss538@gmail.com"
+    ],
+    "action": "Connexion réussie",
+    "ip_address": "127.0.0.1",
+    "timestamp": "2026-10-11T00:51:08.002Z"
+  }
+},
+{
+  "model": "accounts.useractivity",
+  "pk": 104,
+  "fields": {
+    "user": [
+      "babacarciss538@gmail.com"
+    ],
+    "action": "Déconnexion",
+    "ip_address": "127.0.0.1",
+    "timestamp": "2026-10-11T00:51:33.989Z"
+  }
+},
+{
+  "model": "accounts.useractivity",
+  "pk": 105,
+  "fields": {
+    "user": [
+      "babacarciss538@gmail.com"
+    ],
+    "action": "Déconnexion",
+    "ip_address": "127.0.0.1",
+    "timestamp": "2026-10-11T01:40:56.512Z"
+  }
+},
+{
+  "model": "accounts.useractivity",
+  "pk": 106,
+  "fields": {
+    "user": [
+      "receptioniste1@gmail.com"
+    ],
+    "action": "Connexion réussie",
+    "ip_address": "127.0.0.1",
+    "timestamp": "2026-10-11T01:41:38.511Z"
+  }
+},
+{
+  "model": "accounts.useractivity",
+  "pk": 107,
+  "fields": {
+    "user": [
+      "receptioniste1@gmail.com"
+    ],
+    "action": "Déconnexion",
+    "ip_address": "127.0.0.1",
+    "timestamp": "2026-10-11T01:42:34.451Z"
+  }
+},
+{
+  "model": "cashier.cashsession",
+  "pk": 1,
+  "fields": {
+    "cashier": [
+      "babacarciss538@gmail.com"
+    ],
+    "is_closed": false,
+    "opening_amount": "10000.00",
+    "closing_amount": null,
+    "opened_at": "2026-09-21T10:32:15.456Z",
+    "closed_at": null
+  }
+},
+{
+  "model": "cashier.cashsession",
+  "pk": 2,
+  "fields": {
+    "cashier": [
+      "killifeugui745@gmail.com"
+    ],
+    "is_closed": false,
+    "opening_amount": "500000.00",
+    "closing_amount": null,
+    "opened_at": "2026-09-21T10:41:38.607Z",
+    "closed_at": null
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 1,
+  "fields": {
+    "action_time": "2026-09-17T01:57:26.828Z",
+    "user": [
+      "babacarciss538@gmail.com"
+    ],
+    "content_type": [
+      "accounts",
+      "user"
+    ],
+    "object_id": "1",
+    "object_repr": "Babacar CISSE (1. Administrateur Système)",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"R\\u00f4le Syst\\u00e8me\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 2,
+  "fields": {
+    "action_time": "2026-09-17T02:00:42.947Z",
+    "user": [
+      "babacarciss538@gmail.com"
+    ],
+    "content_type": [
+      "accounts",
+      "user"
+    ],
+    "object_id": "1",
+    "object_repr": "Babacar CISSE (6. Femme / Valet de Chambre)",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Num\\u00e9ro de t\\u00e9l\\u00e9phone\", \"Avatar\", \"R\\u00f4le Syst\\u00e8me\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 3,
+  "fields": {
+    "action_time": "2026-09-17T12:33:25.962Z",
+    "user": [
+      "babacarciss538@gmail.com"
+    ],
+    "content_type": [
+      "accounts",
+      "user"
+    ],
+    "object_id": "1",
+    "object_repr": "Babacar CISSE (1. Administrateur Système)",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"R\\u00f4le Syst\\u00e8me\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 4,
+  "fields": {
+    "action_time": "2026-09-17T12:36:01.999Z",
+    "user": [
+      "babacarciss538@gmail.com"
+    ],
+    "content_type": [
+      "accounts",
+      "user"
+    ],
+    "object_id": "2",
+    "object_repr": "Babacar Cissé (13. Chef Cuisine)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 5,
+  "fields": {
+    "action_time": "2026-09-17T12:36:56.210Z",
+    "user": [
+      "babacarciss538@gmail.com"
+    ],
+    "content_type": [
+      "accounts",
+      "user"
+    ],
+    "object_id": "2",
+    "object_repr": "Babacar Cissé (13. Chef Cuisine)",
+    "action_flag": 2,
+    "change_message": "[]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 6,
+  "fields": {
+    "action_time": "2026-09-17T17:29:53.791Z",
+    "user": [
+      "babacarciss538@gmail.com"
+    ],
+    "content_type": [
+      "accounts",
+      "user"
+    ],
+    "object_id": "3",
+    "object_repr": "Pape Mbaye CISSE (2. Directeur / Gérant)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 7,
+  "fields": {
+    "action_time": "2026-09-17T17:30:44.098Z",
+    "user": [
+      "babacarciss538@gmail.com"
+    ],
+    "content_type": [
+      "accounts",
+      "user"
+    ],
+    "object_id": "3",
+    "object_repr": "Pape Mbaye CISSE (2. Directeur / Gérant)",
+    "action_flag": 2,
+    "change_message": "[]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 8,
+  "fields": {
+    "action_time": "2026-09-17T18:14:07.546Z",
+    "user": [
+      "babacarciss538@gmail.com"
+    ],
+    "content_type": [
+      "accounts",
+      "user"
+    ],
+    "object_id": "4",
+    "object_repr": "Fatimata BA (15. Magasinier)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 9,
+  "fields": {
+    "action_time": "2026-09-17T18:18:29.416Z",
+    "user": [
+      "babacarciss538@gmail.com"
+    ],
+    "content_type": [
+      "accounts",
+      "user"
+    ],
+    "object_id": "5",
+    "object_repr": "serveur service (12. Serveur)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 10,
+  "fields": {
+    "action_time": "2026-09-17T18:18:36.757Z",
+    "user": [
+      "babacarciss538@gmail.com"
+    ],
+    "content_type": [
+      "accounts",
+      "user"
+    ],
+    "object_id": "5",
+    "object_repr": "serveur service (12. Serveur)",
+    "action_flag": 2,
+    "change_message": "[]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 11,
+  "fields": {
+    "action_time": "2026-09-17T18:21:02.748Z",
+    "user": [
+      "babacarciss538@gmail.com"
+    ],
+    "content_type": [
+      "accounts",
+      "user"
+    ],
+    "object_id": "6",
+    "object_repr": "caissier caisse (10. Caissier)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 12,
+  "fields": {
+    "action_time": "2026-09-17T18:21:09.246Z",
+    "user": [
+      "babacarciss538@gmail.com"
+    ],
+    "content_type": [
+      "accounts",
+      "user"
+    ],
+    "object_id": "6",
+    "object_repr": "caissier caisse (10. Caissier)",
+    "action_flag": 2,
+    "change_message": "[]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 13,
+  "fields": {
+    "action_time": "2026-09-17T18:24:26.993Z",
+    "user": [
+      "babacarciss538@gmail.com"
+    ],
+    "content_type": [
+      "accounts",
+      "user"
+    ],
+    "object_id": "7",
+    "object_repr": "responsable restaurant (11. Responsable Restaurant)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 14,
+  "fields": {
+    "action_time": "2026-09-17T18:24:35.080Z",
+    "user": [
+      "babacarciss538@gmail.com"
+    ],
+    "content_type": [
+      "accounts",
+      "user"
+    ],
+    "object_id": "7",
+    "object_repr": "responsable restaurant (11. Responsable Restaurant)",
+    "action_flag": 2,
+    "change_message": "[]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 15,
+  "fields": {
+    "action_time": "2026-09-20T01:21:19.224Z",
+    "user": [
+      "babacarciss538@gmail.com"
+    ],
+    "content_type": [
+      "accounts",
+      "user"
+    ],
+    "object_id": "8",
+    "object_repr": "binetou ba (8. Technicien Maintenance)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 16,
+  "fields": {
+    "action_time": "2026-09-20T01:21:28.131Z",
+    "user": [
+      "babacarciss538@gmail.com"
+    ],
+    "content_type": [
+      "accounts",
+      "user"
+    ],
+    "object_id": "8",
+    "object_repr": "binetou ba (8. Technicien Maintenance)",
+    "action_flag": 2,
+    "change_message": "[]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 17,
+  "fields": {
+    "action_time": "2026-09-20T01:21:48.039Z",
+    "user": [
+      "babacarciss538@gmail.com"
+    ],
+    "content_type": [
+      "accounts",
+      "user"
+    ],
+    "object_id": "8",
+    "object_repr": "binetou ba (8. Technicien Maintenance)",
+    "action_flag": 2,
+    "change_message": "[]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 18,
+  "fields": {
+    "action_time": "2026-09-21T10:11:45.468Z",
+    "user": [
+      "babacarciss538@gmail.com"
+    ],
+    "content_type": [
+      "accounts",
+      "user"
+    ],
+    "object_id": "9",
+    "object_repr": "receptionniste recept (3. Réceptionniste)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 19,
+  "fields": {
+    "action_time": "2026-09-23T19:38:25.963Z",
+    "user": [
+      "babacarciss538@gmail.com"
+    ],
+    "content_type": [
+      "accounts",
+      "user"
+    ],
+    "object_id": "10",
+    "object_repr": "biniritou ba (2. Directeur / Gérant)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 20,
+  "fields": {
+    "action_time": "2026-09-23T19:38:59.244Z",
+    "user": [
+      "babacarciss538@gmail.com"
+    ],
+    "content_type": [
+      "accounts",
+      "user"
+    ],
+    "object_id": "10",
+    "object_repr": "biniritou ba (2. Directeur / Gérant)",
+    "action_flag": 2,
+    "change_message": "[]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 21,
+  "fields": {
+    "action_time": "2026-10-08T16:27:01.330Z",
+    "user": [
+      "babacarciss538@gmail.com"
+    ],
+    "content_type": [
+      "accounts",
+      "user"
+    ],
+    "object_id": "11",
+    "object_repr": "Admin Admin (1. Administrateur Système)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 22,
+  "fields": {
+    "action_time": "2026-10-08T16:27:19.821Z",
+    "user": [
+      "babacarciss538@gmail.com"
+    ],
+    "content_type": [
+      "accounts",
+      "user"
+    ],
+    "object_id": "11",
+    "object_repr": "Admin Admin (1. Administrateur Système)",
+    "action_flag": 2,
+    "change_message": "[]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 23,
+  "fields": {
+    "action_time": "2026-10-11T01:40:40.060Z",
+    "user": [
+      "babacarciss538@gmail.com"
+    ],
+    "content_type": [
+      "accounts",
+      "user"
+    ],
+    "object_id": "12",
+    "object_repr": "receptioniste receptioniste (Réceptionniste)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 24,
+  "fields": {
+    "action_time": "2026-10-11T01:40:44.586Z",
+    "user": [
+      "babacarciss538@gmail.com"
+    ],
+    "content_type": [
+      "accounts",
+      "user"
+    ],
+    "object_id": "12",
+    "object_repr": "receptioniste receptioniste (Réceptionniste)",
+    "action_flag": 2,
+    "change_message": "[]"
+  }
+}
+]

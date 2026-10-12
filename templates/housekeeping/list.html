@@ -1,29 +1,251 @@
 {% extends 'base.html' %}
 {% block title %}Housekeeping | {{ HOTEL_NAME }}{% endblock %}
-{% block page_title %}Nettoyage & Gouvernance{% endblock %}
+{% block page_title %}
+  {% if can_assign %}Tableau de Bord Housekeeping — Gouvernante{% else %}Mes Tâches — Nettoyage{% endif %}
+{% endblock %}
 
 {% block content %}
-<div class="glass-card p-4">
-    <div class="d-flex justify-content-between align-items-center mb-4">
-        <h4 class="fw-bold mb-0"><i class="bi bi-stars text-purple me-2"></i>Tâches de Nettoyage</h4>
+
+{# ── KPI Cards ──────────────────────────────────────────────────────────── #}
+<div class="row g-3 mb-4">
+  <div class="col-12 col-sm-6 col-xl-3">
+    <div class="glass-card metric-card">
+      <div><div class="text-muted extra-small">EN ATTENTE</div>
+        <div class="metric-value text-amber">{{ pending_count }}</div></div>
+      <div class="metric-icon icon-amber"><i class="bi bi-hourglass-split"></i></div>
     </div>
-    <div class="table-responsive">
-        <table class="table-glass">
-            <thead>
-                <tr>
-                    <th>Chambre</th>
-                    <th>Priorité</th>
-                    <th>Affecté à</th>
-                    <th>Statut Tâche</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td colspan="5" class="text-center text-muted py-4">Aucune tâche de nettoyage en cours.</td>
-                </tr>
-            </tbody>
-        </table>
+  </div>
+  <div class="col-12 col-sm-6 col-xl-3">
+    <div class="glass-card metric-card">
+      <div><div class="text-muted extra-small">EN COURS</div>
+        <div class="metric-value text-blue">{{ in_progress_count }}</div></div>
+      <div class="metric-icon icon-blue"><i class="bi bi-arrow-repeat"></i></div>
     </div>
+  </div>
+  <div class="col-12 col-sm-6 col-xl-3">
+    <div class="glass-card metric-card">
+      <div><div class="text-muted extra-small">TERMINÉES AUJOURD'HUI</div>
+        <div class="metric-value text-green">{{ completed_today_count }}</div></div>
+      <div class="metric-icon icon-green"><i class="bi bi-check2-all"></i></div>
+    </div>
+  </div>
+  {% if can_assign %}
+  <div class="col-12 col-sm-6 col-xl-3">
+    <div class="glass-card metric-card">
+      <div><div class="text-muted extra-small">CHAMBRES SANS TÂCHE</div>
+        <div class="metric-value text-red">{{ rooms_without_task|length }}</div></div>
+      <div class="metric-icon icon-red"><i class="bi bi-door-open"></i></div>
+    </div>
+  </div>
+  {% endif %}
 </div>
+
+{# ── Panneau d'affectation (gouvernante / direction) ──────────────────── #}
+{% if can_assign %}
+<div class="glass-card p-4 mb-4">
+  <h5 class="fw-bold mb-3"><i class="bi bi-person-plus text-purple me-2"></i>Affecter une tâche de nettoyage</h5>
+  {% if form.non_field_errors %}
+    <div class="alert alert-danger">{{ form.non_field_errors }}</div>
+  {% endif %}
+  <form method="post" class="row g-3">
+    {% csrf_token %}
+    <input type="hidden" name="action" value="assign">
+
+    {# Chambre — sans champ Tarif #}
+    <div class="col-sm-6 col-lg-3">
+      <label class="form-label" for="{{ form.room.id_for_label }}">{{ form.room.label }}</label>
+      {{ form.room }}
+      {% if form.room.errors %}<div class="text-danger small mt-1">{{ form.room.errors }}</div>{% endif %}
+    </div>
+
+    {# Femme de chambre #}
+    <div class="col-sm-6 col-lg-3">
+      <label class="form-label" for="{{ form.assigned_to.id_for_label }}">{{ form.assigned_to.label }}</label>
+      {{ form.assigned_to }}
+      {% if form.assigned_to.errors %}<div class="text-danger small mt-1">{{ form.assigned_to.errors }}</div>{% endif %}
+    </div>
+
+    {# Priorité #}
+    <div class="col-sm-6 col-lg-2">
+      <label class="form-label" for="{{ form.priority.id_for_label }}">{{ form.priority.label }}</label>
+      {{ form.priority }}
+    </div>
+
+    {# Notes #}
+    <div class="col-12 col-lg-4">
+      <label class="form-label" for="{{ form.notes.id_for_label }}">{{ form.notes.label }}</label>
+      {{ form.notes }}
+    </div>
+
+    <div class="col-12">
+      <button class="btn btn-primary" type="submit">
+        <i class="bi bi-send me-2"></i>Affecter la tâche
+      </button>
+    </div>
+  </form>
+</div>
+
+{# ── Chambres À nettoyer sans tâche active ─────────────────────────────── #}
+{% if rooms_without_task %}
+<div class="glass-card p-4 mb-4">
+  <h5 class="fw-bold mb-3 text-warning">
+    <i class="bi bi-exclamation-triangle me-2"></i>Chambres À nettoyer sans tâche assignée
+  </h5>
+  <div class="d-flex flex-wrap gap-2">
+    {% for room in rooms_without_task %}
+      <span class="badge bg-warning text-dark fs-6 px-3 py-2">
+        <i class="bi bi-door-open me-1"></i>Chambre {{ room.number }}
+      </span>
+    {% endfor %}
+  </div>
+</div>
+{% endif %}
+{% endif %}{# end can_assign #}
+
+{# ── Tableau des tâches ─────────────────────────────────────────────────── #}
+<div class="glass-card p-4">
+  <h5 class="fw-bold mb-4">
+    <i class="bi bi-list-task text-purple me-2"></i>
+    {% if can_assign %}Planning Housekeeping{% else %}Mes tâches affectées{% endif %}
+  </h5>
+
+  {% if not tasks %}
+    <div class="text-center text-muted py-5">
+      <i class="bi bi-check-circle display-4"></i>
+      <p class="mt-3">{% if can_assign %}Aucune tâche de nettoyage en cours.{% else %}Aucune tâche ne vous est assignée pour le moment.{% endif %}</p>
+    </div>
+  {% else %}
+  <div class="table-responsive">
+    <table class="table-glass">
+      <thead>
+        <tr>
+          <th>Chambre</th>
+          <th>Titre</th>
+          <th>Priorité</th>
+          <th>Statut</th>
+          <th>Assignée à</th>
+          {% if can_assign %}<th>Créée par</th>{% endif %}
+          <th>Créée le</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for task in tasks %}
+        <tr>
+          {# Chambre #}
+          <td>
+            {% if task.room %}
+              <span class="fw-bold">{{ task.room.number }}</span>
+              <small class="text-muted d-block">{{ task.room.room_type }}</small>
+            {% else %}
+              <span class="text-muted">—</span>
+            {% endif %}
+          </td>
+
+          {# Titre de la tâche #}
+          <td>
+            <span>{{ task.title }}</span>
+            {% if task.notes %}<small class="text-muted d-block">{{ task.notes|truncatechars:60 }}</small>{% endif %}
+          </td>
+
+          {# Priorité #}
+          <td>
+            {% if task.priority == 'URGENT' %}
+              <span class="badge bg-danger">{{ task.get_priority_display }}</span>
+            {% elif task.priority == 'HIGH' %}
+              <span class="badge bg-warning text-dark">{{ task.get_priority_display }}</span>
+            {% elif task.priority == 'NORMAL' %}
+              <span class="badge bg-info text-dark">{{ task.get_priority_display }}</span>
+            {% else %}
+              <span class="badge bg-secondary">{{ task.get_priority_display }}</span>
+            {% endif %}
+          </td>
+
+          {# Statut #}
+          <td>
+            {% if task.status == 'COMPLETED' %}
+              <span class="badge bg-success">{{ task.get_status_display }}</span>
+            {% elif task.status == 'IN_PROGRESS' %}
+              <span class="badge bg-primary">{{ task.get_status_display }}</span>
+            {% else %}
+              <span class="badge bg-warning text-dark">{{ task.get_status_display }}</span>
+            {% endif %}
+          </td>
+
+          {# Assignée à #}
+          <td>
+            {% if task.assigned_to %}
+              <span>{{ task.assigned_to.get_full_name|default:task.assigned_to.email }}</span>
+              {% if can_assign and task.status != 'COMPLETED' %}
+              <form method="post" class="d-inline ms-1">
+                {% csrf_token %}
+                <input type="hidden" name="action" value="reassign">
+                <input type="hidden" name="task_id" value="{{ task.pk }}">
+                <select name="new_agent" class="form-select form-select-sm d-inline w-auto" onchange="this.form.submit()">
+                  <option value="">Réaffecter…</option>
+                  {% for hk in housekeepers %}
+                    {% if hk != task.assigned_to %}
+                    <option value="{{ hk.pk }}">{{ hk.get_full_name|default:hk.email }}</option>
+                    {% endif %}
+                  {% endfor %}
+                </select>
+              </form>
+              {% endif %}
+            {% else %}
+              <span class="text-muted">Non assignée</span>
+            {% endif %}
+          </td>
+
+          {% if can_assign %}
+          {# Créée par #}
+          <td>
+            <small>{{ task.created_by.get_full_name|default:task.created_by.email|default:"—" }}</small>
+          </td>
+          {% endif %}
+
+          {# Date de création #}
+          <td><small class="text-muted">{{ task.created_at|date:"d/m/Y H:i" }}</small></td>
+
+          {# Actions #}
+          <td>
+            <div class="d-flex gap-2 flex-wrap">
+              {# Démarrer #}
+              {% if task.status == 'PENDING' %}
+              <form method="post">
+                {% csrf_token %}
+                <input type="hidden" name="action" value="start">
+                <input type="hidden" name="task_id" value="{{ task.pk }}">
+                <button class="btn btn-sm btn-outline-primary" type="submit">
+                  <i class="bi bi-play-fill me-1"></i>Démarrer
+                </button>
+              </form>
+              {% endif %}
+
+              {# Terminer #}
+              {% if task.status == 'IN_PROGRESS' %}
+              <form method="post">
+                {% csrf_token %}
+                <input type="hidden" name="action" value="complete">
+                <input type="hidden" name="task_id" value="{{ task.pk }}">
+                <button class="btn btn-sm btn-success" type="submit"
+                  onclick="return confirm('Marquer la chambre {{ task.room.number }} comme nettoyée et la remettre Disponible ?')">
+                  <i class="bi bi-check-lg me-1"></i>Terminer
+                </button>
+              </form>
+              {% endif %}
+
+              {# Historique #}
+              <a href="{% url 'housekeeping:task_history' task.pk %}" class="btn btn-sm btn-outline-secondary">
+                <i class="bi bi-clock-history"></i>
+              </a>
+            </div>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  {% endif %}
+</div>
+
 {% endblock %}

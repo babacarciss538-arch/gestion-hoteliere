@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+
+{% block title %}Tableau de bord - Gestion Hôtelière{% endblock %}
+
+{% block content %}
+<div class="container-fluid mt-4">
+    <h1 class="mb-4">Tableau de bord</h1>
+
+    <!-- Cartes Statistiques Chambres -->
+    <div class="row mb-4">
+        <div class="col-md-4">
+            <div class="card text-white bg-primary mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">Total Chambres</h5>
+                    <p class="card-text display-4">{{ total_rooms }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-white bg-success mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">Chambres Disponibles</h5>
+                    <p class="card-text display-4">{{ available_rooms }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-white bg-danger mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">Chambres Occupées</h5>
+                    <p class="card-text display-4">{{ occupied_rooms }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cartes Approvisionnement & Achats (Chantier 3) -->
+    <h2 class="mb-3">Approvisionnement & Stock</h2>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card text-white bg-warning mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">Commandes en attente</h5>
+                    <p class="card-text display-4">{{ pending_orders }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-white bg-info mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">Commandes Reçues/Livrées</h5>
+                    <p class="card-text display-4">{{ completed_orders }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-dark bg-light mb-3 border-warning">
+                <div class="card-body">
+                    <h5 class="card-title">Demandes Cuisine (Besoins)</h5>
+                    <p class="card-text display-4">{{ pending_supply_requests }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -6,10 +6,11 @@ from .models import User, UserActivity
 class UserAdmin(BaseUserAdmin):
     list_display = ('email', 'first_name', 'last_name', 'role', 'phone', 'is_active', 'is_staff')
     list_filter = ('role', 'is_active', 'is_staff', 'date_joined')
+    readonly_fields = ('legacy_role',)
     fieldsets = (
         (None, {'fields': ('email', 'password')}),
         ('Informations Personnelles', {'fields': ('first_name', 'last_name', 'phone', 'avatar')}),
-        ('Rôles et Permissions', {'fields': ('role', 'department', 'is_active', 'is_staff', 'is_superuser', 'groups', 'user_permissions')}),
+        ('Rôles et Permissions', {'fields': ('role', 'legacy_role', 'department', 'is_active', 'is_staff', 'is_superuser', 'groups', 'user_permissions')}),
         ('Dates', {'fields': ('last_login', 'date_joined')}),
     )
     add_fieldsets = (

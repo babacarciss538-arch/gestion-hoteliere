@@ -1,0 +1,250 @@
+{% extends 'base.html' %}
+{% block title %}Ticket #{{ ticket.id }} | {{ HOTEL_NAME }}{% endblock %}
+{% block page_title %}Ticket de Maintenance #{{ ticket.id }}{% endblock %}
+
+{% block content %}
+<div class="row g-4">
+  {# ── Colonne gauche : Détails du ticket & formulaires d'action ────────── #}
+  <div class="col-12 col-lg-7">
+    <div class="glass-card p-4 mb-4">
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <h5 class="fw-bold mb-0">
+          <i class="bi bi-info-circle text-purple me-2"></i>{{ ticket.title }}
+        </h5>
+        <div>
+          <span class="badge bg-{{ ticket.get_priority_badge }} me-1">
+            {{ ticket.get_priority_display }}
+          </span>
+          <span class="badge bg-{{ ticket.get_status_badge }}">
+            {{ ticket.get_status_display }}
+          </span>
+        </div>
+      </div>
+
+      <dl class="row mb-0">
+        <dt class="col-sm-4 text-muted">Chambre / Zone</dt>
+        <dd class="col-sm-8">
+          {% if ticket.room %}
+            <strong>Chambre {{ ticket.room.number }}</strong> ({{ ticket.room.room_type }})
+          {% elif ticket.location %}
+            {{ ticket.location }}
+          {% else %}
+            <span class="text-muted">—</span>
+          {% endif %}
+        </dd>
+
+        <dt class="col-sm-4 text-muted">Signalé par</dt>
+        <dd class="col-sm-8">
+          {% if ticket.reported_by %}
+            {% if ticket.reported_by.get_full_name %}{{ ticket.reported_by.get_full_name }}{% else %}{{ ticket.reported_by.email }}{% endif %}
+          {% else %}
+            Non renseigné
+          {% endif %}
+        </dd>
+
+        <dt class="col-sm-4 text-muted">Date de signalement</dt>
+        <dd class="col-sm-8">{{ ticket.created_at|date:"d/m/Y H:i" }}</dd>
+
+        <dt class="col-sm-4 text-muted">Technicien / Prestataire</dt>
+        <dd class="col-sm-8">
+          {% if ticket.technician_type == 'INTERNAL' and ticket.assigned_technician %}
+            <span class="text-info fw-semibold"><i class="bi bi-person me-1"></i>{% if ticket.assigned_technician.get_full_name %}{{ ticket.assigned_technician.get_full_name }}{% else %}{{ ticket.assigned_technician.email }}{% endif %} (Interne)</span>
+          {% elif ticket.technician_type == 'EXTERNAL' and ticket.external_company %}
+            <span class="text-warning fw-semibold"><i class="bi bi-building me-1"></i>{{ ticket.external_company }} (Prestataire externe)</span>
+            {% if ticket.external_contact %}<small class="d-block text-muted">{{ ticket.external_contact }}</small>{% endif %}
+          {% else %}
+            <span class="text-muted fst-italic">Non affecté</span>
+          {% endif %}
+        </dd>
+
+        {% if ticket.description %}
+          <dt class="col-sm-4 text-muted">Description</dt>
+          <dd class="col-sm-8">{{ ticket.description|linebreaksbr }}</dd>
+        {% endif %}
+
+        {% if ticket.resolution_notes %}
+          <dt class="col-sm-4 text-muted">Notes de réparation</dt>
+          <dd class="col-sm-8 text-success">{{ ticket.resolution_notes|linebreaksbr }}</dd>
+        {% endif %}
+      </dl>
+    </div>
+
+    {# ── Panneau Responsable : Affecter technicien (interne / externe) ────── #}
+    {% if can_manage and ticket.status != 'CLOSED' %}
+    <div class="glass-card p-4 mb-4">
+      <h6 class="fw-bold mb-3">
+        <i class="bi bi-person-gear text-purple me-2"></i>Affectation du Technicien (Interne ou Externe)
+      </h6>
+      <form method="post">
+        {% csrf_token %}
+        <input type="hidden" name="action" value="assign">
+
+        <div class="row g-3">
+          <div class="col-md-6">
+            <label class="form-label" for="{{ assign_form.technician_type.id_for_label }}">{{ assign_form.technician_type.label }}</label>
+            {{ assign_form.technician_type }}
+          </div>
+
+          <div class="col-md-6" id="div_assigned_technician">
+            <label class="form-label" for="{{ assign_form.assigned_technician.id_for_label }}">{{ assign_form.assigned_technician.label }}</label>
+            {{ assign_form.assigned_technician }}
+            {% if assign_form.assigned_technician.errors %}<div class="text-danger small mt-1">{{ assign_form.assigned_technician.errors }}</div>{% endif %}
+          </div>
+
+          <div class="col-md-6 d-none" id="div_external_company">
+            <label class="form-label" for="{{ assign_form.external_company.id_for_label }}">{{ assign_form.external_company.label }}</label>
+            {{ assign_form.external_company }}
+            {% if assign_form.external_company.errors %}<div class="text-danger small mt-1">{{ assign_form.external_company.errors }}</div>{% endif %}
+          </div>
+
+          <div class="col-md-6 d-none" id="div_external_contact">
+            <label class="form-label" for="{{ assign_form.external_contact.id_for_label }}">{{ assign_form.external_contact.label }}</label>
+            {{ assign_form.external_contact }}
+          </div>
+
+          <div class="col-12 mt-3">
+            <button type="submit" class="btn btn-sm btn-primary">
+              <i class="bi bi-check2-circle me-1"></i>Enregistrer l'affectation
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+    {% endif %}
+
+    {# ── Panneau Actions : Démarrer / Résoudre / Clôturer ────────────────── #}
+    <div class="glass-card p-4">
+      <h6 class="fw-bold mb-3"><i class="bi bi-play-circle text-purple me-2"></i>Actions sur l'intervention</h6>
+      <div class="d-flex flex-wrap gap-2">
+        {# 1. Démarrer intervention #}
+        {% if ticket.status == 'ASSIGNED' %}
+        <form method="post" class="d-inline">
+          {% csrf_token %}
+          <input type="hidden" name="action" value="start">
+          <button type="submit" class="btn btn-primary">
+            <i class="bi bi-play-fill me-1"></i>Démarrer l'intervention
+          </button>
+        </form>
+        {% endif %}
+
+        {# 2. Clôturer et confirmer la réparation (Responsable) #}
+        {% if can_manage and ticket.status == 'RESOLVED' %}
+        <form method="post" class="d-inline">
+          {% csrf_token %}
+          <input type="hidden" name="action" value="close">
+          <button type="submit" class="btn btn-success" onclick="return confirm('Confirmer la réparation et remettre la chambre Disponible ?')">
+            <i class="bi bi-check-all me-1"></i>Confirmer réparation & Clôturer
+          </button>
+        </form>
+        {% endif %}
+      </div>
+
+      {# 3. Formulaire de résolution (technicien en cours ou en attente) #}
+      {% if ticket.status in 'IN_PROGRESS,WAITING_PART,ASSIGNED' %}
+      <hr class="my-3">
+      <h6 class="fw-bold mb-2">Compte-rendu d'intervention</h6>
+      <form method="post">
+        {% csrf_token %}
+        <input type="hidden" name="action" value="resolve">
+        <div class="mb-3">
+          <label class="form-label" for="{{ resolve_form.status.id_for_label }}">{{ resolve_form.status.label }}</label>
+          {{ resolve_form.status }}
+        </div>
+        <div class="mb-3">
+          <label class="form-label" for="{{ resolve_form.resolution_notes.id_for_label }}">{{ resolve_form.resolution_notes.label }}</label>
+          {{ resolve_form.resolution_notes }}
+        </div>
+        <button type="submit" class="btn btn-success">
+          <i class="bi bi-save me-1"></i>Enregistrer le compte-rendu
+        </button>
+      </form>
+      {% endif %}
+    </div>
+  </div>
+
+  {# ── Colonne droite : Historique & Audit Trail ────────────────────────── #}
+  <div class="col-12 col-lg-5">
+    <div class="glass-card p-4">
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <h5 class="fw-bold mb-0">
+          <i class="bi bi-clock-history text-purple me-2"></i>Historique des interventions
+        </h5>
+      </div>
+      <p class="text-muted small mb-4">Traçabilité étape par étape de l'incident.</p>
+
+      {% if ticket.history.all %}
+        <div class="timeline">
+          {% for entry in ticket.history.all %}
+          <div class="d-flex gap-3 mb-3">
+            <div class="text-center" style="min-width: 36px;">
+              {% if entry.action == 'REPORTED' %}
+                <span class="badge bg-danger rounded-circle p-2"><i class="bi bi-exclamation-triangle"></i></span>
+              {% elif entry.action == 'ASSIGNED' %}
+                <span class="badge bg-warning text-dark rounded-circle p-2"><i class="bi bi-person-check"></i></span>
+              {% elif entry.action == 'STARTED' %}
+                <span class="badge bg-primary rounded-circle p-2"><i class="bi bi-play-fill"></i></span>
+              {% elif entry.action == 'RESOLVED' %}
+                <span class="badge bg-success rounded-circle p-2"><i class="bi bi-wrench"></i></span>
+              {% elif entry.action == 'CLOSED' %}
+                <span class="badge bg-dark rounded-circle p-2"><i class="bi bi-check-all"></i></span>
+              {% else %}
+                <span class="badge bg-secondary rounded-circle p-2"><i class="bi bi-dot"></i></span>
+              {% endif %}
+            </div>
+            <div class="flex-grow-1">
+              <div class="fw-semibold">
+                {% if entry.action == 'REPORTED' %}1. Problème signalé
+                {% elif entry.action == 'ASSIGNED' %}2. Technicien affecté
+                {% elif entry.action == 'STARTED' %}Intervention démarrée
+                {% elif entry.action == 'RESOLVED' %}Intervention terminée
+                {% elif entry.action == 'CLOSED' %}3. Réparation confirmée & Clôturée
+                {% else %}{{ entry.action }}{% endif %}
+              </div>
+              {% if entry.details %}
+                <small class="text-muted d-block">{{ entry.details }}</small>
+              {% endif %}
+              <div class="text-muted extra-small mt-1">
+                Par <strong>{{ entry.actor.get_full_name|default:entry.actor.email|default:"Système" }}</strong>
+                — {{ entry.created_at|date:"d/m/Y à H:i" }}
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      {% else %}
+        <div class="text-center text-muted py-4">
+          <i class="bi bi-clock display-6"></i>
+          <p class="mt-2 small">Aucun événement d'historique pour l'instant.</p>
+        </div>
+      {% endif %}
+
+      <div class="mt-4 pt-3 border-top border-secondary">
+        <a href="{% url 'maintenance:list' %}" class="btn btn-sm btn-outline-secondary w-100">
+          <i class="bi bi-arrow-left me-1"></i>Retour à la liste des tickets
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+function toggleTechnicianFields() {
+  const typeSelect = document.getElementById('id_technician_type');
+  const divInternal = document.getElementById('div_assigned_technician');
+  const divExtComp = document.getElementById('div_external_company');
+  const divExtContact = document.getElementById('div_external_contact');
+  if (!typeSelect) return;
+
+  if (typeSelect.value === 'EXTERNAL') {
+    if (divInternal) divInternal.classList.add('d-none');
+    if (divExtComp) divExtComp.classList.remove('d-none');
+    if (divExtContact) divExtContact.classList.remove('d-none');
+  } else {
+    if (divInternal) divInternal.classList.remove('d-none');
+    if (divExtComp) divExtComp.classList.add('d-none');
+    if (divExtContact) divExtContact.classList.add('d-none');
+  }
+}
+document.addEventListener('DOMContentLoaded', toggleTechnicianFields);
+</script>
+{% endblock %}

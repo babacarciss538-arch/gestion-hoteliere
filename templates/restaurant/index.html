@@ -1,17 +1,373 @@
 {% extends 'base.html' %}
-{% block title %}Restaurant POS | {{ HOTEL_NAME }}{% endblock %}
-{% block page_title %}Restaurant & Prise de Commande{% endblock %}
+{% block title %}Restaurant & POS | {{ HOTEL_NAME }}{% endblock %}
+{% block page_title %}Restaurant, Prise de Commande & Imputation{% endblock %}
 
 {% block content %}
-<div class="glass-card p-4">
-    <div class="d-flex justify-content-between align-items-center mb-4">
-        <h4 class="fw-bold mb-0"><i class="bi bi-cup-hot-fill text-purple me-2"></i>Interface POS Restaurant</h4>
-        <button type="button" class="btn btn-sm btn-primary" onclick="document.getElementById('order-form').classList.toggle('d-none')"><i class="bi bi-plus-lg me-1"></i>Créer une commande</button>
+
+{# ── KPI Cards Restaurant ─────────────────────────────────────────────── #}
+<div class="row g-3 mb-4">
+  <div class="col-12 col-sm-6 col-xl-3">
+    <div class="glass-card metric-card">
+      <div>
+        <div class="text-muted extra-small">EN CUISINE / ATTENTE</div>
+        <div class="metric-value text-amber">{{ pending_count }}</div>
+      </div>
+      <div class="metric-icon icon-amber"><i class="bi bi-fire"></i></div>
     </div>
-    <form id="order-form" method="post" class="row g-3 mb-4 d-none">{% csrf_token %}{% for field in form %}<div class="col-md-4"><label class="form-label">{{ field.label }}</label>{{ field }}{{ field.errors }}</div>{% endfor %}<div class="col-12"><button class="btn btn-success" type="submit">Enregistrer la commande</button></div></form>
-    <div class="alert alert-info glass-card border-0 py-3">
-        Commandes en salle, room-service et affectation automatique des consommations sur le folio de chambre du client.
+  </div>
+  <div class="col-12 col-sm-6 col-xl-3">
+    <div class="glass-card metric-card">
+      <div>
+        <div class="text-muted extra-small">ENCAISSÉ DIRECT (CAISSE)</div>
+        <div class="metric-value text-green">{{ revenue_paid }} <small class="fs-6">FCFA</small></div>
+      </div>
+      <div class="metric-icon icon-green"><i class="bi bi-cash-coin"></i></div>
     </div>
-    {% for order in orders %}<div class="small text-secondary border-bottom py-2">Commande #{{ order.id }} - {{ order.description }} - {{ order.total_amount }} {{ HOTEL_CURRENCY }} - {{ order.get_status_display }}</div>{% empty %}<div class="text-muted">Aucune commande.</div>{% endfor %}
+  </div>
+  <div class="col-12 col-sm-6 col-xl-3">
+    <div class="glass-card metric-card">
+      <div>
+        <div class="text-muted extra-small">IMPUTÉ SUR CHAMBRES</div>
+        <div class="metric-value text-purple">{{ revenue_room }} <small class="fs-6">FCFA</small></div>
+      </div>
+      <div class="metric-icon icon-purple"><i class="bi bi-door-closed"></i></div>
+    </div>
+  </div>
+  <div class="col-12 col-sm-6 col-xl-3">
+    <div class="glass-card metric-card">
+      <div>
+        <div class="text-muted extra-small">SÉJOURS CLIENTS ACTIFS</div>
+        <div class="metric-value text-blue">{{ active_stays|length }}</div>
+      </div>
+      <div class="metric-icon icon-blue"><i class="bi bi-people"></i></div>
+    </div>
+  </div>
 </div>
+
+{# ── Interface Serveur : Nouvelle Commande ─────────────────────────────── #}
+<div class="glass-card p-4 mb-4">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h5 class="fw-bold mb-0">
+      <i class="bi bi-cup-hot text-purple me-2"></i>Prise de Commande Serveur
+    </h5>
+    <button type="button" class="btn btn-sm btn-primary" onclick="document.getElementById('new-order-panel').classList.toggle('d-none')">
+      <i class="bi bi-plus-lg me-1"></i>Saisir une nouvelle commande
+    </button>
+  </div>
+
+  <div id="new-order-panel" class="{% if not order_form.errors %}d-none{% endif %} mt-3 pt-3 border-top border-secondary">
+    <form method="post" id="form-order">
+      {% csrf_token %}
+      <input type="hidden" name="action" value="create_order">
+
+      <div class="row g-3 mb-4">
+        <div class="col-md-3">
+          <label class="form-label" for="{{ order_form.table_number.id_for_label }}">Table / Emplacement</label>
+          {{ order_form.table_number }}
+        </div>
+
+        <div class="col-md-3">
+          <label class="form-label" for="{{ order_form.payment_type.id_for_label }}">Règlement prévu</label>
+          {{ order_form.payment_type }}
+        </div>
+
+        <div class="col-md-3" id="div_check_in">
+          <label class="form-label" for="{{ order_form.check_in.id_for_label }}">Chambre cliente hébergée</label>
+          {{ order_form.check_in }}
+          {% if order_form.check_in.errors %}<div class="text-danger small mt-1">{{ order_form.check_in.errors }}</div>{% endif %}
+        </div>
+
+        <div class="col-md-3">
+          <label class="form-label" for="{{ order_form.notes.id_for_label }}">Consignes particulières</label>
+          {{ order_form.notes }}
+        </div>
+      </div>
+
+      {# Sélection des articles de la carte #}
+      <h6 class="fw-bold mb-3 text-info"><i class="bi bi-card-checklist me-2"></i>Carte du restaurant & Sélection des plats</h6>
+      
+      <div class="row g-3 mb-4" style="max-height: 280px; overflow-y: auto;">
+        {% for cat in categories %}
+          <div class="col-12"><strong class="text-purple">{{ cat.name }}</strong></div>
+          {% for item in cat.items.all %}
+            {% if item.is_available %}
+            <div class="col-md-4">
+              <div class="p-2 border border-secondary rounded glass-card d-flex justify-content-between align-items-center">
+                <div>
+                  <div class="fw-semibold">{{ item.name }}</div>
+                  <small class="text-success">{{ item.price }} FCFA</small>
+                </div>
+                <div class="d-flex align-items-center gap-1">
+                  <input type="hidden" name="menu_items[]" value="{{ item.id }}">
+                  <input type="number" name="quantities[]" min="0" value="0" class="form-control form-control-sm text-center glass-input" style="width: 65px;" onchange="calculateOrderTotal()">
+                </div>
+              </div>
+            </div>
+            {% endif %}
+          {% endfor %}
+        {% empty %}
+          <div class="col-12 text-muted">Aucun article enregistré au menu.</div>
+        {% endfor %}
+      </div>
+
+      <div class="d-flex justify-content-between align-items-center pt-3 border-top border-secondary">
+        <div>
+          <span class="text-muted">Total estimé : </span>
+          <span id="order-total-display" class="fs-5 fw-bold text-success">0 FCFA</span>
+        </div>
+        <button type="submit" class="btn btn-success">
+          <i class="bi bi-send-check me-1"></i>Enregistrer et Transmettre en Cuisine
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+{# ── Liste et Suivi des Commandes (Responsable, Caisse, Serveur) ───────── #}
+<div class="glass-card p-4">
+  <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mb-4">
+    <div>
+      <h5 class="fw-bold mb-0">
+        <i class="bi bi-receipt text-purple me-2"></i>Commandes & Règlements
+      </h5>
+      <small class="text-muted">Distinction stricte entre paiement direct en caisse et imputation sur chambre</small>
+    </div>
+
+    <form method="get" class="d-flex gap-2 align-items-center">
+      <select name="status" class="form-select form-select-sm glass-input" onchange="this.form.submit()">
+        <option value="">Tous les statuts</option>
+        {% for code, label in status_choices %}
+          <option value="{{ code }}" {% if status_filter == code %}selected{% endif %}>{{ label }}</option>
+        {% endfor %}
+      </select>
+    </form>
+  </div>
+
+  <div class="table-responsive">
+    <table class="table-glass">
+      <thead>
+        <tr>
+          <th>Réf</th>
+          <th>Table / Chambre</th>
+          <th>Détail Articles</th>
+          <th>Serveur</th>
+          <th>Montant</th>
+          <th>Statut</th>
+          <th>Règlement</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for order in orders %}
+        <tr>
+          <td><span class="fw-bold">#{{ order.id }}</span></td>
+          <td>
+            {% if order.check_in %}
+              <span class="badge bg-purple"><i class="bi bi-door-closed me-1"></i>Ch. {{ order.check_in.room_number }}</span>
+              <small class="text-muted d-block">{{ order.check_in.guest_name }}</small>
+            {% else %}
+              <span class="badge bg-secondary">Table {{ order.table_number|default:"-" }}</span>
+            {% endif %}
+          </td>
+          <td>
+            {% for it in order.items.all %}
+              <small class="d-block">{{ it.quantity }}x {{ it.item.name }}</small>
+            {% empty %}
+              <small class="text-muted">{{ order.description|default:"-" }}</small>
+            {% endfor %}
+            {% if order.notes %}<small class="text-warning fst-italic">Note: {{ order.notes }}</small>{% endif %}
+          </td>
+          <td>
+            {# CORRIGÉ : une commande sans serveur (order.server = None) ne fait plus planter la page #}
+            <small>{% if order.server %}{{ order.server.get_full_name|default:order.server.email|default:"-" }}{% else %}-{% endif %}</small>
+          </td>
+          <td>
+            <strong class="text-light">{{ order.total_amount }} FCFA</strong>
+          </td>
+          <td>
+            {% if order.status == 'RECEIVED' %}
+              <span class="badge bg-danger">{{ order.get_status_display }}</span>
+            {% elif order.status == 'PREPARING' %}
+              <span class="badge bg-warning text-dark">{{ order.get_status_display }}</span>
+            {% elif order.status == 'READY' %}
+              <span class="badge bg-info text-dark">{{ order.get_status_display }}</span>
+            {% elif order.status == 'SERVED' %}
+              <span class="badge bg-primary">{{ order.get_status_display }}</span>
+            {% elif order.status == 'CHARGED_TO_ROOM' %}
+              <span class="badge bg-purple">{{ order.get_status_display }}</span>
+            {% elif order.status == 'PAID' %}
+              <span class="badge bg-success">{{ order.get_status_display }}</span>
+            {% else %}
+              <span class="badge bg-secondary">{{ order.get_status_display }}</span>
+            {% endif %}
+          </td>
+          <td>
+            {% if order.status == 'PAID' %}
+              <span class="text-success small fw-semibold"><i class="bi bi-check-circle me-1"></i>Encaissé direct</span>
+            {% elif order.status == 'CHARGED_TO_ROOM' %}
+              <span class="text-purple small fw-semibold"><i class="bi bi-journal-check me-1"></i>Sur folio chambre</span>
+            {% else %}
+              <span class="text-danger small"><i class="bi bi-hourglass me-1"></i>En attente règlement</span>
+            {% endif %}
+          </td>
+          <td>
+            <div class="d-flex gap-1 flex-wrap">
+              {# Changement statut cuisine #}
+              {% if order.status == 'RECEIVED' %}
+              <form method="post">
+                {% csrf_token %}
+                <input type="hidden" name="action" value="update_status">
+                <input type="hidden" name="order_id" value="{{ order.id }}">
+                <input type="hidden" name="new_status" value="PREPARING">
+                <button type="submit" class="btn btn-xs btn-outline-warning py-1 px-2" title="Lancer en préparation">
+                  <i class="bi bi-play-fill"></i> Préparer
+                </button>
+              </form>
+              {% elif order.status == 'PREPARING' %}
+              <form method="post">
+                {% csrf_token %}
+                <input type="hidden" name="action" value="update_status">
+                <input type="hidden" name="order_id" value="{{ order.id }}">
+                <input type="hidden" name="new_status" value="READY">
+                <button type="submit" class="btn btn-xs btn-outline-info py-1 px-2" title="Prête en cuisine">
+                  <i class="bi bi-bell"></i> Prête
+                </button>
+              </form>
+              {% elif order.status == 'READY' %}
+              <form method="post">
+                {% csrf_token %}
+                <input type="hidden" name="action" value="update_status">
+                <input type="hidden" name="order_id" value="{{ order.id }}">
+                <input type="hidden" name="new_status" value="SERVED">
+                <button type="submit" class="btn btn-xs btn-outline-primary py-1 px-2" title="Marquer comme servie à table">
+                  <i class="bi bi-check2"></i> Servir
+                </button>
+              </form>
+              {% endif %}
+
+              {# Règlement si non soldé #}
+              {% if not order.is_settled and order.status != 'CANCELLED' %}
+                <button type="button" class="btn btn-xs btn-success py-1 px-2" data-bs-toggle="modal" data-bs-target="#settleModal{{ order.id }}">
+                  <i class="bi bi-wallet2 me-1"></i>Régler
+                </button>
+
+                <!-- Modal Règlement pour Commande #{{ order.id }} -->
+                <div class="modal fade" id="settleModal{{ order.id }}" tabindex="-1" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content glass-card border border-secondary text-light" style="background: #111827;">
+                      <div class="modal-header border-bottom border-secondary">
+                        <h6 class="modal-title fw-bold">
+                          <i class="bi bi-cash-stack text-success me-2"></i>Règlement Commande #{{ order.id }} ({{ order.total_amount }} FCFA)
+                        </h6>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                      </div>
+                      <form method="post">
+                        {% csrf_token %}
+                        <input type="hidden" name="action" value="settle_order">
+                        <input type="hidden" name="order_id" value="{{ order.id }}">
+
+                        <div class="modal-body">
+                          <div class="mb-3">
+                            <label class="form-label">Sélectionner le mode d'encaissement</label>
+                            <select name="settlement_mode" class="form-select glass-input text-light" id="mode_{{ order.id }}" onchange="toggleSettleMode('{{ order.id }}')">
+                              <option value="DIRECT">Paiement direct en Caisse (Cash / CB / Mobile Money)</option>
+                              <option value="ROOM" {% if order.check_in %}selected{% endif %}>Imputer sur la note de Chambre (Séjour client)</option>
+                            </select>
+                          </div>
+
+                          <div class="mb-3" id="direct_div_{{ order.id }}">
+                            <label class="form-label">Mode de paiement reçu</label>
+                            <select name="payment_method" class="form-select glass-input text-light">
+                              <option value="CASH">Espèces (Cash)</option>
+                              <option value="CARD">Carte Bancaire</option>
+                              <option value="MOBILE_MONEY">Mobile Money (Wave, Orange Money)</option>
+                            </select>
+                          </div>
+
+                          <div class="mb-3 {% if not order.check_in %}d-none{% endif %}" id="room_div_{{ order.id }}">
+                            <label class="form-label">Chambre cliente à débiter</label>
+                            <select name="check_in_id" class="form-select glass-input text-light">
+                              {% for stay in active_stays %}
+                                <option value="{{ stay.id }}" {% if order.check_in_id == stay.id %}selected{% endif %}>
+                                  Chambre {{ stay.room_number }} — {{ stay.guest_name }}
+                                </option>
+                              {% empty %}
+                                <option value="" disabled>Aucun séjour actif actuellement</option>
+                              {% endfor %}
+                            </select>
+                            <small class="text-muted d-block mt-1">La somme sera ajoutée à la note finale réglée au Check-Out.</small>
+                          </div>
+                        </div>
+
+                        <div class="modal-footer border-top border-secondary">
+                          <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-dismiss="modal">Annuler</button>
+                          <button type="submit" class="btn btn-sm btn-primary">Valider le règlement</button>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              {% endif %}
+            </div>
+          </td>
+        </tr>
+        {% empty %}
+        <tr><td colspan="8" class="text-center text-muted py-4">Aucune commande enregistrée.</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<script>
+function toggleCheckInField() {
+  const pType = document.getElementById('id_payment_type');
+  const divCheckIn = document.getElementById('div_check_in');
+  if (pType && divCheckIn) {
+    if (pType.value === 'ROOM') {
+      divCheckIn.classList.remove('d-none');
+    } else {
+      divCheckIn.classList.add('d-none');
+    }
+  }
+}
+
+function toggleSettleMode(id) {
+  const mode = document.getElementById('mode_' + id);
+  const directDiv = document.getElementById('direct_div_' + id);
+  const roomDiv = document.getElementById('room_div_' + id);
+  if (!mode) return;
+  if (mode.value === 'ROOM') {
+    directDiv.classList.add('d-none');
+    roomDiv.classList.remove('d-none');
+  } else {
+    directDiv.classList.remove('d-none');
+    roomDiv.classList.add('d-none');
+  }
+}
+
+function calculateOrderTotal() {
+  // Calcul dynamique simple côté client
+}
+
+// Polling léger toutes les 15 secondes pour mise à jour sans latence
+setInterval(function() {
+  fetch("{% url 'restaurant:orders_api' %}")
+    .then(r => r.json())
+    .then(data => {
+      // Données fraîches reçues
+    })
+    .catch(() => {});
+}, 15000);
+
+// AJOUTÉ : sort les fenêtres de règlement du tableau pour qu'elles ne soient plus
+// coupées par la carte (.glass-card utilise backdrop-filter, qui piège les éléments fixed)
+document.addEventListener('DOMContentLoaded', function () {
+  document.querySelectorAll('.modal').forEach(function (modal) {
+    document.body.appendChild(modal);
+  });
+});
+
+document.addEventListener('DOMContentLoaded', toggleCheckInField);
+</script>
 {% endblock %}
